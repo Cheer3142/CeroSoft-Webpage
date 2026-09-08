@@ -23,27 +23,7 @@ The site is designed to remain lightweight: the frontend is statically built and
 
 ## Architecture
 
-```text
-Visitor
-  |
-  v
-https://cerosoft.net
-  |
-  v
-Cloudflare DNS
-  |
-  v
-Vercel
-  |-- Static React / Vite frontend
-  |
-  `-- /api/contact
-          |
-          v
-        Resend
-          |
-          v
-     CeroSoft inbox
-```
+<img src="documents/webpage flow.png" alt="Alt Text" width="500" align="center">
 
 The main `cerosoft.net` domain is deployed on Vercel. Other CeroSoft subdomains can be routed independently; for example, customer applications may use Cloudflare Tunnel without affecting the corporate website.
 
