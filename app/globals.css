@@ -7,3 +7,21 @@ body{font-family:"DM Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans
 [lang="th"]{font-family:"IBM Plex Sans Thai","DM Sans",ui-sans-serif,system-ui,sans-serif}
 .process-head{display:grid;grid-template-columns:1fr .8fr;gap:80px;align-items:end}.process-head>p{color:var(--soft);margin:0}.hp{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;opacity:0!important}button:disabled{opacity:.65;cursor:wait;transform:none!important;box-shadow:none!important}
 @media(max-width:1000px){.process-head{grid-template-columns:1fr;gap:25px}}
+
+/* System-detail and accessibility refinements */
+.skip-link{position:fixed;z-index:100;top:10px;left:10px;padding:10px 14px;background:var(--cyan);color:var(--ink);font-weight:700;transform:translateY(-150%);transition:transform .2s ease-out}
+.skip-link:focus{transform:none}
+:focus-visible{outline:3px solid var(--cyan);outline-offset:4px}
+.service-list article{grid-template-columns:70px 55px 1fr 35px;min-height:145px}
+.service-list h3{margin:0}
+.service-list article>div p{margin:4px 0;color:var(--soft);font-size:.91rem}
+.service-list article>div small{display:block;color:#59636b;font-size:.74rem;letter-spacing:.015em}
+.feature-strip{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid #ffffff30;border-left:1px solid #ffffff30;margin-top:70px}
+.feature-strip span{display:flex;gap:14px;min-height:68px;padding:18px;border-right:1px solid #ffffff30;border-bottom:1px solid #ffffff30;color:#c3cbd0;font-size:.84rem}
+.feature-strip b{color:var(--cyan);font-size:.67rem;letter-spacing:.08em}
+form output.error{color:#a43232}
+form output.success{color:#087c82}
+input:invalid:not(:placeholder-shown),textarea:invalid:not(:placeholder-shown),select:invalid:focus{border-color:#a43232}
+@media(max-width:1000px){.feature-strip{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:680px){.service-list article{grid-template-columns:38px 36px 1fr 25px}.service-list article>div{grid-column:3/5}.service-list article>div small{margin-top:9px}.feature-strip{grid-template-columns:1fr;margin-top:45px}.feature-strip span{min-height:58px}.portfolio h2{font-size:clamp(3.4rem,16vw,4rem)}}
+@media(prefers-reduced-motion:reduce){.skip-link{transition:none}}
