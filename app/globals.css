@@ -8,6 +8,16 @@ body{font-family:"DM Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans
 .process-head{display:grid;grid-template-columns:1fr .8fr;gap:80px;align-items:end}.process-head>p{color:var(--soft);margin:0}.hp{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;opacity:0!important}button:disabled{opacity:.65;cursor:wait;transform:none!important;box-shadow:none!important}
 @media(max-width:1000px){.process-head{grid-template-columns:1fr;gap:25px}}
 
+/* Brand prominence: give the logo a stronger visual anchor in the navigation. */
+.nav-inner{height:84px}
+.brand{position:relative;gap:12px;font-size:1.28rem;font-weight:700;letter-spacing:-.035em}
+.brand img{width:54px;height:54px;padding:0;background:transparent;box-shadow:none;filter:drop-shadow(0 3px 2px #0008) drop-shadow(0 0 9px #00adb54d)}
+.brand b{line-height:1}
+.navbar .brand{padding-right:20px}
+.navbar .brand::after{content:"";position:absolute;right:0;width:2px;height:30px;background:linear-gradient(180deg,transparent,var(--cyan),transparent)}
+@media(max-width:1000px){.mobile-nav{top:84px}.hero{padding-top:151px}}
+@media(max-width:680px){.navbar .brand{padding-right:12px}.navbar .brand::after{display:none}.brand{gap:9px;font-size:1.16rem}.brand img{width:50px;height:50px}.hero{padding-top:136px}}
+
 /* System-detail and accessibility refinements */
 .skip-link{position:fixed;z-index:100;top:10px;left:10px;padding:10px 14px;background:var(--cyan);color:var(--ink);font-weight:700;transform:translateY(-150%);transition:transform .2s ease-out}
 .skip-link:focus{transform:none}

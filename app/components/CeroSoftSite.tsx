@@ -3,7 +3,7 @@ import { SyntheticEvent, useEffect, useId, useState } from 'react';
 import { ArrowDownRight, ArrowRight, Check, ChevronRight, Menu, X, Workflow, Blocks, Cable, Headphones, AppWindow, Languages } from 'lucide-react';
 
 type Lang='en'|'th';
-const logo='/icon-192.png';
+const logo='/icon-512.png';
 function Image({src,alt,width,height,className}:{src:string,alt:string,width:number,height:number,className?:string,sizes?:string}){return <img src={src} alt={alt} width={width} height={height} className={className} loading={src===logo?'eager':'lazy'}/>}
 const copy={
   en:{
