@@ -37,3 +37,16 @@ input:invalid:not(:placeholder-shown),textarea:invalid:not(:placeholder-shown),s
 @media(max-width:1000px){.feature-strip{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:680px){.service-list article{grid-template-columns:38px 36px 1fr 25px}.service-list article>div{grid-column:3/5}.service-list article>div small{margin-top:9px}.feature-strip{grid-template-columns:1fr;margin-top:45px}.feature-strip span{min-height:58px}.portfolio h2{font-size:clamp(3.4rem,16vw,4rem)}}
 @media(prefers-reduced-motion:reduce){.skip-link{transition:none}}
+
+/* Reference-led opening composition */
+.hero{min-height:100svh;padding:112px 0 28px}
+.hero-grid{grid-template-columns:1.08fr .92fr;gap:48px;min-height:calc(100svh - 140px)}
+.hero-grid>div:first-child>.tag,.hero-grid>div:first-child>p,.hero-actions,.hero-foot{display:none}
+.hero h1{margin:0;font-size:clamp(5.5rem,9.2vw,8.2rem);font-weight:700;line-height:.94;letter-spacing:-.065em}
+.hero h1 span{color:var(--cyan)}
+[lang="th"] .hero h1{font-size:clamp(5.1rem,8.75vw,7.75rem);line-height:1.02;letter-spacing:-.045em}
+.hero-system{height:100%;min-height:560px}
+.zero-ring{width:310px;height:310px}
+.system-label{bottom:22px}
+@media(max-width:1000px){.hero-grid{min-height:auto}.hero-grid>div:first-child{padding-top:24px}.hero-system{min-height:420px}}
+@media(max-width:680px){.hero{padding-top:118px}.hero h1,[lang="th"] .hero h1{font-size:clamp(3.8rem,17vw,5.2rem);line-height:1.04}.hero-system{min-height:340px}.hero-grid>div:first-child{padding-top:0}}
