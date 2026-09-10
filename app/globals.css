@@ -185,6 +185,17 @@ input:invalid:not(:placeholder-shown),textarea:invalid:not(:placeholder-shown),s
   .zero-ring::after{right:20px}
   .zero-ring span{font-size:9.6rem}
   .system-line{width:92%}
+  .system-label{
+    display:grid;
+    grid-template-columns:repeat(5,1fr);
+    align-items:center;
+    bottom:-2px;
+    width:100%;
+    font-size:.43rem;
+    letter-spacing:.08em;
+    text-align:center;
+  }
+  .system-label b,.system-label small{font-size:.43rem;letter-spacing:.08em}
 }
 @media(prefers-reduced-motion:reduce){
   .zero-ring::before,.zero-ring::after,.zero-ring span,.system-line i,.w1,.w2{animation:none!important}
