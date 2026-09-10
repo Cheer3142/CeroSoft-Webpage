@@ -5,8 +5,6 @@
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.button,.service-list article{transition:none}}
 body{font-family:"DM Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
 [lang="th"]{font-family:"IBM Plex Sans Thai","DM Sans",ui-sans-serif,system-ui,sans-serif}
-[lang="th"] h1,[lang="th"] h2{letter-spacing:-.025em;line-height:1.22}
-[lang="th"] .hero h1{line-height:1.18}
 .process-head{display:grid;grid-template-columns:1fr .8fr;gap:80px;align-items:end}.process-head>p{color:var(--soft);margin:0}.hp{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;opacity:0!important}button:disabled{opacity:.65;cursor:wait;transform:none!important;box-shadow:none!important}
 @media(max-width:1000px){.process-head{grid-template-columns:1fr;gap:25px}}
 
@@ -18,7 +16,6 @@ body{font-family:"DM Sans",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans
 .navbar .brand{padding-right:20px}
 @media(max-width:1000px){.mobile-nav{top:84px}.hero{padding-top:151px}}
 @media(max-width:680px){.navbar .brand{padding-right:12px}.brand{gap:9px;font-size:1.16rem}.brand img{width:50px;height:50px}.hero{padding-top:136px}}
-@media(max-width:680px){[lang="th"] .hero h1{font-size:clamp(3.35rem,15vw,4.6rem);line-height:1.2}}
 
 /* System-detail and accessibility refinements */
 .skip-link{position:fixed;z-index:100;top:10px;left:10px;padding:10px 14px;background:var(--cyan);color:var(--ink);font-weight:700;transform:translateY(-150%);transition:transform .2s ease-out}
