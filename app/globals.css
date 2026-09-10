@@ -47,3 +47,29 @@ input:invalid:not(:placeholder-shown),textarea:invalid:not(:placeholder-shown),s
 .system-label{bottom:22px}
 @media(max-width:1000px){.hero-grid{min-height:auto}.hero-grid>div:first-child{padding-top:24px}.hero-system{min-height:420px}}
 @media(max-width:680px){.hero{padding-top:118px}.hero h1,[lang="th"] .hero h1{font-size:clamp(3.8rem,17vw,5.2rem);line-height:1.04}.hero-system{min-height:340px}.hero-grid>div:first-child{padding-top:0}}
+
+/* Keep Thai hero copy on deliberate lines and reserve room for vowel/tone marks. */
+[lang="th"] .hero h1{
+  font-size:clamp(4.6rem,7vw,6.8rem);
+  line-height:1.2;
+  letter-spacing:-.025em;
+}
+[lang="th"] .hero-title-line{
+  display:block;
+  width:max-content;
+  max-width:100%;
+  white-space:nowrap;
+}
+[lang="th"] .hero-title-primary{color:#fff}
+[lang="th"] .hero-title-accent{color:var(--cyan)}
+@media(max-width:1000px){
+  .hero-grid{grid-template-columns:1fr}
+  [lang="th"] .hero h1{font-size:clamp(4rem,10vw,6rem);line-height:1.22}
+}
+@media(max-width:680px){
+  [lang="th"] .hero{padding-top:118px}
+  [lang="th"] .hero-grid{gap:28px}
+  [lang="th"] .hero h1{font-size:clamp(3.15rem,14.2vw,4.15rem);line-height:1.22;letter-spacing:-.018em}
+  .zero-ring{width:220px;height:220px}
+  [lang="th"] .hero-system{min-height:300px}
+}
