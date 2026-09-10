@@ -239,6 +239,7 @@ h2{font-weight:500;letter-spacing:-.04em}
 }
 .hero::after{content:"";position:absolute;inset:84px 0 0;background:linear-gradient(90deg,transparent 49.96%,rgba(201,188,158,.1) 50%,transparent 50.04%);pointer-events:none}
 .hero h1{position:relative;z-index:2;text-shadow:0 14px 45px rgba(0,0,0,.3)}
+[lang="en"] .hero h1{font-size:clamp(5.1rem,8.5vw,7.6rem)}
 .hero h1 .hero-title-primary{color:#e6e7e4}
 .hero h1 .hero-title-accent{color:#18bcc4;text-shadow:0 0 28px rgba(0,173,181,.12)}
 .wire{border-color:rgba(201,188,158,.07)}
@@ -344,6 +345,7 @@ footer{background:#080d10;border-top:1px solid rgba(201,188,158,.18)}
 @media(max-width:680px){
   .section{padding:88px 0}
   .hero{background:radial-gradient(circle at 50% 48%,rgba(24,89,94,.16),transparent 28%),linear-gradient(160deg,#0a0f12,#111a20 56%,#0a1014)}
+  [lang="en"] .hero h1{font-size:clamp(3.5rem,15.5vw,4.8rem)}
   .problem-grid article::before{left:0;right:0}
   [lang="th"] .problem .split-head h2{font-size:clamp(1.9rem,8.2vw,2.4rem)}
   [lang="th"] .about h2{font-size:clamp(1.55rem,7vw,2rem)}
