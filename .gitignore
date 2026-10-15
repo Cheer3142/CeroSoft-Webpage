@@ -39,3 +39,8 @@ next-env.d.ts
 /.wrangler/
 /outputs/
 /work/
+
+# local design tooling
+/.claude/
+/.impeccable/review/
+/.impeccable/questions/
