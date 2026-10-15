@@ -242,8 +242,14 @@ function Calculator({ lang }: { lang: Lang }) {
   );
 }
 
-/** Where each CondoMate screen, in content order, happens on the building: the home screen covers the whole building. */
-const panelFocus: Focus[] = ['all', 'repair', 'parcel', 'booking', 'finance'];
+/** Where each CondoMate screen happens on the building: the home screen covers the whole building. */
+const panelFocus: Record<(typeof copy)['en']['condo']['screens'][number]['key'], Focus> = {
+  home: 'all',
+  repairs: 'repair', // VIS-REP-1, room 715
+  booking: 'booking',
+  finance: 'finance',
+  room: 'repair', // the test resident's room 715
+};
 
 function CondoMate({ lang }: { lang: Lang }) {
   const c = copy[lang].condo;
@@ -263,7 +269,7 @@ function CondoMate({ lang }: { lang: Lang }) {
   // Desktop only: a small twin of Punna Residence 5 beside the phone, lit where the current feature happens.
   const twin = useRef<HTMLDivElement>(null);
   const twinApi = useRef<{ focus(key: Focus): void; destroy(): void } | null>(null);
-  const focus = panelFocus[active] ?? 'all';
+  const focus = panelFocus[c.screens[active].key] ?? 'all';
   const focusRef = useRef(focus);
   useEffect(() => { focusRef.current = focus; twinApi.current?.focus(focus); }, [focus]);
   useEffect(() => {
