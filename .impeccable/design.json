@@ -1,0 +1,173 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-15T00:00:00Z",
+  "title": "Design System: CeroSoft",
+  "extensions": {
+    "colorMeta": {
+      "cero-cyan": { "role": "primary", "displayName": "Cero Cyan", "canonical": "#00adb5", "tonalRamp": ["#001114", "#002d31", "#004c51", "#006d73", "#00939a", "#33b9c1", "#76dee4", "#a9ffff"] },
+      "drafting-film": { "role": "neutral", "displayName": "Drafting Film", "canonical": "#eeeeee", "tonalRamp": ["#0b0b0b", "#242424", "#404040", "#5d5d5d", "#808080", "#a4a4a4", "#cacaca", "#eeeeee"] },
+      "sheet-white": { "role": "neutral", "displayName": "Sheet White", "canonical": "#ffffff", "tonalRamp": ["#0b0b0b", "#242424", "#404040", "#5d5d5d", "#808080", "#a4a4a4", "#cacaca", "#ffffff"] },
+      "charcoal-ink": { "role": "neutral", "displayName": "Charcoal Ink", "canonical": "#222831", "tonalRamp": ["#070b12", "#1f242d", "#3a4049", "#595e66", "#7c8188", "#a1a5ab", "#c7cbd0", "#eceff3"] },
+      "graphite": { "role": "neutral", "displayName": "Graphite", "canonical": "#393e46", "tonalRamp": ["#080b10", "#20242b", "#3b4048", "#595e65", "#7c8087", "#a1a5ab", "#c7cbd0", "#eceff3"] },
+      "pencil-muted": { "role": "neutral", "displayName": "Pencil Muted", "canonical": "#575d66", "tonalRamp": ["#080b10", "#20242a", "#3b4048", "#585e67", "#7b8189", "#a0a5ad", "#c6cbd1", "#ebeff4"] },
+      "rule": { "role": "neutral", "displayName": "Rule", "canonical": "rgba(34, 40, 49, 0.16)" },
+      "rule-strong": { "role": "neutral", "displayName": "Rule Strong", "canonical": "rgba(34, 40, 49, 0.42)" },
+      "grid-minor": { "role": "neutral", "displayName": "Grid Minor (24px)", "canonical": "rgba(34, 40, 49, 0.045)" },
+      "grid-major": { "role": "neutral", "displayName": "Grid Major (120px)", "canonical": "rgba(34, 40, 49, 0.075)" },
+      "redline": { "role": "tertiary", "displayName": "Redline", "canonical": "#a43232", "tonalRamp": ["#280000", "#4e0003", "#761418", "#a13030", "#c35c57", "#e48780", "#ffb2ab", "#ffdad4"] },
+      "night-print-fg": { "role": "neutral", "displayName": "Night Print Foreground", "canonical": "#eeeeee" },
+      "night-print-muted": { "role": "neutral", "displayName": "Night Print Muted", "canonical": "#a9aeb5", "tonalRamp": ["#0a0b0d", "#222427", "#3d4044", "#5b5e62", "#7c8186", "#a0a5ac", "#c6cbd1", "#ebeff5"] },
+      "night-print-rule": { "role": "neutral", "displayName": "Night Print Rule", "canonical": "rgba(238, 238, 238, 0.16)" },
+      "night-print-rule-strong": { "role": "neutral", "displayName": "Night Print Rule Strong", "canonical": "rgba(238, 238, 238, 0.4)" },
+      "device-black": { "role": "neutral", "displayName": "Device Black", "canonical": "#11161c", "tonalRamp": ["#070c11", "#20252b", "#3b4046", "#5a5e63", "#7d8185", "#a2a5a9", "#c8cbce", "#edeff1"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "A-00 headline only; light graphite first line, 700 ink second line." },
+      "display-th": { "displayName": "Display (Thai)", "purpose": "A-00 headline in Thai; Noto Sans Thai with 1.24 leading for vowel and tone marks." },
+      "display-product": { "displayName": "Display Product", "purpose": "The CondoMate product name on the night print only." },
+      "headline": { "displayName": "Headline", "purpose": "One sheet heading per section; no eyebrow above it." },
+      "headline-th": { "displayName": "Headline (Thai)", "purpose": "Sheet heading in Thai, 1.3 leading." },
+      "title": { "displayName": "Title", "purpose": "Stage titles, screen captions, console heading." },
+      "title-large": { "displayName": "Title Large", "purpose": "CondoMate screen captions and console heading on the night print." },
+      "body-small": { "displayName": "Body Small", "purpose": "Callout labels, contact-sheet captions, form status, schedule item lists." },
+      "ui": { "displayName": "UI", "purpose": "Nav sheet index and nav CTA." },
+      "label-large": { "displayName": "Label Large (Geist Mono)", "purpose": "Title-block values, survey and schedule numbering, TH/EN toggle." },
+      "label-small": { "displayName": "Label Small (Geist Mono)", "purpose": "Title-block captions, schedule column heads, nav sheet numbers, footer captions." },
+      "lede": { "displayName": "Lede", "purpose": "One graphite paragraph per heading, max 60ch; Thai leading 1.8." },
+      "body": { "displayName": "Body", "purpose": "Running copy, 52-60ch." },
+      "body-th": { "displayName": "Body (Thai)", "purpose": "Thai running copy, leading 1.75." },
+      "label": { "displayName": "Label (Geist Mono)", "purpose": "Sheet bands, dimensions, legends. In Thai: Noto Sans Thai, 0 tracking, no uppercase." }
+    },
+    "lineForms": [
+      { "name": "dashed", "value": "stroke-dasharray: 7 5 / border-style: dashed", "purpose": "Today's manual workflow (Excel, LINE, paper), proposed links, the un-built process line." },
+      { "name": "solid", "value": "2px ink stroke / 1.5px ink border", "purpose": "What is built: the as-built system, built process line, resident app." },
+      { "name": "double", "value": "border: 5px double", "purpose": "Management console / live system plates and legend key." }
+    ],
+    "shadows": [
+      { "name": "device-drop", "value": "0 30px 60px -20px rgba(0, 0, 0, 0.55)", "purpose": "Only under real phone screenshots on the night print." },
+      { "name": "field-focus", "value": "inset 0 -2px 0 #00adb5", "purpose": "Inset cyan underline on a focused form cell; a rule, not elevation." },
+      { "name": "field-invalid", "value": "inset 0 -2px 0 #a43232", "purpose": "Inset redline underline on an invalid form cell." },
+      { "name": "callout-halo", "value": "0 0 0 3px #222831", "purpose": "Knocks a leader-line dot out of the screenshot behind it." }
+    ],
+    "motion": [
+      { "name": "ease", "value": "cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "CSS state transitions (GSAP equivalent: expo.out)." },
+      { "name": "plot-draw", "value": "stroke-dashoffset len -> 0, 1.1-1.4s, power2/power3.inOut", "purpose": "Hero plan links, revision clouds and system lines plot themselves; default state is the finished drawing." },
+      { "name": "rule-in", "value": "scaleX/scaleY(var(--p)) scrubbed 0.6", "purpose": "Process line drawn solid over its dashed plan as you read; nodes turn built." },
+      { "name": "marching-dashes", "value": "stroke-dashoffset ±120, scrubbed", "purpose": "Dashed legacy lettering keeps moving while in view." },
+      { "name": "pinned-stage", "value": "ScrollTrigger pin, (n-1) x 0.9 viewport, >=1000px only", "purpose": "The single pinned CondoMate stage; screenshots wipe in by clip-path, leader lines extend 0.6s staggered 0.12s." },
+      { "name": "smooth-scroll", "value": "Lenis 1.3.26, lerp 0.12", "purpose": "Disabled entirely under prefers-reduced-motion, as are all GSAP timelines and the pin." },
+      { "name": "live-pulse", "value": "2.4s infinite ring scale 0.4 -> 1.6", "purpose": "The live dot only." }
+    ],
+    "breakpoints": [
+      { "name": "index-collapse", "value": "1180px" },
+      { "name": "stack", "value": "1000px" },
+      { "name": "restack", "value": "760px" },
+      { "name": "phone", "value": "640px" }
+    ],
+    "sheets": ["A-00 Hero", "A-01 Problem", "A-02 Services", "A-03 CondoMate", "A-04 Process", "A-05 About", "A-06 Contact"]
+  },
+  "components": [
+    {
+      "name": "Primary Cell CTA",
+      "kind": "button",
+      "refersTo": "button-cell-cta",
+      "description": "Title-block cell for the primary action: cyan fill, ink text, square, arrow pushed to the edge.",
+      "html": "<a class=\"ds-cell-cta\" href=\"#\">Talk to us<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14\"/><path d=\"m12 5 7 7-7 7\"/></svg></a>",
+      "css": ".ds-cell-cta { display: inline-flex; align-items: center; justify-content: space-between; gap: 18px; min-height: 52px; padding: 0 20px; border: 1.5px solid var(--ink, #222831); border-radius: 0; background: var(--cyan, #00adb5); color: var(--ink, #222831); font: 600 1rem/1 'Inter Variable', 'Noto Sans Thai', system-ui, sans-serif; letter-spacing: -0.005em; text-decoration: none; cursor: pointer; transition: background-color .25s cubic-bezier(0.16,1,0.3,1), color .25s cubic-bezier(0.16,1,0.3,1); } .ds-cell-cta svg { width: 18px; height: 18px; transition: transform .35s cubic-bezier(0.16,1,0.3,1); } .ds-cell-cta:hover { background: var(--ink, #222831); color: var(--cyan, #00adb5); } .ds-cell-cta:hover svg { transform: translateX(4px); } .ds-cell-cta:focus-visible { outline: 2px solid var(--ink, #222831); outline-offset: 3px; } .ds-cell-cta:active { transform: translateY(1px); }"
+    },
+    {
+      "name": "Ink Link",
+      "kind": "button",
+      "refersTo": "link-ink",
+      "description": "Secondary 'proposed' action: dashed underline that becomes solid when reached for.",
+      "html": "<a class=\"ds-ink-link\" href=\"#\">See CondoMate<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"m7 7 10 10\"/><path d=\"M17 7v10H7\"/></svg></a>",
+      "css": ".ds-ink-link { display: inline-flex; align-items: center; gap: 10px; padding-bottom: 4px; border-bottom: 1.5px dashed currentColor; color: var(--ink, #222831); font: 600 1rem/1.4 'Inter Variable', system-ui, sans-serif; text-decoration: none; transition: gap .3s cubic-bezier(0.16,1,0.3,1); } .ds-ink-link svg { width: 17px; height: 17px; } .ds-ink-link:hover { border-bottom-style: solid; gap: 14px; } .ds-ink-link:focus-visible { outline: 2px solid var(--ink, #222831); outline-offset: 3px; }"
+    },
+    {
+      "name": "Sheet Band",
+      "kind": "custom",
+      "refersTo": "sheet-band",
+      "description": "Title-block band that opens every sheet A-01..A-06; replaces any eyebrow.",
+      "html": "<div class=\"ds-sheet-band\"><span class=\"ds-band-no\">A-02</span><span>Services</span><span class=\"ds-band-meta\">CeroSoft · 2026</span></div>",
+      "css": ".ds-sheet-band { display: grid; grid-template-columns: 84px 1fr auto; border-top: 2px solid var(--ink, #222831); border-bottom: 1px solid rgba(34,40,49,.42); font: 400 .75rem/1.4 'Geist Mono', ui-monospace, monospace; letter-spacing: .02em; font-variant-numeric: tabular-nums; color: var(--ink, #222831); background: var(--film, #eeeeee); } .ds-sheet-band > span { padding: 10px 14px; } .ds-band-no { padding-left: 0 !important; border-right: 1px solid rgba(34,40,49,.42); font-weight: 500; } .ds-band-meta { color: #575d66; border-left: 1px solid rgba(34,40,49,.42); }"
+    },
+    {
+      "name": "Title Block",
+      "kind": "card",
+      "refersTo": "title-block",
+      "description": "Hero closing block: bordered cells of mono caption over value (Sheet, Title, Scale, Year).",
+      "html": "<div class=\"ds-title-block\"><span><small>Sheet</small>A-00</span><span><small>Title</small>From Zero to Solution</span><span><small>Scale</small>1 : 1</span><span><small>Year</small>2026</span></div>",
+      "css": ".ds-title-block { display: grid; grid-template-columns: 120px 1fr 120px 120px; border: 1.5px solid var(--ink, #222831); background: rgba(255,255,255,.5); font: 400 .8rem/1.4 'Geist Mono', ui-monospace, monospace; font-variant-numeric: tabular-nums; color: var(--ink, #222831); } .ds-title-block > span { display: flex; flex-direction: column; gap: 2px; padding: 10px 14px; border-left: 1px solid rgba(34,40,49,.42); } .ds-title-block > span:first-child { border-left: 0; } .ds-title-block small { font-size: .65rem; letter-spacing: .08em; text-transform: uppercase; color: #575d66; }"
+    },
+    {
+      "name": "Request Cell (input)",
+      "kind": "input",
+      "refersTo": "input-cell",
+      "description": "Borderless form cell on the white request sheet; cyan inset underline on focus, redline when invalid.",
+      "html": "<label class=\"ds-cell\"><span>Name</span><input type=\"text\" placeholder=\"Your name\" required></label>",
+      "css": ".ds-cell { display: flex; flex-direction: column; gap: 2px; padding: 12px 18px 10px; background: var(--paper, #ffffff); border: 1.5px solid var(--ink, #222831); transition: box-shadow .2s cubic-bezier(0.16,1,0.3,1); } .ds-cell > span { font: 400 .72rem/1.4 'Geist Mono', ui-monospace, monospace; letter-spacing: .03em; color: #575d66; } .ds-cell input { width: 100%; padding: 6px 0 4px; border: 0; border-radius: 0; background: transparent; outline: none; font: 400 1.02rem/1.5 'Inter Variable', 'Noto Sans Thai', system-ui, sans-serif; color: var(--ink, #222831); } .ds-cell input::placeholder { color: #575d66; } .ds-cell:focus-within { box-shadow: inset 0 -2px 0 var(--cyan, #00adb5); } .ds-cell:has(:user-invalid) { box-shadow: inset 0 -2px 0 var(--danger, #a43232); }"
+    },
+    {
+      "name": "Sheet Index Nav",
+      "kind": "nav",
+      "refersTo": "nav-bar",
+      "description": "Film bar with ink bottom rule; sheet numbers in mono beside titles; square TH/EN toggle.",
+      "html": "<nav class=\"ds-nav\"><b class=\"ds-brand\">Cero<span>Soft</span></b><a href=\"#\"><small>A-01</small>Problem first</a><a href=\"#\"><small>A-02</small>Services</a><a href=\"#\"><small>A-03</small>CondoMate</a><button class=\"ds-lang\" type=\"button\">TH</button></nav>",
+      "css": ".ds-nav { display: flex; align-items: center; gap: 2px; height: 64px; padding: 0 16px; background: var(--film, #eeeeee); border-bottom: 1.5px solid var(--ink, #222831); font-family: 'Inter Variable', system-ui, sans-serif; } .ds-brand { margin-right: auto; font-size: 1.15rem; font-weight: 700; letter-spacing: -.025em; color: var(--ink, #222831); } .ds-brand span { font-weight: 400; color: #393e46; } .ds-nav a { display: inline-flex; align-items: baseline; gap: 6px; padding: 8px 10px; font-size: .875rem; font-weight: 500; color: #393e46; text-decoration: underline transparent; text-underline-offset: 8px; text-decoration-thickness: 1.5px; transition: color .2s, text-decoration-color .2s; } .ds-nav a small { font: .7rem 'Geist Mono', ui-monospace, monospace; color: #575d66; } .ds-nav a:hover { color: var(--ink, #222831); text-decoration-color: var(--ink, #222831); } .ds-nav a:focus-visible, .ds-lang:focus-visible { outline: 2px solid var(--ink, #222831); outline-offset: 3px; } .ds-lang { width: 42px; height: 40px; margin-left: 12px; border: 1.5px solid var(--ink, #222831); border-radius: 0; background: transparent; font: 500 .8rem 'Geist Mono', ui-monospace, monospace; color: var(--ink, #222831); cursor: pointer; transition: background-color .2s, color .2s; } .ds-lang:hover { background: var(--ink, #222831); color: var(--film, #eeeeee); }"
+    },
+    {
+      "name": "Line Legend",
+      "kind": "chip",
+      "refersTo": "line-legend",
+      "description": "The state key: dashed = today, solid = built, double = management; cyan dot = live.",
+      "html": "<ul class=\"ds-legend\"><li><i class=\"ds-key ds-dashed\"></i>Today: Excel, LINE, paper</li><li><i class=\"ds-key\"></i>Built</li><li><i class=\"ds-key ds-double\"></i>Management</li><li><i class=\"ds-live\"></i>Live</li></ul>",
+      "css": ".ds-legend { display: grid; gap: 12px; margin: 0; padding: 0; list-style: none; font: 400 .78rem/1.4 'Geist Mono', ui-monospace, monospace; color: #393e46; } .ds-legend li { display: flex; align-items: center; gap: 12px; } .ds-key { display: inline-block; width: 32px; height: 0; border-top: 2px solid var(--ink, #222831); } .ds-key.ds-dashed { border-top-style: dashed; border-color: #393e46; } .ds-key.ds-double { border-top: 5px double var(--ink, #222831); } .ds-live { position: relative; display: inline-block; width: 10px; height: 10px; margin: 0 11px; border-radius: 50%; background: var(--cyan, #00adb5); } .ds-live::after { content: ''; position: absolute; inset: -5px; border-radius: 50%; border: 1px solid var(--cyan, #00adb5); animation: ds-live 2.4s cubic-bezier(0.16,1,0.3,1) infinite; } @keyframes ds-live { 0% { transform: scale(.4); opacity: .9; } 100% { transform: scale(1.6); opacity: 0; } } @media (prefers-reduced-motion: reduce) { .ds-live::after { animation: none; } }"
+    },
+    {
+      "name": "Services Schedule Row",
+      "kind": "custom",
+      "refersTo": "schedule",
+      "description": "Services drawn as a door/finish schedule: heavy rules top and bottom, mono code column.",
+      "html": "<table class=\"ds-schedule\"><thead><tr><th>Code</th><th>Service</th><th>What it solves</th></tr></thead><tbody><tr><td class=\"ds-code\">S-01</td><th>Custom Software</th><td>Systems built around how your team already works.</td></tr><tr><td class=\"ds-code\">S-02</td><th>Business Automation</th><td>Remove repeated manual entry between tools.</td></tr></tbody></table>",
+      "css": ".ds-schedule { width: 100%; border-collapse: collapse; border-top: 2px solid var(--ink, #222831); border-bottom: 2px solid var(--ink, #222831); font-family: 'Inter Variable', system-ui, sans-serif; color: var(--ink, #222831); } .ds-schedule thead th { padding: 12px 16px 12px 0; text-align: left; font: 500 .7rem 'Geist Mono', ui-monospace, monospace; letter-spacing: .08em; text-transform: uppercase; color: #575d66; border-bottom: 1px solid rgba(34,40,49,.42); } .ds-schedule tbody tr + tr { border-top: 1px solid rgba(34,40,49,.16); } .ds-schedule td, .ds-schedule tbody th { padding: 22px 24px 22px 0; vertical-align: top; text-align: left; } .ds-schedule tbody th { font-size: 1.2rem; font-weight: 600; letter-spacing: -.01em; } .ds-schedule tbody td:last-child { color: #393e46; } .ds-code { width: 96px; font: .85rem 'Geist Mono', ui-monospace, monospace; font-variant-numeric: tabular-nums; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "The Drawing Set",
+    "overview": "The site is a construction drawing set. A visitor's workflow is surveyed as-is in dashed line (Excel, LINE, paper), redrawn as-built in solid line, and CondoMate is the built sheet, printed in reverse on a charcoal \"night print\". Every section is a numbered sheet (A-00 to A-06) opened by a title-block band; the hero closes with a full title block (sheet, title, scale, year); the footer is the master title block. Nothing is a card, nothing glows, nothing floats. Structure comes from ruled lines, cells and dimension marks on a drafting-film ground with a fine 24px/120px grid.\n\nDensity is a working drawing's: generous sheet spacing (72 to 136px between sheets) with tight, ruled detail inside each sheet (schedules, numbered notes, request form cells). Ink is charcoal, secondary line is graphite, and one colour, Cero Cyan, is held back for the things a visitor can act on and the things that are live. The world explicitly refuses the dark SaaS hero, the feature-card grid and the glowing \"0\" ring of the previous site.\n\nMotion is plotting, not presenting: lines draw, dashes resolve to solid, a process line is ruled in as you read. Every drawing's default state is the finished, visible drawing; motion only animates from blank toward it, so a stalled script or reduced motion still shows the whole set.",
+    "keyCharacteristics": [
+      "Line form carries state: dashed = today's manual workflow, solid = built, double = management/live console.",
+      "Cero Cyan only on actions (primary cells, focus underline in fields, selection) and live state (the live dot).",
+      "Numbered sheets A-00 to A-06, each opened by a mono title-block band; no eyebrows above headings.",
+      "Square, ruled, flat: 0 radius everywhere except real device screenshots and node/live dots.",
+      "Thai first: Thai copy sets in Noto Sans Thai with looser leading; Thai labels are never tracked or uppercased.",
+      "Motion = plot/draw from an already-visible default; one pinned CondoMate stage; reduced motion disables Lenis and the pin."
+    ],
+    "rules": [
+      { "name": "The Signal Rule", "body": "Cero Cyan appears only on something you can press or something that is live. If it is neither, it is ink or graphite.", "section": "colors" },
+      { "name": "The Night Print Rule", "body": "The reversed charcoal ground is reserved for the built product (CondoMate) and the master title block (footer). Other sheets stay on film.", "section": "colors" },
+      { "name": "The Thai Face Rule", "body": "Any label set in mono for English switches to Noto Sans Thai in Thai, with letter-spacing 0 and no text-transform. Geist Mono has no Thai glyphs; tracked or uppercased Thai is never acceptable.", "section": "typography" },
+      { "name": "The No Eyebrow Rule", "body": "Headings are introduced by the sheet's title-block band, not by a kicker line above them. A heading stands alone with its lede beside or below it.", "section": "typography" },
+      { "name": "The Line Weight Rule", "body": "If something needs to stand out, give it a heavier or different line, not a shadow, glow or tint.", "section": "elevation" }
+    ],
+    "dos": [
+      "Do encode state in line form: dashed for today's manual workflow, solid for what is built, double for the management/live console.",
+      "Do keep Cero Cyan to actions and live state, with Charcoal Ink text on cyan fills.",
+      "Do open every sheet with its numbered title-block band (A-00 to A-06) and let the heading stand without a kicker.",
+      "Do set Thai in Noto Sans Thai with leading of 1.75 for body and 1.24 to 1.3 for headings, and switch mono labels to the Thai face with zero tracking and no uppercase.",
+      "Do keep every control and container square (0 radius) with a ruled border; reserve curves for devices, nodes and dots.",
+      "Do animate by plotting: stroke-dashoffset draws, dashed-to-solid rules, leader lines extending, always from a default state that already shows the finished drawing.",
+      "Do keep a single pinned stage (CondoMate) and drop Lenis and the pin entirely under prefers-reduced-motion.",
+      "Do use real CondoMate screens with dimension marks as proof; label them, never mock them up."
+    ],
+    "donts": [
+      "Don't use cyan for decoration, headings, icons, borders of non-actions or background washes.",
+      "Don't put an eyebrow or kicker line above a heading.",
+      "Don't track or uppercase Thai, or set Thai in Geist Mono.",
+      "Don't build feature-card grids, rounded cards, pills, glows or gradient heroes; use schedules, ruled lists and title-block cells.",
+      "Don't add a second pinned or scroll-jacked section.",
+      "Don't hide content behind animation: nothing may depend on a script running to become visible.",
+      "Don't use shadows for hierarchy; the device drop under real phone screenshots is the only shadow."
+    ]
+  }
+}

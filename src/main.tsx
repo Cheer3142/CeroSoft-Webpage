@@ -1,5 +1,13 @@
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
+import '@fontsource-variable/inter';
+import '@fontsource/noto-sans-thai/400.css';
+import '@fontsource/noto-sans-thai/500.css';
+import '@fontsource/noto-sans-thai/600.css';
+import '@fontsource/noto-sans-thai/700.css';
+import '@fontsource/geist-mono/400.css';
+import '@fontsource/geist-mono/500.css';
+import 'lenis/dist/lenis.css';
 import CeroSoftSite from '../app/components/CeroSoftSite';
 import '../app/globals.css';
 createRoot(document.getElementById('root')!).render(<StrictMode><CeroSoftSite/></StrictMode>);
