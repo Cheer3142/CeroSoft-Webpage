@@ -14,7 +14,6 @@ import {
     with live CondoMate events pinned to the places they happen. */
 
 export type Marker = { key: string; label: string };
-type MarkerSpot = { key: string; pos: Vector3 };
 
 const FLOOR = 1.1;
 const LOBBY = 1.6;
@@ -200,13 +199,29 @@ function lineMaterial(height: number, opacity: number) {
   });
 }
 
-export function mountBuilding(container: HTMLElement, markers: Marker[], reduced: boolean) {
+/** Where each CondoMate event happens on the building. */
+export type Spot = 'repair' | 'parcel' | 'booking' | 'finance';
+export type Focus = Spot | 'all';
+const SPOTS: Record<Spot, Vector3> = {
+  repair: new Vector3(-5.3, LOBBY + 4 * FLOOR + 0.55, 3.05), // room 715 on the long facade
+  parcel: new Vector3(-9.2, 0.8, 4.2), // the lobby canopy
+  booking: new Vector3(-12, 0.3, 8.8), // the pool deck
+  finance: new Vector3(8.5, LOBBY + 1 * FLOOR + 0.55, 5.05), // the office in the east wing
+};
+const SPOT_KEYS = Object.keys(SPOTS) as Spot[];
+
+type Frame = { t: number; w: number; h: number; eased: number };
+type Hooks = { resize(w: number, h: number, camera: PerspectiveCamera): void; draw(f: Frame): void };
+
+/** One renderer, scene and marker layer in a container. It renders only while the container is on screen, and with
+    reduced motion it draws single static frames on demand. Returns null when WebGL is unavailable. */
+function stage(container: HTMLElement, reduced: boolean, revealSeconds: number, hooks: Hooks) {
   let renderer: WebGLRenderer;
   try {
     renderer = new WebGLRenderer({ antialias: true, alpha: true, powerPreference: 'low-power' });
   } catch {
     container.classList.add('no-webgl');
-    return { setScroll() {}, setMarkers() {}, destroy() {} };
+    return null;
   }
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1.75));
   renderer.setClearColor(0x000000, 0);
@@ -216,7 +231,6 @@ export function mountBuilding(container: HTMLElement, markers: Marker[], reduced
 
   const scene = new Scene();
   const camera = new PerspectiveCamera(32, 1, 0.1, 200);
-
   const height = TOP + 1.7;
   const mMain = lineMaterial(height, 0.6);
   const mBack = lineMaterial(height, 0.38);
@@ -226,96 +240,45 @@ export function mountBuilding(container: HTMLElement, markers: Marker[], reduced
   scene.add(new LineSegments(grounds().geometry(), mBack));
   scene.add(new LineSegments(punna().geometry(), mMain));
 
-  const spots: MarkerSpot[] = [
-    { key: 'repair', pos: new Vector3(-5.3, LOBBY + 4 * FLOOR + 0.55, 3.05) },
-    { key: 'parcel', pos: new Vector3(-9.2, 0.8, 4.2) },
-    { key: 'booking', pos: new Vector3(-12, 0.3, 8.8) },
-    { key: 'finance', pos: new Vector3(8.5, LOBBY + 1 * FLOOR + 0.55, 5.05) },
-  ];
   const layer = document.createElement('div');
   layer.className = 'twin-markers';
   container.append(layer);
-  const els = new Map<string, HTMLElement>();
-  const setMarkers = (list: Marker[]) => {
-    list.forEach(m => {
-      let el = els.get(m.key);
-      if (!el) {
-        el = document.createElement('div');
-        el.className = 'twin-marker';
-        el.innerHTML = '<div class="mk"><i></i><span></span></div>';
-        layer.append(el);
-        els.set(m.key, el);
-      }
-      el.querySelector('span')!.textContent = m.label;
-    });
-  };
-  setMarkers(markers);
 
   let w = 0, h = 0;
+  let visible = false;
+  let raf = 0;
+  let start = 0;
+  const frame = (now: number) => {
+    // The build-up plays the first time the twin comes on screen, not at mount.
+    if (!start) start = now;
+    const t = (now - start) / 1000;
+    const reveal = reduced ? 1 : Math.min(1, t / revealSeconds);
+    const eased = 1 - Math.pow(1 - reveal, 3);
+    mMain.uniforms.uReveal.value = eased;
+    mBack.uniforms.uReveal.value = Math.min(1, eased * 1.15);
+    hooks.draw({ t, w, h, eased });
+    renderer.render(scene, camera);
+    if (visible && !reduced) raf = requestAnimationFrame(frame);
+  };
+  const kick = () => {
+    if (!visible) return;
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(frame);
+  };
+
   const resize = () => {
     w = container.clientWidth; h = container.clientHeight;
+    if (!w || !h) return;
     renderer.setSize(w, h, false);
     camera.aspect = w / h;
-    // On narrow screens pull back so the whole building fits.
-    camera.fov = w < 700 ? 52 : 32;
+    hooks.resize(w, h, camera);
     camera.updateProjectionMatrix();
+    // setSize clears the canvas, so a paused (reduced-motion) twin needs a fresh frame.
+    if (reduced) kick();
   };
   resize();
   const ro = new ResizeObserver(resize);
   ro.observe(container);
-
-  let reveal = reduced ? 1 : 0;
-  let scroll = 0;
-  let angle = -0.5;
-  let pointerX = 0, pointerY = 0;
-  const onPointer = (e: PointerEvent) => {
-    pointerX = (e.clientX / window.innerWidth - 0.5) * 2;
-    pointerY = (e.clientY / window.innerHeight - 0.5) * 2;
-  };
-  window.addEventListener('pointermove', onPointer, { passive: true });
-
-  const target = new Vector3(-1.5, 3, 3);
-  const tmp = new Vector3();
-  let visible = true;
-  let raf = 0;
-  const start = performance.now();
-
-  const frame = (now: number) => {
-    const t = (now - start) / 1000;
-    if (!reduced) {
-      reveal = Math.min(1, t / 2.8);
-      angle += 0.0009;
-    }
-    const eased = 1 - Math.pow(1 - reveal, 3);
-    mMain.uniforms.uReveal.value = eased;
-    mBack.uniforms.uReveal.value = Math.min(1, eased * 1.15);
-
-    const radius = 50 - scroll * 12;
-    const a = angle + scroll * 0.55 + pointerX * 0.05;
-    camera.position.set(target.x + Math.sin(a) * radius, 21 - scroll * 6 + pointerY * 0.8, target.z + Math.cos(a) * radius);
-    // Keep the building right of centre on wide screens so the headline has room.
-    const wide = w >= 1000;
-    camera.setViewOffset(w, h, wide ? -w * 0.17 : 0, wide ? h * 0.02 : h * 0.24, w, h);
-    camera.lookAt(target);
-    renderer.render(scene, camera);
-
-    const markersOn = eased > 0.97;
-    spots.forEach((s, i) => {
-      const el = els.get(s.key);
-      if (!el) return;
-      tmp.copy(s.pos).project(camera);
-      const x = (tmp.x * 0.5 + 0.5) * w;
-      const y = (-tmp.y * 0.5 + 0.5) * h;
-      const narrow = w < 700;
-      // On phones the headline owns the lower half: markers live only in the top band and never flip off-screen.
-      const clear = !narrow || y < h * 0.33;
-      el.style.transform = `translate3d(${(narrow ? Math.min(x, w - 16) : x).toFixed(1)}px, ${y.toFixed(1)}px, 0)`;
-      el.classList.toggle('is-on', clear && markersOn && (reduced || t > 3 + i * 0.35));
-      el.classList.toggle('flip', !narrow && x > w - 260);
-      el.classList.toggle('clamp', narrow && x > w * 0.5);
-    });
-    if (visible && !reduced) raf = requestAnimationFrame(frame);
-  };
 
   const io = new IntersectionObserver(([e]) => {
     visible = e.isIntersecting;
@@ -323,26 +286,153 @@ export function mountBuilding(container: HTMLElement, markers: Marker[], reduced
     if (visible) raf = requestAnimationFrame(frame);
   });
   io.observe(container);
-  raf = requestAnimationFrame(frame);
 
+  const tmp = new Vector3();
   return {
-    setScroll(p: number) {
-      scroll = Math.max(0, Math.min(1, p));
-      if (reduced) requestAnimationFrame(frame);
-    },
-    setMarkers(list: Marker[]) {
-      setMarkers(list);
-      if (reduced) requestAnimationFrame(frame);
+    camera, mMain, layer, kick,
+    project(p: Vector3) {
+      // Markers are placed before the render, so bring the camera matrices up to date with this frame.
+      camera.updateMatrixWorld();
+      tmp.copy(p).project(camera);
+      return { x: (tmp.x * 0.5 + 0.5) * w, y: (-tmp.y * 0.5 + 0.5) * h };
     },
     destroy() {
       cancelAnimationFrame(raf);
       io.disconnect();
       ro.disconnect();
-      window.removeEventListener('pointermove', onPointer);
       renderer.dispose();
       scene.traverse(o => { if (o instanceof LineSegments) { o.geometry.dispose(); (o.material as ShaderMaterial).dispose(); } });
       canvas.remove();
       layer.remove();
     },
+  };
+}
+
+function markerEl(layer: HTMLElement) {
+  const el = document.createElement('div');
+  el.className = 'twin-marker';
+  el.innerHTML = '<div class="mk"><i></i><span></span></div>';
+  layer.append(el);
+  return el;
+}
+
+/** The hero: a large slow orbit that follows scroll and pointer, with labelled live markers. */
+export function mountBuilding(container: HTMLElement, markers: Marker[], reduced: boolean) {
+  let scroll = 0;
+  let angle = -0.5;
+  let pointerX = 0, pointerY = 0;
+  const onPointer = (e: PointerEvent) => {
+    pointerX = (e.clientX / window.innerWidth - 0.5) * 2;
+    pointerY = (e.clientY / window.innerHeight - 0.5) * 2;
+  };
+  const target = new Vector3(-1.5, 3, 3);
+  const els = new Map<string, HTMLElement>();
+
+  const s = stage(container, reduced, 2.8, {
+    // On narrow screens pull back so the whole building fits.
+    resize(w, _h, camera) { camera.fov = w < 700 ? 52 : 32; },
+    draw({ t, w, h, eased }) {
+      if (!reduced) angle += 0.0009;
+      const radius = 50 - scroll * 12;
+      const a = angle + scroll * 0.55 + pointerX * 0.05;
+      const camera = s!.camera;
+      camera.position.set(target.x + Math.sin(a) * radius, 21 - scroll * 6 + pointerY * 0.8, target.z + Math.cos(a) * radius);
+      // Keep the building right of centre on wide screens so the headline has room.
+      const wide = w >= 1000;
+      camera.setViewOffset(w, h, wide ? -w * 0.17 : 0, wide ? h * 0.02 : h * 0.24, w, h);
+      camera.lookAt(target);
+
+      const markersOn = eased > 0.97;
+      SPOT_KEYS.forEach((key, i) => {
+        const el = els.get(key);
+        if (!el) return;
+        const { x, y } = s!.project(SPOTS[key]);
+        const narrow = w < 700;
+        // On phones the headline owns the lower half: markers live only in the top band and never flip off-screen.
+        const clear = !narrow || y < h * 0.33;
+        el.style.transform = `translate3d(${(narrow ? Math.min(x, w - 16) : x).toFixed(1)}px, ${y.toFixed(1)}px, 0)`;
+        el.classList.toggle('is-on', clear && markersOn && (reduced || t > 3 + i * 0.35));
+        el.classList.toggle('flip', !narrow && x > w - 260);
+        el.classList.toggle('clamp', narrow && x > w * 0.5);
+      });
+    },
+  });
+  if (!s) return { setScroll() {}, setMarkers() {}, destroy() {} };
+
+  const setMarkers = (list: Marker[]) => {
+    list.forEach(m => {
+      let el = els.get(m.key);
+      if (!el) { el = markerEl(s.layer); els.set(m.key, el); }
+      el.querySelector('span')!.textContent = m.label;
+    });
+  };
+  setMarkers(markers);
+  window.addEventListener('pointermove', onPointer, { passive: true });
+
+  return {
+    setScroll(p: number) {
+      scroll = Math.max(0, Math.min(1, p));
+      if (reduced) s.kick();
+    },
+    setMarkers(list: Marker[]) {
+      setMarkers(list);
+      if (reduced) s.kick();
+    },
+    destroy() {
+      window.removeEventListener('pointermove', onPointer);
+      s.destroy();
+    },
+  };
+}
+
+/** The CondoMate panel: a small twin that leans towards and lights the place where the current feature happens.
+    `focus('all')` lights the whole building. */
+export function mountPanelTwin(container: HTMLElement, reduced: boolean) {
+  let focus: Focus = 'all';
+  const home = new Vector3(-2.5, 2.6, 3);
+  const aim = home.clone();
+  const goal = home.clone();
+  const base = new Color('#e6e8ea');
+  const hot = new Color('#00adb5');
+  let glow = 1;
+  let els = new Map<Spot, HTMLElement>();
+
+  const s = stage(container, reduced, 2.2, {
+    // Fit the building's width whatever the panel's aspect ratio.
+    resize(w, h, camera) {
+      camera.fov = Math.min(70, (2 * Math.atan(16.5 / 52 / (w / h)) * 180) / Math.PI);
+    },
+    draw({ t, eased }) {
+      const k = reduced ? 1 : 0.06;
+      aim.lerp(goal, k);
+      glow += ((focus === 'all' ? 1 : 0) - glow) * k;
+      s!.mMain.uniforms.uColor.value.copy(base).lerp(hot, glow * 0.55);
+
+      const a = -0.62 + (reduced ? 0 : Math.sin(t * 0.15) * 0.14);
+      const camera = s!.camera;
+      camera.position.set(aim.x + Math.sin(a) * 52, aim.y + 19, aim.z + Math.cos(a) * 52);
+      camera.lookAt(aim);
+
+      const on = eased > 0.97;
+      els.forEach((el, key) => {
+        const { x, y } = s!.project(SPOTS[key]);
+        el.style.transform = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0)`;
+        el.classList.toggle('is-on', on);
+        el.classList.toggle('is-focus', focus === 'all' || focus === key);
+      });
+    },
+  });
+  if (!s) return { focus() {}, destroy() {} };
+  els = new Map(SPOT_KEYS.map(key => [key, markerEl(s.layer)]));
+
+  return {
+    focus(key: Focus) {
+      focus = key;
+      // Lean the view a third of the way towards the spot so the whole building stays in frame.
+      goal.copy(home);
+      if (key !== 'all') goal.lerp(SPOTS[key], 0.35);
+      s.kick();
+    },
+    destroy: s.destroy,
   };
 }

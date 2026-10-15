@@ -2,6 +2,7 @@ import { SyntheticEvent, useEffect, useId, useMemo, useRef, useState } from 'rea
 import { ArrowRight, ArrowDownRight, Check, CircleAlert, Menu, Plus, X } from 'lucide-react';
 import { copy, navIds, type Lang } from './content';
 import { setupMotion } from './motion';
+import type { Focus } from './building';
 
 const logo = '/icon-192.png';
 const year = new Date().getFullYear();
@@ -241,6 +242,15 @@ function Calculator({ lang }: { lang: Lang }) {
   );
 }
 
+/** Where each CondoMate screen happens on the building: the home screen covers the whole building. */
+const panelFocus: Record<(typeof copy)['en']['condo']['screens'][number]['key'], Focus> = {
+  home: 'all',
+  repairs: 'repair', // VIS-REP-1, room 715
+  booking: 'booking',
+  finance: 'finance',
+  room: 'repair', // the test resident's room 715
+};
+
 function CondoMate({ lang }: { lang: Lang }) {
   const c = copy[lang].condo;
   const [active, setActive] = useState(0);
@@ -255,6 +265,32 @@ function CondoMate({ lang }: { lang: Lang }) {
     blocks.current.forEach(b => b && io.observe(b));
     return () => io.disconnect();
   }, [lang]);
+
+  // Desktop only: a small twin of Punna Residence 5 beside the phone, lit where the current feature happens.
+  const twin = useRef<HTMLDivElement>(null);
+  const twinApi = useRef<{ focus(key: Focus): void; destroy(): void } | null>(null);
+  const focus = panelFocus[c.screens[active].key] ?? 'all';
+  const focusRef = useRef(focus);
+  useEffect(() => { focusRef.current = focus; twinApi.current?.focus(focus); }, [focus]);
+  useEffect(() => {
+    const mq = window.matchMedia('(min-width: 1000px)');
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let alive = true;
+    const unmount = () => { twinApi.current?.destroy(); twinApi.current = null; };
+    const sync = () => {
+      if (!mq.matches) return unmount();
+      if (twinApi.current) return;
+      import('./building').then(({ mountPanelTwin }) => {
+        if (!alive || !mq.matches || twinApi.current || !twin.current) return;
+        twinApi.current = mountPanelTwin(twin.current, reduced);
+        twinApi.current.focus(focusRef.current);
+      });
+    };
+    sync();
+    mq.addEventListener('change', sync);
+    return () => { alive = false; mq.removeEventListener('change', sync); unmount(); };
+  }, []);
+
   return (
     <section id="condomate" className="condomate light" aria-labelledby="condo-title">
       <div className="wrap">
@@ -278,6 +314,8 @@ function CondoMate({ lang }: { lang: Lang }) {
           <p className="scroller-note">{c.note}</p>
         </div>
         <div className="scroller-panel dark-card" aria-hidden="true">
+          <div className="twin panel-twin" ref={twin} />
+          <p className="panel-place">Punna Residence 5</p>
           <div className="panel-phone">
             {c.screens.map((s, i) => (
               <img key={s.src} src={s.src} alt="" width={s.w} height={s.h} className={i === active ? 'is-active' : ''} loading={i === 0 ? 'eager' : 'lazy'} decoding="async" />
