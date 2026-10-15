@@ -7,20 +7,22 @@ related_targets: ["index.html"]
 
 # Surface: cerosoft.net home (one page)
 
-Mode: Persuade. Audience: Thai SME owners (Thai first). Action: start a conversation via the contact form. Proof: CondoMate at Punna Residence 5 (real screens in public/portfolio). Constraints: bilingual TH/EN toggle, Resend contact endpoint with honeypot, GSAP + Lenis allowed, no invented clients/metrics.
+Mode: Persuade. Audience: Thai SME owners (Thai first). Action: start a conversation via the contact form. Proof: CondoMate at Punna Residence 5 (real screens in public/portfolio). Constraints: bilingual TH/EN toggle, Resend contact endpoint with honeypot, GSAP + Lenis + three.js (lazy), no invented clients/metrics/testimonials, no stock photos.
+
+History: "The Drawing Set" was built and rejected by the user (2026-10-15). The user then pinned an external reference: Terminal Industries (terminal-industries.com, REJOUICE, Awwwards Site of the Month Sep 2025). User pin beats the roll.
 
 ## Direction contract
 
-THESIS: The site is a construction drawing set. The visitor's workflow is drawn as-is (dashed: Excel, LINE, paper) and redrawn as-built (solid), and CondoMate is the built sheet. Refuses the dark SaaS hero + feature-card grid and the incumbent glowing "0" ring.
+THESIS: A cinematic B2B product site in the Terminal Industries grammar: the real operation becomes a live digital twin, and the product proves itself. Refuses the dark-SaaS-cards template and the previous drafting-sheet world.
 
-OWN-WORLD: Drafting film #EEEEEE ground on a fine ruled grid, white sheets, charcoal #222831 line ink, graphite #393E46 secondary. Line form carries state: dashed = manual/today, solid = built, double = live. Cero Cyan #00ADB5 only for actions and live state. Every section is a numbered sheet (A-00…A-07) with a title-block band; callouts are leader lines with tick ends; buttons are title-block cells.
+OWN-WORLD: Charcoal #222831 cinematic grounds alternating with white/#F4F5F5 statement sections joined by notched edges; one accent, Cero Cyan #00ADB5 (Terminal's lime role) for primary action, live events and the last letter of revealing headlines. Inter 400–500 at large size with tight tracking for statements (Suisse role), Geist Mono uppercase micro-labels for data/UI only (Latin), Noto Sans Thai for Thai. Floating capsule nav. Cards with 14px radii and notched corners on dark panels.
 
-STORY: "They read my work before writing code" → see my mess drawn exactly → see the five-stage method → see CondoMate built and running → talk to them.
+STORY: See a condo drawn from zero into one connected system → "before code we read the work" → start small (one problem first) → estimate what repeated work costs you → watch CondoMate do the job → how we work / about → FAQ → talk to us.
 
-FIRST VIEWPORT: Sheet A-00 full-bleed. Left 7/12: sheet label, headline "From Zero to Solution" / "เริ่มจากศูนย์ สู่โซลูชันที่ใช่" at display scale, one-line subcopy, primary "Talk to us" cyan cell + "See CondoMate" ink link. Right 5/12: a live plan drawing — Excel, LINE, Paper boxes linked by dashed lines that resolve on load into one solid system box (the C mark) with a cyan live dot. Title block bottom-right: sheet no., scale, date, TH/EN toggle.
+FIRST VIEWPORT: Full-bleed charcoal; three.js wireframe condo building fills the right/centre, drawing itself in, then cyan event markers with mono labels (ห้อง 715 · แจ้งซ่อม, พัสดุ 1 ชิ้น). Headline bottom-left at display scale, typed reveal, last letter cyan. Floating capsule nav top with cyan "ปรึกษาเรา" cell. Secondary "ดู CondoMate" button.
 
-FORM: Construction drawing set, candidate 3 of 7. seed: none (unavailable)
+FORM: User-pinned reference (Terminal Industries), not from the ordered list; it superseded the original roll (key c1d19b61, which assigned The Drawing Set and printed no SEED REFERENCE line). seed: none (unavailable)
 
-Signature interaction: scroll draws the drawing — SVG strokes animate dashed→solid (GSAP ScrollTrigger), CondoMate screens pin full-viewport with annotation callouts that draw in per screen. Motion grammar: line-draw and plot, never fade-blur. Raises: line-form state (emission rail); cyan reserved for action (paste-up); one screen holds the viewport (fashion flagship); one toggle redraws every sheet (Miura).
+Signature interaction: the hero digital-twin building (draw-in, slow orbit, scroll dolly, live markers) and the pinned CondoMate panel whose screen changes as each left-hand block comes into focus (grey to ink). Motion grammar: word-by-word colour reveal, wireframe draw, notch-edged section transitions.
 
 FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance

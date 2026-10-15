@@ -1,57 +1,70 @@
-import type { ReactNode } from 'react';
-
 export type Lang = 'en' | 'th';
 
-export const sheetIds = ['problem', 'services', 'condomate', 'process', 'about', 'contact'] as const;
-export type SheetId = (typeof sheetIds)[number];
+export const navIds = ['condomate', 'services', 'process', 'about', 'faq'] as const;
+export type NavId = (typeof navIds)[number];
 
 type Step = { n: string; title: string; text: string };
-type Service = { code: string; title: string; text: string; items: string };
-type Callout = { y: number; label: string };
-type Screen = { src: string; w: number; h: number; title: string; text: string; callouts: Callout[] };
-type Note = { title: string; text: string };
+type Path = { key: 'one' | 'few' | 'all'; title: string; text: string; service: string };
+type Service = { title: string; text: string; items: string[] };
+type Callout = { label: string };
+type Screen = { src: string; w: number; h: number; tag: string; title: string; text: string; callouts: Callout[] };
+type Faq = { q: string; a: string };
 
 type Copy = {
   skip: string;
   menu: string;
   langLabel: string;
   talk: string;
-  sheets: Record<SheetId, { no: string; title: string }>;
+  nav: Record<NavId, string>;
   hero: {
-    sheetTitle: string;
-    title: ReactNode;
+    line1: string;
+    line2: string;
     text: string;
     primary: string;
     secondary: string;
-    plan: { excel: string; line: string; paper: string; reentry: string; friction: string; system: string; live: string; asis: string; asbuilt: string };
+    markers: { repair: string; parcel: string; booking: string; finance: string };
+    canvasLabel: string;
+    dataNote: string;
   };
-  problem: { title: ReactNode; text: string; close: string; steps: Step[] };
-  legacy: { words: string[]; title: string; text: string; cta: string; legendOld: string; legendNew: string };
-  services: { title: ReactNode; text: string; head: [string, string, string, string]; rows: Service[] };
+  statement: { text: string; sub: string };
+  paths: { title: string; text: string; items: Path[]; cta: string };
+  calc: {
+    title: string;
+    text: string;
+    formTitle: string;
+    people: string;
+    hours: string;
+    days: string;
+    wage: string;
+    unitPeople: string;
+    unitHours: string;
+    unitDays: string;
+    unitWage: string;
+    resultTitle: string;
+    hoursYear: string;
+    costYear: string;
+    perYear: string;
+    note: string;
+    cta: string;
+  };
   condo: {
     title: string;
-    sub: string;
     text: string;
     live: string;
-    resident: string;
-    management: string;
-    note: string;
-    stageTitle: string;
     screens: Screen[];
-    more: string;
-    moreScreens: { src: string; title: string }[];
-    console: { title: string; text: string; items: { name: string; title: string; text: string }[] };
-    legend: string;
+    note: string;
+    console: { title: string; text: string; tabs: { name: string; title: string; text: string }[] };
     features: string[];
     cta: string;
   };
-  process: { title: ReactNode; text: string; steps: Step[]; liveNote: string };
-  about: { title: ReactNode; text: string; notesTitle: string; notes: Note[] };
+  services: { title: string; text: string; items: Service[] };
+  process: { title: string; text: string; steps: Step[] };
+  about: { title: string; text: string; mission: [string, string]; vision: [string, string]; valuesTitle: string; values: [string, string][] };
+  faq: { title: string; text: string; items: Faq[] };
   contact: {
-    title: ReactNode;
+    title: string;
     text: string;
-    next: string;
-    formTitle: string;
+    bullets: string[];
     fields: [string, string, string, string, string, string];
     optional: string;
     select: string;
@@ -63,110 +76,98 @@ type Copy = {
     failed: string;
     honeypot: string;
   };
-  footer: { tagline: string; line: string; index: string; online: string; city: string; drawn: string };
+  closing: { title: string; cta: string };
+  footer: { tagline: string; line: string; menu: string; services: string; contact: string; city: string };
 };
 
-const screensEn: Screen[] = [
-  { src: '/portfolio/condomate-resident-dashboard.png', w: 390, h: 1105, title: 'Resident dashboard', text: 'A focused home for announcements, parcels, maintenance, and daily tasks.', callouts: [{ y: 29, label: 'Parcels waiting and open repairs, counted for the room' }, { y: 56, label: 'Latest announcement from the office' }, { y: 83, label: 'Quick actions for daily tasks' }] },
-  { src: '/portfolio/condomate-resident-repairs.png', w: 390, h: 844, title: 'Maintenance workflow', text: 'Residents submit, track, and review repair requests in one place.', callouts: [{ y: 25, label: 'Status: received · in progress · done' }, { y: 31, label: 'New request in one tap' }, { y: 46, label: 'Every job gets a reference number' }] },
-  { src: '/portfolio/condomate-resident-parcels.png', w: 390, h: 844, title: 'Parcel tracking', text: 'Residents can check deliveries and pickup details.', callouts: [{ y: 25, label: 'Waiting or collected' }, { y: 40, label: 'Carrier and tracking number' }] },
-  { src: '/portfolio/condomate-resident-booking.png', w: 390, h: 844, title: 'Shared-space booking', text: 'Clear availability, capacity checks, and time-slot requests.', callouts: [{ y: 13, label: 'Book a shared space by the hour' }, { y: 25, label: 'Pending · approved · cancelled' }, { y: 50, label: 'A clear empty state, not a blank page' }] },
-  { src: '/portfolio/condomate-resident-finance.png', w: 390, h: 844, title: 'Resident finance', text: 'Payment information and financial activity in one place.', callouts: [{ y: 19, label: 'Bank account and QR for payment' }, { y: 32, label: 'Send proof of payment' }, { y: 49, label: 'Amount and due date per item' }] },
-];
-
-const screensTh: Screen[] = [
-  { src: '/portfolio/condomate-resident-dashboard.png', w: 390, h: 1105, title: 'แดชบอร์ดลูกบ้าน', text: 'รวมประกาศ พัสดุ งานแจ้งซ่อม และบริการประจำวันไว้ในที่เดียว', callouts: [{ y: 29, label: 'พัสดุรอรับและงานแจ้งซ่อมของห้อง นับให้อัตโนมัติ' }, { y: 56, label: 'ประกาศล่าสุดจากนิติบุคคล' }, { y: 83, label: 'ทางลัดสำหรับงานประจำวัน' }] },
-  { src: '/portfolio/condomate-resident-repairs.png', w: 390, h: 844, title: 'ระบบแจ้งซ่อม', text: 'แจ้งเรื่อง ติดตามความคืบหน้า และตรวจสอบสถานะงานซ่อมได้ในที่เดียว', callouts: [{ y: 25, label: 'สถานะ: รอรับงาน · กำลังดำเนินการ · เสร็จสิ้น' }, { y: 31, label: 'แจ้งซ่อมใหม่ได้ในแตะเดียว' }, { y: 46, label: 'ทุกงานมีเลขอ้างอิง' }] },
-  { src: '/portfolio/condomate-resident-parcels.png', w: 390, h: 844, title: 'ติดตามพัสดุ', text: 'ตรวจสอบพัสดุและรายละเอียดการรับได้สะดวก', callouts: [{ y: 25, label: 'รอรับหรือรับแล้ว' }, { y: 40, label: 'ผู้ให้บริการและเลขพัสดุ' }] },
-  { src: '/portfolio/condomate-resident-booking.png', w: 390, h: 844, title: 'ระบบจองพื้นที่ส่วนกลาง', text: 'ตรวจสอบช่วงเวลาว่าง จำนวนผู้ใช้ และความจุของพื้นที่ได้อย่างชัดเจน', callouts: [{ y: 13, label: 'จองพื้นที่เป็นรอบ รอบละ 1 ชั่วโมง' }, { y: 25, label: 'รออนุมัติ · อนุมัติแล้ว · ยกเลิกแล้ว' }, { y: 50, label: 'แจ้งชัดเมื่อยังไม่มีรายการ' }] },
-  { src: '/portfolio/condomate-resident-finance.png', w: 390, h: 844, title: 'การเงินลูกบ้าน', text: 'ดูข้อมูลชำระเงินและรายการทางการเงินในที่เดียว', callouts: [{ y: 19, label: 'บัญชีรับเงินและ QR สำหรับชำระ' }, { y: 32, label: 'แจ้งชำระพร้อมหลักฐาน' }, { y: 49, label: 'ยอดเงินและวันครบกำหนดแต่ละรายการ' }] },
-];
+const screen = (name: string, h = 844) => ({ src: `/portfolio/condomate-resident-${name}.png`, w: 390, h });
 
 export const copy: Record<Lang, Copy> = {
   en: {
     skip: 'Skip to content',
-    menu: 'Sheet index',
+    menu: 'Menu',
     langLabel: 'อ่านภาษาไทย',
     talk: 'Talk to us',
-    sheets: {
-      problem: { no: 'A-01', title: 'Problem first' },
-      services: { no: 'A-02', title: 'Services' },
-      condomate: { no: 'A-03', title: 'CondoMate' },
-      process: { no: 'A-04', title: 'How we work' },
-      about: { no: 'A-05', title: 'About' },
-      contact: { no: 'A-06', title: 'Contact' },
-    },
+    nav: { condomate: 'CondoMate', services: 'Services', process: 'How we work', about: 'About', faq: 'FAQ' },
     hero: {
-      sheetTitle: 'From zero to solution',
-      title: <><span className="h1-line">From Zero</span><span className="h1-line h1-strong">to Solution.</span></>,
+      line1: 'From Zero',
+      line2: 'to Solution.',
       text: 'We begin with the business problem—not a preferred technology. Then we design software that makes the work simpler, clearer, and ready to scale.',
       primary: 'Talk to us',
       secondary: 'See CondoMate',
-      plan: { excel: 'Excel', line: 'LINE chats', paper: 'Paper forms', reentry: 'typed again ×3', friction: 'friction', system: 'One system', live: 'live', asis: 'As-is', asbuilt: 'As-built' },
+      markers: { repair: 'Room 715 · Repair VIS-REP-1', parcel: 'Room 715 · 1 parcel waiting', booking: 'Shared space · 1-hour slots', finance: 'Common fee · Due 30 Sep' },
+      canvasLabel: 'Punna Residence 5 drawn as one connected system: repairs, parcels, bookings and finance in one place.',
+      dataNote: 'Model of Punna Residence 5. Labels show CondoMate test data.',
     },
-    problem: {
-      title: <>Before we write code,<br />we read the work.</>,
+    statement: {
       text: 'Most software problems are not really software problems. They are disconnected steps, repeated data entry, unclear ownership, and information trapped between people and tools.',
-      close: 'We map the reality first. Then we remove friction with the smallest system that can create meaningful change.',
-      steps: [
-        { n: '01', title: 'Observe', text: 'How work actually moves—not how it is supposed to.' },
-        { n: '02', title: 'Find the friction', text: 'Where time, data, and responsibility fall between tools.' },
-        { n: '03', title: 'Define the outcome', text: 'What should become faster, clearer, or more dependable.' },
-        { n: '04', title: 'Build the system', text: 'Only then do we choose the right architecture and technology.' },
-      ],
+      sub: 'Before we write code, we read the work.',
     },
-    legacy: {
-      words: ['Excel.', 'Chats.', 'Paper.', 'Re-entry.'],
-      title: 'A familiar starting point',
-      text: 'Fragmented tools are often a sign that the business has outgrown its current workflow—not that the team is doing something wrong.',
-      cta: 'Tell us what is not working',
-      legendOld: 'Dashed: how the work runs today',
-      legendNew: 'Solid: the system we build',
-    },
-    services: {
-      title: <>One partner.<br />The whole system.</>,
-      text: 'Strategy, design, engineering, integration, and long-term care—connected by one understanding of your business.',
-      head: ['Code', 'Service', 'What it does', 'Includes'],
-      rows: [
-        { code: 'S-01', title: 'Custom Software', text: 'Web applications and internal systems built around the way your team works.', items: 'Web applications · Internal management systems · Business management systems' },
-        { code: 'S-02', title: 'Business Automation', text: 'Reduce repeated work and turn manual steps into clear workflows.', items: 'Workflow automation · Data processing · Reporting and dashboards' },
-        { code: 'S-03', title: 'Web Solutions', text: 'Corporate sites, portals, and online services with purpose and clarity.', items: 'Corporate websites · Customer portals · Online services' },
-        { code: 'S-04', title: 'System Integration', text: 'Connect APIs, databases, existing tools, and operational data.', items: 'API integration · Database integration · Existing-system integration' },
-        { code: 'S-05', title: 'Support & Maintenance', text: 'Monitoring, backup, updates, and ongoing technical care.', items: 'Monitoring · Backup · Updates · Technical support' },
+    paths: {
+      title: 'Fix one problem today. Grow on your timeline.',
+      text: 'We map the reality first. Then we remove friction with the smallest system that can create meaningful change.',
+      items: [
+        { key: 'one', title: 'One repeated task', text: 'Start with the single step that eats the most time—an Excel sheet, a paper form, a report rebuilt every week.', service: 'Business Automation' },
+        { key: 'few', title: 'A few disconnected tools', text: 'Connect the spreadsheets, chats, and systems you already use so data is entered once and flows everywhere.', service: 'System Integration' },
+        { key: 'all', title: 'One system for the whole operation', text: 'A system designed around your workflow, for staff and customers, like CondoMate for a condominium.', service: 'Custom Software' },
       ],
+      cta: 'Tell us where to start',
+    },
+    calc: {
+      title: 'What is repeated work costing you?',
+      text: 'A quick estimate from your own numbers. It shows the time spent today, not a promise of savings.',
+      formTitle: 'Tell us about your team',
+      people: 'People who re-type or copy data',
+      hours: 'Hours per person per day on it',
+      days: 'Working days per month',
+      wage: 'Average cost per hour',
+      unitPeople: 'people',
+      unitHours: 'hours',
+      unitDays: 'days',
+      unitWage: 'THB',
+      resultTitle: 'Your team spends on repeated work',
+      hoursYear: 'hours a year',
+      costYear: 'in labour cost a year',
+      perYear: 'per year',
+      note: 'Estimate = people × hours × days × 12 months × cost per hour.',
+      cta: 'Ask how much of this we can remove',
     },
     condo: {
-      title: 'CondoMate',
-      sub: 'Condominium Management System',
-      text: 'A real operational platform for condominium management teams and residents. CondoMate brings maintenance, parcels, shared-space booking, announcements, finance, accounts, and reporting into one connected workflow.',
-      live: 'Live product environment',
-      resident: 'Resident experience',
-      management: 'Management console',
-      note: 'Illustrative screen mockups of the CondoMate experience at Punna Residence 5, shown with test data.',
-      stageTitle: 'One operational system. Two clear experiences.',
-      screens: screensEn,
-      more: 'More resident screens',
-      moreScreens: [
-        { src: '/portfolio/condomate-resident-announcements.png', title: 'Announcements' },
-        { src: '/portfolio/condomate-resident-my-room.png', title: 'My room' },
-        { src: '/portfolio/condomate-resident-payment-info.png', title: 'Payment details' },
-        { src: '/portfolio/condomate-resident-juristic-info.png', title: 'Juristic information' },
-        { src: '/portfolio/condomate-resident-phone-directory.png', title: 'Phone directory' },
+      title: 'CondoMate: one system for the whole condominium.',
+      text: 'A real operational platform for condominium management teams and residents. Maintenance, parcels, shared-space booking, announcements, finance, accounts, and reporting in one connected workflow.',
+      live: 'Live at Punna Residence 5',
+      screens: [
+        { ...screen('dashboard', 1105), tag: 'Resident home', title: 'Everything for the room on one screen', text: 'Announcements, parcels, maintenance, and daily tasks in one focused home.', callouts: [{ label: 'Parcels and open repairs, counted' }, { label: 'Latest announcement' }] },
+        { ...screen('repairs'), tag: 'Maintenance', title: 'Report a repair. Follow it to done.', text: 'Residents submit, track, and review repair requests in one place. Every job gets a reference number.', callouts: [{ label: 'Received · In progress · Done' }, { label: 'VIS-REP-1 · Room 715' }] },
+        { ...screen('parcels'), tag: 'Parcels', title: 'No more calling the front desk', text: 'Residents can check deliveries and pickup details themselves.', callouts: [{ label: 'Waiting · Collected' }, { label: 'Carrier and tracking number' }] },
+        { ...screen('booking'), tag: 'Shared spaces', title: 'Book the common room by the hour', text: 'Clear availability, capacity checks, and time-slot requests the office can approve.', callouts: [{ label: 'Pending · Approved · Cancelled' }, { label: '1-hour slots' }] },
+        { ...screen('finance'), tag: 'Finance', title: 'Fees, QR payment and proof in one flow', text: 'Payment information and financial activity in one place, for residents and the office.', callouts: [{ label: 'Bank account and QR' }, { label: 'Amount and due date' }] },
       ],
+      note: 'Illustrative screens of CondoMate at Punna Residence 5, shown with test data.',
       console: {
-        title: 'Management console',
-        text: 'The juristic office runs the same data from a desktop console.',
-        items: [
+        title: 'The office runs the same data from a desktop console.',
+        text: 'One operational system. Two clear experiences.',
+        tabs: [
           { name: 'finance', title: 'Finance workspace', text: 'Manage condominium income and expenses in one workflow.' },
           { name: 'report', title: 'Financial reports', text: 'Review daily totals, transactions, and printable reports.' },
         ],
       },
-      legend: 'Connected in one system',
       features: ['Resident management', 'Maintenance requests', 'Parcel tracking', 'Shared-space booking', 'Announcements', 'Finance and accounting', 'Reporting', 'Admin tools', 'Audit logs'],
       cta: 'Discuss a similar system',
     },
+    services: {
+      title: 'One partner. The whole system.',
+      text: 'Strategy, design, engineering, integration, and long-term care—connected by one understanding of your business.',
+      items: [
+        { title: 'Custom Software', text: 'Web applications and internal systems built around the way your team works.', items: ['Web applications', 'Internal management systems', 'Business management systems'] },
+        { title: 'Business Automation', text: 'Reduce repeated work and turn manual steps into clear workflows.', items: ['Workflow automation', 'Data processing', 'Reporting and dashboards'] },
+        { title: 'Web Solutions', text: 'Corporate sites, portals, and online services with purpose and clarity.', items: ['Corporate websites', 'Customer portals', 'Online services'] },
+        { title: 'System Integration', text: 'Connect APIs, databases, existing tools, and operational data.', items: ['API integration', 'Database integration', 'Existing-system integration'] },
+        { title: 'Support & Maintenance', text: 'Monitoring, backup, updates, and ongoing technical care.', items: ['Monitoring', 'Backup', 'Updates', 'Technical support'] },
+      ],
+    },
     process: {
-      title: <>Zero assumptions.<br />Five clear stages.</>,
+      title: 'Zero assumptions. Five clear stages.',
       text: 'We do not begin with a predetermined technology. A clear five-stage process helps us discover, shape, and deliver the solution that fits your business.',
       steps: [
         { n: '01', title: 'Understand', text: 'Understand the business, users, and workflow.' },
@@ -175,27 +176,30 @@ export const copy: Record<Lang, Copy> = {
         { n: '04', title: 'Build', text: 'Develop, test, and iterate.' },
         { n: '05', title: 'Support', text: 'Deploy, maintain, and improve.' },
       ],
-      liveNote: 'Support continues after launch',
     },
     about: {
-      title: <>Technology should solve problems,<br />not create new ones.</>,
+      title: 'Technology should solve problems, not create new ones.',
       text: 'CeroSoft combines software engineering with an understanding of business operations. We translate complex workflows into systems that people can actually use, maintain, and trust.',
-      notesTitle: 'General notes',
-      notes: [
-        { title: 'Mission', text: 'Make technology simpler and more accessible through practical software that solves real-world problems.' },
-        { title: 'Vision', text: 'Become the trusted technology partner for businesses seeking practical and sustainable digital systems.' },
-        { title: 'Simple', text: 'Complex behind. Simple in front.' },
-        { title: 'Practical', text: 'Build what matters.' },
-        { title: 'Reliable', text: 'Software you can depend on.' },
-        { title: 'Adaptable', text: 'Built around your workflow.' },
-        { title: 'Transparent', text: 'Clear technology. Clear communication.' },
+      mission: ['Mission', 'Make technology simpler and more accessible through practical software that solves real-world problems.'],
+      vision: ['Vision', 'Become the trusted technology partner for businesses seeking practical and sustainable digital systems.'],
+      valuesTitle: 'Values',
+      values: [['Simple', 'Complex behind. Simple in front.'], ['Practical', 'Build what matters.'], ['Reliable', 'Software you can depend on.'], ['Adaptable', 'Built around your workflow.'], ['Transparent', 'Clear technology. Clear communication.']],
+    },
+    faq: {
+      title: 'Questions owners ask first',
+      text: 'Short answers. Ask us anything else in the form below.',
+      items: [
+        { q: 'Do I need a technical specification before we talk?', a: 'No. Show us how the work happens today and what needs to improve. We listen first, map the workflow, and recommend a practical next step.' },
+        { q: 'Do you start with a particular technology?', a: 'No. We begin with the business problem. Only after we understand the work and define the outcome do we choose the architecture and technology.' },
+        { q: 'Can we start small?', a: 'Yes. We remove friction with the smallest system that can create meaningful change, then grow it on your timeline.' },
+        { q: 'What happens after launch?', a: 'Support & Maintenance covers monitoring, backup, updates, and ongoing technical support, so the system keeps working as the business changes.' },
+        { q: 'Can you connect the tools we already use?', a: 'Yes. System Integration connects APIs, databases, existing tools, and operational data so information is entered once.' },
       ],
     },
     contact: {
-      title: <>Bring us the problem.<br />We’ll find the path.</>,
+      title: 'Bring us the problem. We’ll find the path.',
       text: 'You do not need a technical specification. Show us how the work happens today and what needs to improve.',
-      next: 'We listen first, map the workflow, and recommend a practical next step.',
-      formTitle: 'Project request',
+      bullets: ['We listen first', 'We map your workflow', 'We recommend a practical next step'],
       fields: ['Name', 'Company / Organization', 'Email', 'Phone', 'What do you want to improve?', 'Message'],
       optional: 'optional',
       select: 'Select a topic',
@@ -207,92 +211,94 @@ export const copy: Record<Lang, Copy> = {
       failed: 'Message could not be sent. Please try again or email info@cerosoft.net.',
       honeypot: 'Leave this field empty',
     },
-    footer: { tagline: 'From Zero to Solution.', line: 'Simple Software. Real Solutions.', index: 'Sheet index', online: 'Online', city: 'Thailand', drawn: 'Drawn and built in Thailand' },
+    closing: { title: 'Every solution starts from zero.', cta: 'Start from zero with us' },
+    footer: { tagline: 'From Zero to Solution.', line: 'Simple Software. Real Solutions.', menu: 'Explore', services: 'Services', contact: 'Contact', city: 'Thailand' },
   },
   th: {
     skip: 'ข้ามไปยังเนื้อหา',
-    menu: 'สารบัญแผ่นงาน',
+    menu: 'เมนู',
     langLabel: 'Read in English',
     talk: 'ปรึกษาเรา',
-    sheets: {
-      problem: { no: 'A-01', title: 'เริ่มที่ปัญหา' },
-      services: { no: 'A-02', title: 'บริการ' },
-      condomate: { no: 'A-03', title: 'ผลงาน CondoMate' },
-      process: { no: 'A-04', title: 'ขั้นตอนการทำงาน' },
-      about: { no: 'A-05', title: 'รู้จักเรา' },
-      contact: { no: 'A-06', title: 'ติดต่อเรา' },
-    },
+    nav: { condomate: 'CondoMate', services: 'บริการ', process: 'ขั้นตอนการทำงาน', about: 'รู้จักเรา', faq: 'คำถามที่พบบ่อย' },
     hero: {
-      sheetTitle: 'เริ่มจากศูนย์ สู่โซลูชัน',
-      title: <><span className="h1-line">เริ่มจากศูนย์</span><span className="h1-line h1-strong">สู่โซลูชันที่ใช่</span></>,
-      text: 'เราเริ่มจากโจทย์ของธุรกิจ ไม่ได้เริ่มจากการเลือกเทคโนโลยี เราทำความเข้าใจปัญหาและวิธีทำงานของคุณอย่างรอบด้าน ก่อนออกแบบซอฟต์แวร์ที่ช่วยให้งานง่ายขึ้น เป็นระบบขึ้น และพร้อมเติบโตไปพร้อมกับธุรกิจ',
+      line1: 'เริ่มจากศูนย์',
+      line2: 'สู่โซลูชันที่ใช่',
+      text: 'เราเริ่มจากโจทย์ของธุรกิจ ไม่ได้เริ่มจากการเลือกเทคโนโลยี แล้วจึงออกแบบซอฟต์แวร์ที่ช่วยให้งานง่ายขึ้น เป็นระบบขึ้น และพร้อมเติบโตไปพร้อมกับธุรกิจ',
       primary: 'ปรึกษาเรา',
       secondary: 'ดูผลงาน CondoMate',
-      plan: { excel: 'Excel', line: 'แชต LINE', paper: 'เอกสารกระดาษ', reentry: 'กรอกซ้ำ ×3', friction: 'จุดติดขัด', system: 'ระบบเดียว', live: 'ใช้งานจริง', asis: 'งานวันนี้', asbuilt: 'หลังมีระบบ' },
+      markers: { repair: 'ห้อง 715 · แจ้งซ่อม VIS-REP-1', parcel: 'ห้อง 715 · พัสดุรอรับ 1 ชิ้น', booking: 'พื้นที่ส่วนกลาง · จองรอบละ 1 ชม.', finance: 'ค่าส่วนกลาง · ครบกำหนด 30 ก.ย.' },
+      canvasLabel: 'Punna Residence 5 ที่ถูกวาดเป็นระบบเดียว: งานแจ้งซ่อม พัสดุ การจอง และการเงิน เชื่อมกันในที่เดียว',
+      dataNote: 'โมเดลอาคาร Punna Residence 5 ป้ายกำกับแสดงข้อมูลทดสอบของ CondoMate',
     },
-    problem: {
-      title: <>ก่อนเขียนโค้ด<br /><span className="nowrap">เราทำความเข้าใจหน้างาน</span></>,
+    statement: {
       text: 'ปัญหาที่ดูเหมือนเป็นเรื่องซอฟต์แวร์ หลายครั้งเกิดจากขั้นตอนที่ไม่เชื่อมต่อกัน การกรอกข้อมูลซ้ำ หน้าที่รับผิดชอบที่ไม่ชัดเจน หรือข้อมูลที่กระจัดกระจายอยู่ในหลายเครื่องมือ',
-      close: 'เราจึงเริ่มจากการทำความเข้าใจงานจริงและค้นหาจุดติดขัด ก่อนออกแบบระบบที่พอดีกับธุรกิจและสร้างความเปลี่ยนแปลงได้จริง',
-      steps: [
-        { n: '01', title: 'ดูงานจริง', text: 'ทำความเข้าใจว่างานดำเนินไปอย่างไรในแต่ละวัน ไม่ใช่แค่ภาพที่ควรจะเป็น' },
-        { n: '02', title: 'หาจุดติดขัด', text: 'ค้นหาจุดที่ทำให้เวลา ข้อมูล หรือความรับผิดชอบขาดช่วงระหว่างการทำงาน' },
-        { n: '03', title: 'กำหนดเป้าหมาย', text: 'ระบุให้ชัดว่าอะไรควรเร็วขึ้น ง่ายขึ้น หรือเชื่อถือได้มากขึ้น' },
-        { n: '04', title: 'ออกแบบระบบ', text: 'จากนั้นจึงเลือกโครงสร้างและเทคโนโลยีที่เหมาะกับโจทย์' },
-      ],
+      sub: 'ก่อนเขียนโค้ด เราทำความเข้าใจหน้างาน',
     },
-    legacy: {
-      words: ['Excel', 'แชต', 'เอกสาร', 'กรอกซ้ำ'],
-      title: 'จุดเริ่มต้นที่หลายธุรกิจคุ้นเคย',
-      text: 'เมื่อธุรกิจเติบโต เครื่องมือและวิธีทำงานเดิมอาจเริ่มตามไม่ทัน ไม่ใช่เพราะทีมทำงานผิด แต่เพราะระบบเดิมไม่ได้ถูกออกแบบมาให้รองรับธุรกิจในวันนี้',
-      cta: 'เล่าให้เราฟังว่าอะไรยังติดขัด',
-      legendOld: 'เส้นประ: วิธีทำงานวันนี้',
-      legendNew: 'เส้นทึบ: ระบบที่เราสร้าง',
-    },
-    services: {
-      title: <><span className="nowrap">พาร์ตเนอร์หนึ่งเดียว</span><br />ดูแลครบทั้งระบบ</>,
-      text: 'ตั้งแต่วางกลยุทธ์ ออกแบบ พัฒนา และเชื่อมต่อระบบ ไปจนถึงการดูแลระยะยาว ทุกขั้นตอนต่อเนื่องด้วยความเข้าใจธุรกิจชุดเดียวกัน',
-      head: ['รหัส', 'บริการ', 'ช่วยอะไร', 'ครอบคลุม'],
-      rows: [
-        { code: 'S-01', title: 'ซอฟต์แวร์เฉพาะธุรกิจ', text: 'เว็บแอปและระบบภายในที่ออกแบบให้สอดคล้องกับวิธีทำงานของทีมคุณ', items: 'เว็บแอป · ระบบจัดการภายใน · ระบบบริหารธุรกิจ' },
-        { code: 'S-02', title: 'ระบบงานอัตโนมัติ', text: 'ลดงานซ้ำซ้อน และเปลี่ยนขั้นตอนที่ต้องทำด้วยมือให้เป็นระบบที่ชัดเจน', items: 'ระบบงานอัตโนมัติ · ประมวลผลข้อมูล · รายงานและแดชบอร์ด' },
-        { code: 'S-03', title: 'โซลูชันเว็บไซต์', text: 'เว็บไซต์องค์กร พอร์ทัล และบริการออนไลน์ที่ออกแบบอย่างตรงจุด', items: 'เว็บไซต์องค์กร · พอร์ทัลลูกค้า · บริการออนไลน์' },
-        { code: 'S-04', title: 'การเชื่อมต่อระบบ', text: 'เชื่อมต่อ API ฐานข้อมูล เครื่องมือเดิม และข้อมูลจากการทำงานจริง', items: 'เชื่อมต่อ API · เชื่อมต่อฐานข้อมูล · เชื่อมต่อระบบเดิม' },
-        { code: 'S-05', title: 'ดูแลและบำรุงรักษา', text: 'เฝ้าระวังระบบ สำรองข้อมูล อัปเดต และให้คำปรึกษาด้านเทคนิคอย่างต่อเนื่อง', items: 'เฝ้าระวังระบบ · สำรองข้อมูล · อัปเดต · สนับสนุนด้านเทคนิค' },
+    paths: {
+      title: 'แก้ปัญหาเดียวได้ตั้งแต่วันนี้ แล้วค่อยขยายตามจังหวะของคุณ',
+      text: 'เราเริ่มจากการทำความเข้าใจงานจริงและค้นหาจุดติดขัด ก่อนออกแบบระบบที่เล็กที่สุดที่สร้างความเปลี่ยนแปลงได้จริง',
+      items: [
+        { key: 'one', title: 'งานซ้ำ ๆ งานเดียว', text: 'เริ่มจากขั้นตอนที่กินเวลาที่สุด เช่น ไฟล์ Excel แบบฟอร์มกระดาษ หรือรายงานที่ต้องทำใหม่ทุกสัปดาห์', service: 'ระบบงานอัตโนมัติ' },
+        { key: 'few', title: 'หลายเครื่องมือที่ไม่เชื่อมกัน', text: 'เชื่อมไฟล์ แชต และระบบที่ใช้อยู่ ให้กรอกข้อมูลครั้งเดียวแล้วใช้ได้ทุกที่', service: 'การเชื่อมต่อระบบ' },
+        { key: 'all', title: 'ระบบเดียวสำหรับทั้งองค์กร', text: 'ระบบที่ออกแบบตามวิธีทำงานของคุณ ทั้งพนักงานและลูกค้า แบบที่ CondoMate ทำให้คอนโดมิเนียม', service: 'ซอฟต์แวร์เฉพาะธุรกิจ' },
       ],
+      cta: 'เล่าให้เราฟังว่าควรเริ่มตรงไหน',
+    },
+    calc: {
+      title: 'งานกรอกซ้ำทำให้ธุรกิจเสียเท่าไร',
+      text: 'ประเมินคร่าว ๆ จากตัวเลขของคุณเอง ตัวเลขนี้คือเวลาที่ใช้อยู่วันนี้ ไม่ใช่คำสัญญาว่าจะประหยัดได้เท่าไร',
+      formTitle: 'เล่าเรื่องทีมของคุณ',
+      people: 'จำนวนคนที่ต้องกรอกหรือคัดลอกข้อมูลซ้ำ',
+      hours: 'ชั่วโมงต่อคนต่อวันที่ใช้กับงานนี้',
+      days: 'วันทำงานต่อเดือน',
+      wage: 'ค่าแรงเฉลี่ยต่อชั่วโมง',
+      unitPeople: 'คน',
+      unitHours: 'ชั่วโมง',
+      unitDays: 'วัน',
+      unitWage: 'บาท',
+      resultTitle: 'ทีมของคุณใช้เวลากับงานซ้ำ ๆ',
+      hoursYear: 'ชั่วโมงต่อปี',
+      costYear: 'เป็นค่าแรงต่อปี',
+      perYear: 'ต่อปี',
+      note: 'วิธีคำนวณ = จำนวนคน × ชั่วโมงต่อวัน × วันทำงาน × 12 เดือน × ค่าแรงต่อชั่วโมง',
+      cta: 'ปรึกษาว่าลดส่วนนี้ได้แค่ไหน',
     },
     condo: {
-      title: 'CondoMate',
-      sub: 'ระบบบริหารจัดการคอนโดมิเนียม',
+      title: 'CondoMate ระบบเดียวสำหรับทั้งคอนโดมิเนียม',
       text: 'แพลตฟอร์มที่พัฒนาขึ้นเพื่อการใช้งานจริงของนิติบุคคลและลูกบ้าน เชื่อมงานแจ้งซ่อม รับพัสดุ จองพื้นที่ส่วนกลาง ประกาศ การเงิน บัญชี และรายงานไว้ในระบบเดียว',
-      live: 'ใช้งานจริงแล้ว',
-      resident: 'สำหรับลูกบ้าน',
-      management: 'สำหรับนิติบุคคล',
-      note: 'ภาพจำลองหน้าจอการใช้งาน CondoMate สำหรับ Punna Residence 5 แสดงด้วยข้อมูลทดสอบ',
-      stageTitle: 'ระบบเดียว ใช้งานลงตัวทั้งลูกบ้านและนิติบุคคล',
-      screens: screensTh,
-      more: 'หน้าจออื่นสำหรับลูกบ้าน',
-      moreScreens: [
-        { src: '/portfolio/condomate-resident-announcements.png', title: 'ประกาศข่าวสาร' },
-        { src: '/portfolio/condomate-resident-my-room.png', title: 'ห้องของฉัน' },
-        { src: '/portfolio/condomate-resident-payment-info.png', title: 'รายละเอียดการชำระเงิน' },
-        { src: '/portfolio/condomate-resident-juristic-info.png', title: 'ข้อมูลนิติบุคคล' },
-        { src: '/portfolio/condomate-resident-phone-directory.png', title: 'สมุดโทรศัพท์' },
+      live: 'ใช้งานจริงที่ Punna Residence 5',
+      screens: [
+        { ...screen('dashboard', 1105), tag: 'หน้าหลักลูกบ้าน', title: 'ทุกเรื่องของห้องอยู่ในหน้าเดียว', text: 'รวมประกาศ พัสดุ งานแจ้งซ่อม และบริการประจำวันไว้ในที่เดียว', callouts: [{ label: 'นับพัสดุและงานซ่อมให้อัตโนมัติ' }, { label: 'ประกาศล่าสุดจากนิติบุคคล' }] },
+        { ...screen('repairs'), tag: 'แจ้งซ่อม', title: 'แจ้งซ่อม แล้วติดตามได้จนเสร็จ', text: 'แจ้งเรื่อง ติดตามความคืบหน้า และตรวจสอบสถานะงานซ่อมได้ในที่เดียว ทุกงานมีเลขอ้างอิง', callouts: [{ label: 'รอรับงาน · กำลังดำเนินการ · เสร็จสิ้น' }, { label: 'VIS-REP-1 · ห้อง 715' }] },
+        { ...screen('parcels'), tag: 'พัสดุ', title: 'ไม่ต้องโทรถามนิติฯ อีกต่อไป', text: 'ลูกบ้านตรวจสอบพัสดุและรายละเอียดการรับได้เอง', callouts: [{ label: 'รอรับ · รับแล้ว' }, { label: 'ผู้ให้บริการและเลขพัสดุ' }] },
+        { ...screen('booking'), tag: 'พื้นที่ส่วนกลาง', title: 'จองพื้นที่ส่วนกลางเป็นรายชั่วโมง', text: 'ตรวจสอบช่วงเวลาว่าง จำนวนผู้ใช้ และความจุของพื้นที่ได้ชัดเจน นิติบุคคลอนุมัติได้ทันที', callouts: [{ label: 'รออนุมัติ · อนุมัติแล้ว · ยกเลิกแล้ว' }, { label: 'รอบละ 1 ชั่วโมง' }] },
+        { ...screen('finance'), tag: 'การเงิน', title: 'ค่าส่วนกลาง QR และหลักฐานการชำระในขั้นตอนเดียว', text: 'ดูข้อมูลชำระเงินและรายการทางการเงินในที่เดียว ทั้งฝั่งลูกบ้านและนิติบุคคล', callouts: [{ label: 'บัญชีรับเงินและ QR' }, { label: 'ยอดเงินและวันครบกำหนด' }] },
       ],
+      note: 'ภาพจำลองหน้าจอการใช้งาน CondoMate สำหรับ Punna Residence 5 แสดงด้วยข้อมูลทดสอบ',
       console: {
-        title: 'ระบบสำหรับนิติบุคคล',
-        text: 'สำนักงานนิติบุคคลใช้ข้อมูลชุดเดียวกันผ่านหน้าจอบนคอมพิวเตอร์',
-        items: [
+        title: 'นิติบุคคลใช้ข้อมูลชุดเดียวกันผ่านหน้าจอคอมพิวเตอร์',
+        text: 'ระบบเดียว ใช้งานลงตัวทั้งลูกบ้านและนิติบุคคล',
+        tabs: [
           { name: 'finance', title: 'งานการเงิน', text: 'จัดการรายรับและรายจ่ายของคอนโดในขั้นตอนเดียว' },
           { name: 'report', title: 'รายงานการเงิน', text: 'ดูยอดประจำวัน รายการธุรกรรม และรายงานสำหรับพิมพ์' },
         ],
       },
-      legend: 'เชื่อมต่อกันในระบบเดียว',
       features: ['จัดการข้อมูลลูกบ้าน', 'งานแจ้งซ่อม', 'ติดตามพัสดุ', 'จองพื้นที่ส่วนกลาง', 'ประกาศข่าวสาร', 'การเงินและบัญชี', 'รายงาน', 'เครื่องมือผู้ดูแล', 'บันทึกการใช้งาน'],
       cta: 'ปรึกษาเรื่องระบบแบบนี้',
     },
+    services: {
+      title: 'พาร์ตเนอร์หนึ่งเดียว ดูแลครบทั้งระบบ',
+      text: 'ตั้งแต่วางกลยุทธ์ ออกแบบ พัฒนา และเชื่อมต่อระบบ ไปจนถึงการดูแลระยะยาว ทุกขั้นตอนต่อเนื่องด้วยความเข้าใจธุรกิจชุดเดียวกัน',
+      items: [
+        { title: 'ซอฟต์แวร์เฉพาะธุรกิจ', text: 'เว็บแอปและระบบภายในที่ออกแบบให้สอดคล้องกับวิธีทำงานของทีมคุณ', items: ['เว็บแอป', 'ระบบจัดการภายใน', 'ระบบบริหารธุรกิจ'] },
+        { title: 'ระบบงานอัตโนมัติ', text: 'ลดงานซ้ำซ้อน และเปลี่ยนขั้นตอนที่ต้องทำด้วยมือให้เป็นระบบที่ชัดเจน', items: ['ระบบงานอัตโนมัติ', 'ประมวลผลข้อมูล', 'รายงานและแดชบอร์ด'] },
+        { title: 'โซลูชันเว็บไซต์', text: 'เว็บไซต์องค์กร พอร์ทัล และบริการออนไลน์ที่ออกแบบอย่างตรงจุด', items: ['เว็บไซต์องค์กร', 'พอร์ทัลลูกค้า', 'บริการออนไลน์'] },
+        { title: 'การเชื่อมต่อระบบ', text: 'เชื่อมต่อ API ฐานข้อมูล เครื่องมือเดิม และข้อมูลจากการทำงานจริง', items: ['เชื่อมต่อ API', 'เชื่อมต่อฐานข้อมูล', 'เชื่อมต่อระบบเดิม'] },
+        { title: 'ดูแลและบำรุงรักษา', text: 'เฝ้าระวังระบบ สำรองข้อมูล อัปเดต และให้คำปรึกษาด้านเทคนิคอย่างต่อเนื่อง', items: ['เฝ้าระวังระบบ', 'สำรองข้อมูล', 'อัปเดต', 'สนับสนุนด้านเทคนิค'] },
+      ],
+    },
     process: {
-      title: <>ไม่ด่วนสรุป<br /><span className="nowrap">ค่อย ๆ หาคำตอบที่ใช่</span></>,
+      title: 'ไม่ด่วนสรุป ค่อย ๆ หาคำตอบที่ใช่',
       text: 'เราไม่กำหนดเทคโนโลยีไว้ล่วงหน้า แต่ใช้กระบวนการทำงาน 5 ขั้นตอนเพื่อทำความเข้าใจ กำหนดทิศทาง และพัฒนาโซลูชันที่เหมาะกับธุรกิจของคุณจริง ๆ',
       steps: [
         { n: '01', title: 'เข้าใจ', text: 'เข้าใจธุรกิจ ผู้ใช้ และวิธีทำงาน' },
@@ -301,27 +307,30 @@ export const copy: Record<Lang, Copy> = {
         { n: '04', title: 'พัฒนา', text: 'พัฒนา ทดสอบ และปรับปรุง' },
         { n: '05', title: 'ดูแล', text: 'ติดตั้ง ดูแล และพัฒนาต่อ' },
       ],
-      liveNote: 'ดูแลต่อเนื่องหลังเปิดใช้งาน',
     },
     about: {
-      title: <><span className="nowrap">เทคโนโลยีควรช่วยแก้ปัญหา</span><br />ไม่ใช่เพิ่มปัญหาใหม่</>,
+      title: 'เทคโนโลยีควรช่วยแก้ปัญหา ไม่ใช่เพิ่มปัญหาใหม่',
       text: 'CeroSoft ผสานความเชี่ยวชาญด้านวิศวกรรมซอฟต์แวร์เข้ากับความเข้าใจในการดำเนินธุรกิจ เพื่อเปลี่ยนกระบวนการที่ซับซ้อนให้เป็นระบบที่คนใช้งานได้จริง ดูแลต่อได้ และไว้วางใจได้',
-      notesTitle: 'หมายเหตุทั่วไป',
-      notes: [
-        { title: 'พันธกิจ', text: 'ทำให้เทคโนโลยีเป็นเรื่องง่ายและเข้าถึงได้ ผ่านซอฟต์แวร์ที่ตอบโจทย์การใช้งานและแก้ปัญหาได้จริง' },
-        { title: 'วิสัยทัศน์', text: 'เป็นพาร์ตเนอร์ด้านเทคโนโลยีที่ธุรกิจไว้วางใจ ในการสร้างระบบดิจิทัลที่ใช้ได้จริงและเติบโตได้อย่างยั่งยืน' },
-        { title: 'เรียบง่าย', text: 'ระบบเบื้องหลังอาจซับซ้อน แต่ประสบการณ์ของผู้ใช้ควรง่าย' },
-        { title: 'ใช้ได้จริง', text: 'พัฒนาเฉพาะสิ่งที่สร้างคุณค่าและตอบโจทย์การใช้งานจริง' },
-        { title: 'เชื่อถือได้', text: 'ออกแบบให้เสถียร ปลอดภัย ดูแลรักษาได้ และมีแนวทางดูแลที่ชัดเจน' },
-        { title: 'ยืดหยุ่น', text: 'ระบบควรปรับเข้ากับกระบวนการของธุรกิจ ไม่ใช่บังคับธุรกิจให้เข้ากับระบบ' },
-        { title: 'โปร่งใส', text: 'สื่อสารขอบเขต ค่าใช้จ่าย ข้อจำกัด และความสามารถของระบบอย่างชัดเจน' },
+      mission: ['พันธกิจ', 'ทำให้เทคโนโลยีเป็นเรื่องง่ายและเข้าถึงได้ ผ่านซอฟต์แวร์ที่ตอบโจทย์การใช้งานและแก้ปัญหาได้จริง'],
+      vision: ['วิสัยทัศน์', 'เป็นพาร์ตเนอร์ด้านเทคโนโลยีที่ธุรกิจไว้วางใจ ในการสร้างระบบดิจิทัลที่ใช้ได้จริงและเติบโตได้อย่างยั่งยืน'],
+      valuesTitle: 'คุณค่าที่เรายึดถือ',
+      values: [['เรียบง่าย', 'ระบบเบื้องหลังอาจซับซ้อน แต่ประสบการณ์ของผู้ใช้ควรง่าย'], ['ใช้ได้จริง', 'พัฒนาเฉพาะสิ่งที่สร้างคุณค่าและตอบโจทย์การใช้งานจริง'], ['เชื่อถือได้', 'เสถียร ปลอดภัย ดูแลรักษาได้'], ['ยืดหยุ่น', 'ระบบปรับตามธุรกิจ ไม่ใช่บังคับธุรกิจให้เข้ากับระบบ'], ['โปร่งใส', 'สื่อสารขอบเขต ค่าใช้จ่าย และข้อจำกัดอย่างชัดเจน']],
+    },
+    faq: {
+      title: 'คำถามที่เจ้าของธุรกิจถามบ่อย',
+      text: 'คำตอบสั้น ๆ ถ้ามีคำถามอื่น ถามเราได้ในแบบฟอร์มด้านล่าง',
+      items: [
+        { q: 'ต้องเตรียมเอกสารสเปกก่อนคุยไหม', a: 'ไม่จำเป็น เพียงเล่าให้เราฟังว่าวันนี้งานเป็นอย่างไร และอยากเห็นอะไรดีขึ้น เราจะรับฟัง ทำความเข้าใจกระบวนการทำงาน และแนะนำขั้นตอนถัดไปที่เหมาะกับธุรกิจของคุณ' },
+        { q: 'CeroSoft เริ่มจากเทคโนโลยีตัวไหน', a: 'เราไม่กำหนดเทคโนโลยีไว้ล่วงหน้า เราเริ่มจากโจทย์ของธุรกิจ ทำความเข้าใจงานและกำหนดเป้าหมายก่อน แล้วจึงเลือกโครงสร้างและเทคโนโลยีที่เหมาะกับโจทย์' },
+        { q: 'เริ่มจากโปรเจกต์เล็ก ๆ ได้ไหม', a: 'ได้ เราออกแบบระบบที่เล็กที่สุดที่สร้างความเปลี่ยนแปลงได้จริงก่อน แล้วค่อยขยายตามจังหวะของธุรกิจ' },
+        { q: 'หลังส่งมอบแล้วมีคนดูแลไหม', a: 'มีบริการดูแลและบำรุงรักษา ครอบคลุมการเฝ้าระวังระบบ สำรองข้อมูล อัปเดต และสนับสนุนด้านเทคนิคอย่างต่อเนื่อง' },
+        { q: 'เชื่อมกับโปรแกรมที่ใช้อยู่ได้ไหม', a: 'ได้ บริการเชื่อมต่อระบบช่วยเชื่อม API ฐานข้อมูล เครื่องมือเดิม และข้อมูลจากการทำงานจริง ให้กรอกข้อมูลครั้งเดียว' },
       ],
     },
     contact: {
-      title: <><span className="nowrap">เริ่มคุยจากปัญหา</span><br /><span className="nowrap">แล้วหาทางไปด้วยกัน</span></>,
+      title: 'เริ่มคุยจากปัญหา แล้วหาทางไปด้วยกัน',
       text: 'คุณไม่จำเป็นต้องเตรียมเอกสารสเปก เพียงเล่าให้เราฟังว่าวันนี้งานเป็นอย่างไร และอยากเห็นอะไรดีขึ้น',
-      next: 'เราจะรับฟัง ทำความเข้าใจกระบวนการทำงาน และแนะนำขั้นตอนถัดไปที่เหมาะกับธุรกิจของคุณ',
-      formTitle: 'แบบฟอร์มขอคำปรึกษา',
+      bullets: ['เรารับฟังก่อน', 'ทำความเข้าใจวิธีทำงานของคุณ', 'แนะนำขั้นตอนถัดไปที่ทำได้จริง'],
       fields: ['ชื่อ', 'บริษัท / องค์กร', 'อีเมล', 'เบอร์โทรศัพท์', 'เรื่องที่อยากปรับปรุง', 'เล่ารายละเอียดเพิ่มเติม'],
       optional: 'ไม่บังคับ',
       select: 'เลือกหัวข้อ',
@@ -333,6 +342,7 @@ export const copy: Record<Lang, Copy> = {
       failed: 'ยังส่งข้อความไม่ได้ กรุณาลองอีกครั้ง หรือติดต่อเราทางอีเมล info@cerosoft.net',
       honeypot: 'เว้นช่องนี้ว่างไว้',
     },
-    footer: { tagline: 'จากศูนย์ สู่โซลูชันที่ใช่', line: 'ซอฟต์แวร์ที่เรียบง่าย แก้ปัญหาได้จริง', index: 'สารบัญแผ่นงาน', online: 'ช่องทางออนไลน์', city: 'ประเทศไทย', drawn: 'ออกแบบและพัฒนาในประเทศไทย' },
+    closing: { title: 'ทุกโซลูชันเริ่มต้นจากศูนย์', cta: 'เริ่มจากศูนย์ไปกับเรา' },
+    footer: { tagline: 'จากศูนย์ สู่โซลูชันที่ใช่', line: 'ซอฟต์แวร์ที่เรียบง่าย แก้ปัญหาได้จริง', menu: 'เมนู', services: 'บริการ', contact: 'ติดต่อ', city: 'ประเทศไทย' },
   },
 };

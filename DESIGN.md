@@ -1,341 +1,411 @@
 ---
 name: CeroSoft
-description: The Drawing Set. A bilingual (Thai-first) studio site drawn as a numbered construction drawing set, where line form carries state.
+description: Cinematic B2B product site where the real operation becomes a live digital twin. From Zero to Solution.
 colors:
   cero-cyan: "#00adb5"
-  drafting-film: "#eeeeee"
-  sheet-white: "#ffffff"
-  charcoal-ink: "#222831"
+  cero-cyan-hover: "#22c4cc"
+  charcoal: "#222831"
+  charcoal-raised: "#2a3039"
+  charcoal-deep: "#1d2229"
+  hero-glow: "#2e3641"
+  device-black: "#10141a"
   graphite: "#393e46"
-  pencil-muted: "#575d66"
-  rule: "rgba(34, 40, 49, 0.16)"
-  rule-strong: "rgba(34, 40, 49, 0.42)"
-  grid-minor: "rgba(34, 40, 49, 0.045)"
-  grid-major: "rgba(34, 40, 49, 0.075)"
-  redline: "#a43232"
-  night-print-fg: "#eeeeee"
-  night-print-muted: "#a9aeb5"
-  night-print-rule: "rgba(238, 238, 238, 0.16)"
-  night-print-rule-strong: "rgba(238, 238, 238, 0.4)"
-  device-black: "#11161c"
+  fog-light: "#f4f5f5"
+  paper: "#ffffff"
+  diagram-well: "#eef0f1"
+  muted: "#5b616b"
+  step-idle: "#7d838b"
+  reveal-start: "#a2a8ae"
+  line: "#e1e4e6"
+  line-strong: "#c9cdd1"
+  on-dark: "#eceef0"
+  on-dark-heading: "#f3f4f5"
+  on-dark-muted: "#a9afb6"
+  on-dark-line: "rgba(236, 238, 240, 0.14)"
+  danger: "#a43232"
+  danger-on-dark: "#ff9d9d"
 typography:
   display:
     fontFamily: "'Inter Variable', 'Noto Sans Thai', ui-sans-serif, system-ui, sans-serif"
-    fontSize: "clamp(3rem, 7.2vw, 6rem)"
-    fontWeight: 300
-    lineHeight: 0.98
-    letterSpacing: "-0.035em"
+    fontSize: "clamp(3.1rem, 7vw, 6rem)"
+    fontWeight: 400
+    lineHeight: 1.02
+    letterSpacing: "-0.04em"
   display-th:
     fontFamily: "'Noto Sans Thai', 'Inter Variable', ui-sans-serif, system-ui, sans-serif"
-    fontSize: "clamp(2.2rem, 5.4vw, 4.75rem)"
+    fontSize: "clamp(2.6rem, 6vw, 5.2rem)"
+    fontWeight: 500
+    lineHeight: 1.25
+    letterSpacing: "-0.01em"
+  display-phone:
+    fontFamily: "'Inter Variable', 'Noto Sans Thai', ui-sans-serif, system-ui, sans-serif"
+    fontSize: "clamp(2.7rem, 13vw, 3.6rem)"
     fontWeight: 400
-    lineHeight: 1.24
-    letterSpacing: "-0.012em"
-  display-product:
-    fontFamily: "'Inter Variable', ui-sans-serif, system-ui, sans-serif"
-    fontSize: "clamp(3.4rem, 9vw, 6rem)"
-    fontWeight: 650
-    lineHeight: 0.95
+    lineHeight: 1.02
     letterSpacing: "-0.04em"
+  display-th-phone:
+    fontFamily: "'Noto Sans Thai', 'Inter Variable', ui-sans-serif, system-ui, sans-serif"
+    fontSize: "clamp(2.2rem, 10.5vw, 3rem)"
+    fontWeight: 500
+    lineHeight: 1.25
+    letterSpacing: "-0.01em"
   headline:
     fontFamily: "'Inter Variable', 'Noto Sans Thai', ui-sans-serif, system-ui, sans-serif"
-    fontSize: "clamp(2.2rem, 4.3vw, 3.9rem)"
-    fontWeight: 600
-    lineHeight: 1.04
-    letterSpacing: "-0.03em"
+    fontSize: "clamp(2.1rem, 4.2vw, 3.75rem)"
+    fontWeight: 400
+    lineHeight: 1.08
+    letterSpacing: "-0.035em"
   headline-th:
     fontFamily: "'Noto Sans Thai', 'Inter Variable', ui-sans-serif, system-ui, sans-serif"
-    fontSize: "clamp(1.9rem, 3.6vw, 3.25rem)"
-    fontWeight: 600
+    fontSize: "clamp(1.85rem, 3.6vw, 3.2rem)"
+    fontWeight: 500
     lineHeight: 1.3
     letterSpacing: "-0.01em"
+  figure:
+    fontFamily: "'Inter Variable', ui-sans-serif, system-ui, sans-serif"
+    fontSize: "clamp(2.4rem, 4.6vw, 3.8rem)"
+    fontWeight: 400
+    lineHeight: 1.1
+    letterSpacing: "-0.035em"
+    fontFeature: "'tnum'"
+  title-lg:
+    fontFamily: "'Inter Variable', 'Noto Sans Thai', ui-sans-serif, system-ui, sans-serif"
+    fontSize: "clamp(1.7rem, 2.8vw, 2.5rem)"
+    fontWeight: 400
+    lineHeight: 1.15
+    letterSpacing: "-0.03em"
+  statement:
+    fontFamily: "'Inter Variable', 'Noto Sans Thai', ui-sans-serif, system-ui, sans-serif"
+    fontSize: "clamp(1.2rem, 2.1vw, 1.75rem)"
+    fontWeight: 400
+    lineHeight: 1.5
+    letterSpacing: "-0.015em"
   title:
     fontFamily: "'Inter Variable', 'Noto Sans Thai', ui-sans-serif, system-ui, sans-serif"
-    fontSize: "clamp(1.35rem, 2vw, 1.75rem)"
-    fontWeight: 600
+    fontSize: "1.3rem"
+    fontWeight: 500
     lineHeight: 1.3
-    letterSpacing: "-0.01em"
-  title-large:
+    letterSpacing: "-0.015em"
+  body-lead:
     fontFamily: "'Inter Variable', 'Noto Sans Thai', ui-sans-serif, system-ui, sans-serif"
-    fontSize: "clamp(1.6rem, 2.6vw, 2.25rem)"
-    fontWeight: 600
-    lineHeight: 1.15
-    letterSpacing: "-0.02em"
-  lede:
-    fontFamily: "'Inter Variable', 'Noto Sans Thai', ui-sans-serif, system-ui, sans-serif"
-    fontSize: "clamp(1.06rem, 1.35vw, 1.22rem)"
+    fontSize: "1.05rem"
     fontWeight: 400
-    lineHeight: 1.65
+    lineHeight: 1.6
   body:
     fontFamily: "'Inter Variable', 'Noto Sans Thai', ui-sans-serif, system-ui, sans-serif"
     fontSize: "1rem"
     fontWeight: 400
     lineHeight: 1.6
-    fontFeature: "'cv11', 'ss01'"
   body-th:
     fontFamily: "'Noto Sans Thai', 'Inter Variable', ui-sans-serif, system-ui, sans-serif"
     fontSize: "1rem"
     fontWeight: 400
     lineHeight: 1.75
-  body-small:
+  control:
     fontFamily: "'Inter Variable', 'Noto Sans Thai', ui-sans-serif, system-ui, sans-serif"
-    fontSize: "0.92rem"
+    fontSize: "0.95rem"
+    fontWeight: 600
+    lineHeight: 1.2
+  caption:
+    fontFamily: "'Inter Variable', 'Noto Sans Thai', ui-sans-serif, system-ui, sans-serif"
+    fontSize: "0.82rem"
     fontWeight: 400
     lineHeight: 1.5
-  ui:
-    fontFamily: "'Inter Variable', 'Noto Sans Thai', ui-sans-serif, system-ui, sans-serif"
-    fontSize: "0.875rem"
-    fontWeight: 500
-    lineHeight: 1.4
   label:
     fontFamily: "'Geist Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace"
-    fontSize: "0.75rem"
-    fontWeight: 500
-    lineHeight: 1.4
-    letterSpacing: "0.02em"
-  label-large:
-    fontFamily: "'Geist Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace"
-    fontSize: "0.8rem"
+    fontSize: "0.72rem"
     fontWeight: 400
     lineHeight: 1.4
-  label-small:
-    fontFamily: "'Geist Mono', ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace"
+    letterSpacing: "0.06em"
+    fontFeature: "'tnum'"
+  label-th:
+    fontFamily: "'Noto Sans Thai', 'Inter Variable', ui-sans-serif, system-ui, sans-serif"
+    fontSize: "0.8rem"
+    fontWeight: 400
+    lineHeight: 1.5
+    letterSpacing: "0"
+  marker:
+    fontFamily: "'Geist Mono', ui-monospace, monospace"
     fontSize: "0.7rem"
     fontWeight: 400
     lineHeight: 1.4
-    letterSpacing: "0.08em"
+    letterSpacing: "0.04em"
 rounded:
-  none: "0px"
-  screen: "23px"
-  thumb: "18px"
+  hairline: "2px"
+  focus: "4px"
+  chip: "6px"
+  button: "8px"
+  well: "10px"
+  capsule: "12px"
+  card: "14px"
+  device-screen: "23px"
   device: "30px"
-  node: "50%"
+  pill: "999px"
 spacing:
-  hairline: "1px"
-  line: "1.5px"
-  cell-x: "18px"
-  band-cell: "10px 14px"
   gutter: "clamp(16px, 4vw, 48px)"
-  nav-h: "64px"
-  sheet: "clamp(72px, 9vw, 136px)"
-  frame-max: "1360px"
+  section: "clamp(96px, 11vw, 168px)"
+  xs: "8px"
+  sm: "12px"
+  md: "16px"
+  lg: "24px"
+  xl: "32px"
+  2xl: "48px"
+  column-gap: "clamp(32px, 6vw, 96px)"
 components:
-  button-cell-cta:
+  button-primary:
     backgroundColor: "{colors.cero-cyan}"
-    textColor: "{colors.charcoal-ink}"
-    rounded: "{rounded.none}"
+    textColor: "{colors.charcoal}"
+    typography: "{typography.control}"
+    rounded: "{rounded.button}"
     padding: "0 20px"
-    height: "52px"
-  button-cell-cta-hover:
-    backgroundColor: "{colors.charcoal-ink}"
-    textColor: "{colors.cero-cyan}"
-  button-cell-cta-disabled:
-    backgroundColor: "{colors.drafting-film}"
-    textColor: "{colors.pencil-muted}"
-  button-cell-cta-nav:
-    backgroundColor: "{colors.cero-cyan}"
-    textColor: "{colors.charcoal-ink}"
-    rounded: "{rounded.none}"
-    padding: "0 14px"
-    height: "40px"
-  link-ink:
-    textColor: "{colors.charcoal-ink}"
-    padding: "0 0 4px"
-  toggle-lang:
+    height: "48px"
+  button-primary-hover:
+    backgroundColor: "{colors.cero-cyan-hover}"
+  button-ghost:
     backgroundColor: "transparent"
-    textColor: "{colors.charcoal-ink}"
+    textColor: "{colors.paper}"
+    typography: "{typography.control}"
+    rounded: "{rounded.button}"
+    padding: "0 20px"
+    height: "48px"
+  button-outline:
+    backgroundColor: "transparent"
+    textColor: "{colors.charcoal}"
+    typography: "{typography.control}"
+    rounded: "{rounded.button}"
+    padding: "0 20px"
+    height: "48px"
+  button-outline-hover:
+    backgroundColor: "{colors.charcoal}"
+    textColor: "{colors.paper}"
+  nav-capsule:
+    backgroundColor: "rgba(58, 64, 72, 0.5)"
+    textColor: "{colors.on-dark}"
+    rounded: "{rounded.capsule}"
+    padding: "0 8px 0 14px"
+    height: "52px"
+  nav-capsule-solid:
+    backgroundColor: "rgba(28, 33, 40, 0.92)"
+  chip-cta:
+    backgroundColor: "{colors.cero-cyan}"
+    textColor: "{colors.charcoal}"
     typography: "{typography.label}"
-    rounded: "{rounded.none}"
-    width: "42px"
-    height: "40px"
-  toggle-lang-hover:
-    backgroundColor: "{colors.charcoal-ink}"
-    textColor: "{colors.drafting-film}"
-  sheet-band:
-    textColor: "{colors.charcoal-ink}"
+    rounded: "{rounded.chip}"
+    padding: "0 12px"
+    height: "32px"
+  chip-lang:
+    backgroundColor: "rgba(255, 255, 255, 0.9)"
+    textColor: "{colors.charcoal}"
     typography: "{typography.label}"
-    padding: "{spacing.band-cell}"
-  title-block:
-    backgroundColor: "rgba(255, 255, 255, 0.5)"
-    textColor: "{colors.charcoal-ink}"
-    typography: "{typography.label}"
-    rounded: "{rounded.none}"
-    padding: "{spacing.band-cell}"
-  input-cell:
-    backgroundColor: "{colors.sheet-white}"
-    textColor: "{colors.charcoal-ink}"
-    rounded: "{rounded.none}"
-    padding: "12px 18px 10px"
-  nav-bar:
-    backgroundColor: "{colors.drafting-film}"
+    rounded: "{rounded.chip}"
+    height: "32px"
+  tab-light:
+    backgroundColor: "{colors.paper}"
     textColor: "{colors.graphite}"
-    height: "{spacing.nav-h}"
-  night-print:
-    backgroundColor: "{colors.charcoal-ink}"
-    textColor: "{colors.night-print-fg}"
-  device-frame:
-    backgroundColor: "{colors.device-black}"
-    rounded: "{rounded.device}"
-    padding: "7px"
+    rounded: "{rounded.chip}"
+    padding: "0 12px"
+    height: "36px"
+  tab-light-selected:
+    backgroundColor: "{colors.charcoal}"
+    textColor: "{colors.paper}"
+  tab-dark:
+    backgroundColor: "rgba(255, 255, 255, 0.06)"
+    textColor: "#cfd4d9"
+    rounded: "{rounded.chip}"
+    padding: "0 12px"
+    height: "36px"
+  tab-dark-selected:
+    backgroundColor: "{colors.on-dark}"
+    textColor: "{colors.charcoal}"
+  card-light:
+    backgroundColor: "{colors.paper}"
+    textColor: "{colors.charcoal}"
+    rounded: "{rounded.card}"
+    padding: "clamp(24px, 3vw, 32px)"
+  card-dark-notched:
+    backgroundColor: "{colors.charcoal}"
+    textColor: "{colors.on-dark}"
+    rounded: "{rounded.card}"
+    padding: "clamp(28px, 3.5vw, 44px)"
+  tag:
+    backgroundColor: "{colors.diagram-well}"
+    textColor: "{colors.graphite}"
+    typography: "{typography.label}"
+    rounded: "{rounded.chip}"
+    padding: "5px 9px"
+  live-marker-label:
+    backgroundColor: "rgba(21, 25, 32, 0.82)"
+    textColor: "{colors.on-dark}"
+    typography: "{typography.marker}"
+    rounded: "{rounded.chip}"
+    padding: "5px 9px"
+  feature-pill:
+    backgroundColor: "{colors.paper}"
+    textColor: "{colors.graphite}"
+    rounded: "{rounded.pill}"
+    padding: "8px 14px"
+  input-line:
+    backgroundColor: "transparent"
+    textColor: "{colors.paper}"
+    rounded: "0"
+    padding: "8px 0"
 ---
 
 # Design System: CeroSoft
 
 ## Overview
 
-**Creative North Star: "The Drawing Set"**
+**Creative North Star: "The Live Twin"**
 
-The site is a construction drawing set. A visitor's workflow is surveyed as-is in dashed line (Excel, LINE, paper), redrawn as-built in solid line, and CondoMate is the built sheet, printed in reverse on a charcoal "night print". Every section is a numbered sheet (A-00 to A-06) opened by a title-block band; the hero closes with a full title block (sheet, title, scale, year); the footer is the master title block. Nothing is a card, nothing glows, nothing floats. Structure comes from ruled lines, cells and dimension marks on a drafting-film ground with a fine 24px/120px grid.
+CeroSoft presents itself the way an operations product would, not the way a studio would: as a cinematic B2B product site in the grammar of Terminal Industries (user-pinned reference), translated into CeroSoft's own brand. The real operation becomes a digital twin. The hero is a full-bleed charcoal stage where a three.js wireframe of Punna Residence 5 draws itself from the ground up, slowly orbits, and lights cyan live markers at the rooms where CondoMate events happen. Everything that follows is product proof, not adjectives.
 
-Density is a working drawing's: generous sheet spacing (72 to 136px between sheets) with tight, ruled detail inside each sheet (schedules, numbered notes, request form cells). Ink is charcoal, secondary line is graphite, and one colour, Cero Cyan, is held back for the things a visitor can act on and the things that are live. The world explicitly refuses the dark SaaS hero, the feature-card grid and the glowing "0" ring of the previous site.
+The page breathes in long alternating takes: charcoal cinematic grounds for the twin, services and the closing, and light fog-grey (#F4F5F5) sections for statements, calculators and the CondoMate walkthrough. The two grounds meet at a trapezoid notch, a shallow tab of the light ground that bites into the dark edge, so a section change reads as a cut rather than a stripe. Statements are set big, light and tight in Inter 400; Thai carries the same scale in Noto Sans Thai 500 so vowels and tone marks stay clear. Geist Mono appears only as small uppercase Latin data labels, the instrument readout of the world.
 
-Motion is plotting, not presenting: lines draw, dashes resolve to solid, a process line is ruled in as you read. Every drawing's default state is the finished, visible drawing; motion only animates from blank toward it, so a stalled script or reduced motion still shows the whole set.
+One accent does all the signalling. Cero Cyan marks the primary action, every live event, and the last letter of the typed hero headline. Nowhere else. Density is low; the light sections are mostly air with a few 14px cards; the dark panels carry one clipped corner as their signature. The previous drafting-sheet world ("The Drawing Set") and the generic dark-SaaS-cards template are both rejected.
 
 **Key Characteristics:**
-- Line form carries state: dashed = today's manual workflow, solid = built, double = management/live console.
-- Cero Cyan only on actions (primary cells, focus underline in fields, selection) and live state (the live dot).
-- Numbered sheets A-00 to A-06, each opened by a mono title-block band; no eyebrows above headings.
-- Square, ruled, flat: 0 radius everywhere except real device screenshots and node/live dots.
-- Thai first: Thai copy sets in Noto Sans Thai with looser leading; Thai labels are never tracked or uppercased.
-- Motion = plot/draw from an already-visible default; one pinned CondoMate stage; reduced motion disables Lenis and the pin.
+- Charcoal cinematic grounds alternating with fog-light statement sections, joined by trapezoid notches.
+- A single accent, Cero Cyan, reserved for action, live events and the typed headline's last letter.
+- Large, tight Inter 400 statements; Noto Sans Thai 500 for Thai; Geist Mono uppercase micro-labels for Latin data only.
+- Floating capsule nav with a cyan call-to-action cell.
+- 14px card radii; dark cards cut with one 26px clipped corner.
+- A lazy-loaded wireframe digital twin with cyan live markers; reduced motion shows the finished frame.
 
 ## Colors
 
-A drafting-office palette: grey film, white sheets, charcoal ink, graphite pencil, and one cyan signal.
+A near-monochrome charcoal-and-fog system with one cool cyan voice.
 
 ### Primary
-- **Cero Cyan** (cero-cyan): the only chroma in the system. Fills primary title-block cells (Talk to us, Send), the live dot and its pulse ring, the field focus underline, the "built" node centre in the process line, the success tick, and text selection. Text on cyan is always Charcoal Ink, never white.
+- **Cero Cyan** (#00ADB5): the brand accent. Primary buttons and the nav "talk to us" cell, live-dot pulses and twin markers, filled range tracks, focus rings on dark grounds, text selection, the leading edge of the twin's draw-in, and the last letter of the hero headline. Text on cyan is always Charcoal, never white.
+- **Cero Cyan Lift** (#22C4CC): hover state of cyan fills only.
 
 ### Neutral
-- **Drafting Film** (drafting-film): page ground, carrying the 24px minor / 120px major grid in Grid Minor and Grid Major. Also the nav bar fill.
-- **Sheet White** (sheet-white): the request-form sheet and the as-built system box; the hero title block and as-is boxes use it at 50 to 55% over film.
-- **Charcoal Ink** (charcoal-ink): all primary text, solid line work, 2px sheet-band top rules, 1.5px control borders, focus outline; and the ground of the CondoMate night print.
-- **Graphite** (graphite): secondary line and text: dashed as-is boxes and links, revision clouds, lede copy, the light first line of the hero headline.
-- **Pencil Muted** (pencil-muted): metadata, mono numbering, survey/process descriptions, placeholders.
-- **Rule / Rule Strong** (rule, rule-strong): 1px dividers inside tables and lists / cell dividers in bands and title blocks, and the un-built dashed process line.
-- **Night Print Foreground, Muted, Rules** (night-print-fg, night-print-muted, night-print-rule, night-print-rule-strong): the reversed palette inside the charcoal CondoMate sheet and footer.
-- **Device Black** (device-black): only behind real phone screenshots and thumbnails.
-
-### Tertiary
-- **Redline** (redline): validation errors only (invalid field underline, error status text). It is a correction mark, not a decorative accent.
+- **Charcoal** (#222831): the cinematic ground (hero, services, footer, dark cards) and the ink colour on light grounds. One value, two roles.
+- **Charcoal Raised** (#2A3039): top of the service panel gradient; a lifted dark surface.
+- **Charcoal Deep** (#1D2229) and **Hero Glow** (#2E3641): the hero's radial vignette ends, darker at the edges and slightly lifted behind the twin.
+- **Device Black** (#10141A): phone bezels around real CondoMate screens.
+- **Graphite** (#393E46): secondary text on light, diagram strokes, scrollbar thumb.
+- **Fog Light** (#F4F5F5): the light section ground and page background.
+- **Paper** (#FFFFFF): light cards, tabs and pills that sit on Fog Light.
+- **Diagram Well** (#EEF0F1): the inset well behind path diagrams and the tag fill.
+- **Muted** (#5B616B): body copy and descriptions on light grounds.
+- **Step Idle** (#7D838B): CondoMate step headings before they come into focus (large text only).
+- **Reveal Start** (#A2A8AE): the transient start tint of the scroll-scrubbed statement reveal; never a resting text colour.
+- **Line** (#E1E4E6) and **Line Strong** (#C9CDD1): card borders and dividers; Line Strong for list rules (process, FAQ).
+- **On-Dark** (#ECEEF0), **On-Dark Heading** (#F3F4F5), **On-Dark Muted** (#A9AFB6), **On-Dark Line** (rgba(236,238,240,0.14)): text, headings, secondary text and hairlines on charcoal.
+- **Danger** (#A43232) / **Danger on Dark** (#FF9D9D): form validation and send failure only.
 
 ### Named Rules
-**The Signal Rule.** Cero Cyan appears only on something you can press or something that is live. If it is neither, it is ink or graphite.
+**The One Voice Rule.** Cero Cyan means "act here" or "this is live." It never fills a section, a card background or decorative ornament; if a cyan element is neither an action nor a live event (or the headline's last letter), it is wrong.
 
-**The Night Print Rule.** The reversed charcoal ground is reserved for the built product (CondoMate) and the master title block (footer). Other sheets stay on film.
+**The Charcoal Is Ink Rule.** The dark ground and the light-ground text are the same Charcoal. Do not introduce a second near-black.
 
 ## Typography
 
-**Display Font:** Inter Variable (self-hosted, with system sans fallback)
-**Body Font:** Inter Variable for English; Noto Sans Thai 400 to 700 for Thai (self-hosted)
-**Label/Mono Font:** Geist Mono 400/500 (self-hosted), for sheet numbers, title blocks, schedule codes, dimensions and legends
+**Display Font:** Inter Variable (with Noto Sans Thai, system-ui fallback)
+**Body Font:** Inter Variable for Latin; Noto Sans Thai for Thai (the site switches the whole stack under `lang="th"`)
+**Label/Mono Font:** Geist Mono (with ui-monospace)
 
-**Character:** A light, tightly tracked Inter headline set against a heavy second line reads like a drawing title; Geist Mono does the annotation work a draughtsman's lettering would. Thai is set in its own face with taller leading so vowels and tone marks never clip.
+**Character:** Inter at large size, regular weight and tight negative tracking gives calm, expensive product statements; Noto Sans Thai takes over at weight 500 with almost no tracking and generous leading so Thai reads cleanly; Geist Mono is the quiet instrument voice for data.
 
 ### Hierarchy
-- **Display** (300, clamp 3 to 6rem, 0.98): the A-00 headline. First line light graphite, second line 700 ink. Thai version (display-th) 400/700 at clamp 2.2 to 4.75rem, line-height 1.24.
-- **Display Product** (650, clamp 3.4 to 6rem, 0.95, -0.04em): the product name "CondoMate" only; a Latin wordmark, set in Inter in both languages.
-- **Headline** (600, clamp 2.2 to 3.9rem, 1.04, -0.03em): one per sheet. Thai version (headline-th) at clamp 1.9 to 3.25rem, line-height 1.3.
-- **Title** (600, clamp 1.35 to 1.75rem, 1.3): legacy footnote heading and sub-sheet titles.
-- **Title Large** (600, clamp 1.6 to 2.25rem, 1.15, -0.02em): CondoMate screen captions and the console heading on the night print.
-- **Lede** (400, clamp 1.06 to 1.22rem, 1.65; Thai 1.8): one paragraph under a headline, max 60ch, graphite.
-- **Body** (400, 1rem, 1.6; Thai 1.75): running copy, max 52 to 60ch.
-- **Body Small** (400, 0.92rem): callout labels, contact-sheet captions, form status, schedule item lists.
-- **UI** (500, 0.875rem): nav sheet index and nav CTA.
-- **Label** (Geist Mono, three steps: 0.7rem small, 0.75rem base, 0.8rem large; 0.02 to 0.12em tracking, tabular numerals): sheet numbers, band metadata, schedule headers and codes, title blocks, dimensions, legends. Uppercase only for small title-block captions and column heads in English.
+- **Display** (400, clamp(3.1rem, 7vw, 6rem), 1.02, -0.04em): the typed hero headline only. Thai: 500, clamp(2.6rem, 6vw, 5.2rem), 1.25. On phones the hero drops to clamp(2.7rem, 13vw, 3.6rem) Latin and clamp(2.2rem, 10.5vw, 3rem) Thai.
+- **Headline** (400, clamp(2.1rem, 4.2vw, 3.75rem), 1.08, -0.035em, balanced wrap): section titles. Thai: 500, clamp(1.85rem, 3.6vw, 3.2rem), 1.3.
+- **Figure** (400, clamp(2.4rem, 4.6vw, 3.8rem), 1.1, tabular numerals): calculated results on dark cards.
+- **Title Large** (400, clamp(1.7rem, 2.8vw, 2.5rem), 1.15, -0.03em): CondoMate step heads, service and console heads. Thai switches to 500 with 0 tracking.
+- **Statement** (400, clamp(1.2rem, 2.1vw, 1.75rem), 1.5): the word-by-word reveal paragraph, max 34em. Thai: line-height 1.7, 0 tracking.
+- **Title** (500, ~1.2 to 1.4rem, 1.3, -0.015em): card and stage headings.
+- **Body** (400, 1rem, 1.6; Thai 1.75) and **Body Lead** (1.05rem): copy, held to 40 to 64ch.
+- **Label** (Geist Mono 400, 0.72rem, 0.06em, uppercase, tabular): tags, stage numbers, panel counts, footer heads. In Thai, labels switch to Noto Sans Thai 0.8rem, no tracking, no case transform.
 
 ### Named Rules
-**The Thai Face Rule.** Any label set in mono for English switches to Noto Sans Thai in Thai, with letter-spacing 0 and no text-transform. Geist Mono has no Thai glyphs; tracked or uppercased Thai is never acceptable.
+**The Mono Is Latin Data Rule.** Geist Mono is used only for Latin data and UI chips: counts, numbers, short codes. Thai text is never set in mono and never uppercased or tracked.
 
-**The No Eyebrow Rule.** Headings are introduced by the sheet's title-block band, not by a kicker line above them. A heading stands alone with its lede beside or below it.
+**The Light Statement Rule.** Big Latin statements are weight 400 with negative tracking. Do not set Latin display or headline text bold.
+
+**The Typed Last Letter Rule.** The hero headline types in grapheme by grapheme (Thai vowels and tone marks stay attached) and its last letter grapheme is Cero Cyan. No other headline carries a coloured letter.
 
 ## Layout
 
-A single centred frame, `min(1360px, 100% - 2 × gutter)`, with a fluid gutter (16 to 48px). The fixed nav is 64px tall with a 1.5px ink bottom rule. Each sheet opens with a full-frame title-block band (84px number cell, title, metadata cell) and is separated from the next by the sheet space (72 to 136px).
+Single column of full-bleed sections. Content sits in a centred wrap of min(1240px, 100% - 2 × gutter) (narrow variant 980px), with a fluid gutter of clamp(16px, 4vw, 48px). Sections are separated by a section rhythm of clamp(96px, 11vw, 168px); consecutive light sections drop their top padding so the light ground runs continuously. Section heads are centred (max 860 to 980px) with a 60ch lead underneath.
 
-Inside sheets, the common grammar is a two-column split (heading left, lede right, bottom-aligned) above full-width ruled content: survey list, services schedule table, five-node process line, numbered notes, request form. The hero is a 7/5 split: copy left, the live plan drawing right, title block below. CondoMate pins a full-viewport stage on desktop: caption column (260 to 320px), phone at up to 700px tall, leader-line callouts to the right.
+Grids are simple: three path cards, a two-column calculator (form left, dark result right), a two-column CondoMate scroller (text blocks left, sticky dark product panel right), five process stages, a three-column about grid, and two-column FAQ and contact splits. Card gaps are 16px; column gaps in split layouts are clamp(32px, 6vw, 96px). The internal spacing rhythm steps 8 / 12 / 16 / 24 / 32 / 48px.
 
-Breakpoints: 1180px (sheet index collapses to a menu), 1000px (splits stack; process line turns vertical; pinned stage disabled), 760px (schedule rows restack; contact-sheet becomes a horizontal snap strip; title block reflows to 2 columns), 640px (nav CTA hides; form cells single column; band metadata hides; hero CTA full width).
+Responsive: at 1080px the nav links collapse into a menu toggle; at 1000px every split goes to one column, the sticky CondoMate panel is replaced by an inline phone under each step, and the hero scrim turns bottom-up; at 640px the nav CTA cell hides, hero buttons go full width, the notch shortens to 18px and the footer stacks. The hero twin moves from right-of-centre (wide) to the upper band (phone), where only the first marker shows its label.
 
 ## Elevation & Depth
 
-Flat. Depth comes from line weight and the film/sheet/night-print tonal shift, not shadow. Hierarchy reads by rule weight: 2px ink top rule opens a band or table, 1.5px ink outlines a control or sheet, 1px rule divides rows.
+Depth comes from ground changes and cinematic light, not from shadow stacks. Cards are flat with a 1px border on light ground; dark surfaces separate by tone (charcoal, charcoal raised) and hairlines. The hero gets depth from a radial glow behind the twin, a left-and-bottom scrim that protects the headline, and depth fog in the wireframe shader. The nav capsule floats with a translucent blur.
 
 ### Shadow Vocabulary
-- **Device drop** (`box-shadow: 0 30px 60px -20px rgba(0, 0, 0, 0.55)`): only under real phone screenshots on the night print, to seat the photographed object.
-- **Field underline** (`box-shadow: inset 0 -2px 0 <cyan | redline>`): an inset rule, not an elevation; focus is cyan, invalid is redline.
-- **Callout halo** (`box-shadow: 0 0 0 3px <charcoal ink>`): knocks a leader-line dot out of the screenshot behind it.
+- **Device drop** (`box-shadow: 0 40px 80px -30px rgba(0, 0, 0, 0.7)`): the phone bezel inside the dark CondoMate panel.
+- **Console lift** (`box-shadow: 0 30px 60px -36px rgba(34, 40, 49, 0.45)`): the management-console screenshot frame on light ground.
+- **Marker halo** (`box-shadow: 0 0 0 3px rgba(0, 173, 181, 0.25)`): ring around a live twin marker dot.
+- **Thumb** (`box-shadow: 0 2px 6px rgba(34, 40, 49, 0.18)`): range slider thumb.
 
 ### Named Rules
-**The Line Weight Rule.** If something needs to stand out, give it a heavier or different line, not a shadow, glow or tint.
+**The Product Floats, Cards Don't Rule.** Only real product imagery (phone, console screenshot) casts a shadow. Text cards are flat.
 
 ## Shapes
 
-Square drafting geometry. Every control, cell, sheet, table and plate has 0 radius and a ruled border. Curves are reserved for what is curved in the world: real phone glass (device 30px outer, screen 23px inner) and thumbnails (18px), the round process nodes, callout number circles and the live dot. Line form is semantic:
-
-- **Dashed** (stroke-dasharray 7 5 in drawings; CSS dashed borders): the as-is manual workflow, proposed links, un-built process line, the hero's dashed lettering of "Excel / LINE / paper".
-- **Solid**: the as-built system, built process line, resident app legend key.
-- **Double** (5px double border): the management console plates and the management legend key.
-
-Drafting marks recur: dimension lines with 45-degree tick ends, revision clouds around the friction step, leader-line callouts with numbered circles.
+Gently rounded and engineered. Cards are 14px; buttons 8px; chips, tabs, tags and marker labels 6px; the nav capsule and mobile menu 12px; diagram wells 10px; feature pills fully round. Dark cards (calculator result, CondoMate panel, contact form) keep their 14px radius on three corners and cut the top-right corner with a 26px diagonal clip, the system's signature silhouette. Section joins use a trapezoid notch: a centred tab min(520px, 64%) wide and 26px tall (18px on phones) with 5% sloped shoulders, coloured as the light ground, sitting on the dark section's top or bottom edge. Live dots and markers are circles with an expanding pulse ring.
 
 ## Components
 
 ### Buttons
-Title-block cells, not pills.
-- **Shape:** square (0), 1.5px ink border.
-- **Primary (cell CTA):** Cero Cyan fill, Charcoal Ink 600 text, 52px tall, 20px side padding, trailing arrow pushed to the far edge.
-- **Hover / Focus:** inverts to ink fill with cyan text; arrow slides 4px right; 2px ink focus outline at 3px offset. On the night print the border is cyan and hover inverts to film.
-- **Disabled / Sending:** film fill, muted text, rule-strong border, progress cursor.
-- **Nav variant:** 40px tall, 14px padding, 0.875rem.
+Confident and quiet: solid, square-ish, with a trailing arrow that nudges 3px on hover.
+- **Shape:** gently rounded (8px), 48px tall, 20px side padding, 600 weight at 0.95rem.
+- **Primary:** Cero Cyan fill, Charcoal text; hover lifts to Cero Cyan Lift.
+- **Ghost (on dark):** transparent, 1px rgba(255,255,255,0.32) border, white text; hover solid white border and a 6% white wash.
+- **Outline (on light):** 1px Charcoal border and text; hover inverts to Charcoal fill, white text.
+- **Focus:** 2px outline offset 3px, Charcoal on light, Cero Cyan on dark. Disabled drops to 60% opacity.
 
-### Ink Link (secondary action)
-A "proposed" link: 600 text with a 1.5px dashed underline that turns solid on hover while the arrow gap widens. Used for "See CondoMate" and the legacy sheet's prompt to talk.
+### Chips
+- **Style:** 32px (36px as tabs), 6px radius, label type. The language chip is near-white on the capsule; the CTA chip is cyan.
+- **Tabs:** on light, Paper with a Line border, selected inverts to Charcoal. On dark, a 6% white wash, selected becomes On-Dark with Charcoal text. Arrow keys move between tabs.
+- **Tag:** Diagram Well fill, Graphite mono label, 5px 9px padding.
+- **Feature pill:** fully round Paper pill with a Line border and a check icon.
 
-### Sheet Band
-The opener of every sheet A-01 to A-06: Geist Mono 0.75rem with tabular numerals, 2px ink top rule, 1px rule-strong bottom, number cell / title / "CeroSoft · year" cell divided by rule-strong. On the night print the rules reverse. Decorative (aria-hidden); the section heading carries semantics.
-
-### Title Block
-The hero's closing block and the footer master block: a bordered grid of cells, each with a tiny mono uppercase caption (Sheet, Title, Scale, Year) over its value; 50% white over film in the hero, night-print rules in the footer.
+### Cards / Containers
+- **Corner Style:** 14px.
+- **Light card:** Paper on Fog Light, 1px Line border, padding clamp(24px, 3vw, 32px). Path cards hold a diagram in a 10px Diagram Well.
+- **Dark notched card:** Charcoal, On-Dark text, one 26px clipped top-right corner. Used for results, the product panel and the contact form.
+- **Service panel:** Charcoal Raised to Charcoal gradient with an On-Dark Line border, two columns of statement and checklist.
+- **Shadow Strategy:** flat; see Elevation.
 
 ### Inputs / Fields
-- **Style:** the request form is a white sheet with a 1.5px ink border and a mono title strip; fields are borderless cells in a 2-column grid divided by 1px rules, with a mono caption label above the input.
-- **Focus:** an inset 2px cyan underline across the cell.
-- **Error:** an inset 2px redline underline (`:user-invalid`); error status in redline with an alert icon. Success shows a cyan tick.
-- **Submit:** a full-width cell CTA, 60px, separated by an ink rule.
+- **Style:** underline-only on the dark contact card: transparent field, 1px rgba(236,238,240,0.28) bottom rule, no radius, white text, cyan caret. Labels sit above in 0.82rem On-Dark Muted.
+- **Focus:** the bottom rule turns Cero Cyan.
+- **Error:** invalid fields after interaction get a Danger on Dark rule; the status line carries an icon plus message.
+- **Range:** 4px track filled cyan up to the value, Line beyond; white 20px thumb with a 2px Charcoal ring.
 
 ### Navigation
-Film bar, 1.5px ink bottom rule, brand mark left. Desktop shows a sheet index: mono sheet number + title, graphite at rest, ink with a 1.5px underline at 8px offset on hover. Square TH/EN toggle (mono, inverts on hover) and the nav CTA. Below 1180px a square menu toggle opens a full-width sheet list with ruled rows.
+A floating capsule fixed 14px from the top, max 1080px wide, 52px tall, 12px radius, translucent graphite (rgba(58,64,72,0.5)) with a 16px backdrop blur and a 10% white hairline. It turns solid (rgba(28,33,40,0.92)) once the hero has scrolled away. Brand mark left; centred 0.875rem links with a 6px hover wash; a language chip and the cyan talk cell right. Below 1080px a menu toggle opens a solid dark sheet of full-width rows, the last row in cyan.
 
-### Schedule (services)
-A table drawn like a door/finish schedule: 2px ink rules top and bottom, mono uppercase column heads, mono code column (S-01...), 600 service name, graphite description, muted item list. Restacks into a two-column grid on small screens.
+### Digital Twin (signature)
+A lazy-loaded three.js wireframe of Punna Residence 5 (lobby plus six floors) fills the hero right of centre. Lines are light grey (#E6E8EA) with depth fog; the building draws upward over about 2.8s with a cyan leading edge, then orbits slowly, dollies with scroll and leans slightly with the pointer. After draw-in, cyan live markers (dot, pulse ring, mono label in a dark 6px chip with a cyan hairline) appear one by one at the rooms where events happen. Labels flip left near the right edge; on phones only the top-band markers show, and only the first keeps its label. With reduced motion the twin renders a single finished frame with markers on. Without WebGL a soft cyan radial glow stands in.
 
-### Process Line
-Five nodes on a horizontal line (vertical under 1000px). The dashed rule-strong line is the plan; a 2px ink line is ruled over it by scroll progress; each node fills ink with a cyan centre once built.
+### CondoMate Scroller (signature)
+Left: tall text blocks whose headings sit in Step Idle grey and turn Charcoal as each block crosses the viewport centre. Right: a sticky dark notched panel holding a phone bezel whose real screen wipes in top-down per block, with cyan callout chips bottom-left and a mono "01 / 05" count top-right.
 
-### CondoMate Stage (signature)
-The night-print product sheet. Real phone screenshots in a device frame, with mono dimension lines (390 × 844) and numbered leader-line callouts. On desktop with motion, the stage pins for one viewport and scroll cuts between screens; an index of screens on the left marks the current one with a solid rule (others dashed). Below it, a contact-sheet strip of further screens and the management console in double-ruled plates under a 1366px dimension.
-
-### Live Dot
-A 10px cyan dot with a pulsing 1px ring: the only animated loop in the system, and the only meaning of "live".
+### Motion
+Lenis smooth scroll; ease cubic-bezier(0.16, 1, 0.3, 1) (expo out) for every transition. Hero headline types in per grapheme (45ms stagger), copy rises 24px after it. The statement paragraph scrubs word by word from Reveal Start to Charcoal. Cards settle 36px upward on entry and are never hidden. Reduced motion disables smooth scroll, typing, reveals and pulses.
 
 ## Do's and Don'ts
 
 ### Do:
-- **Do** encode state in line form: dashed for today's manual workflow, solid for what is built, double for the management/live console.
-- **Do** keep Cero Cyan to actions and live state, with Charcoal Ink text on cyan fills.
-- **Do** open every sheet with its numbered title-block band (A-00 to A-06) and let the heading stand without a kicker.
-- **Do** set Thai in Noto Sans Thai with leading of 1.75 for body and 1.24 to 1.3 for headings, and switch mono labels to the Thai face with zero tracking and no uppercase.
-- **Do** keep every control and container square (0 radius) with a ruled border; reserve curves for devices, nodes and dots.
-- **Do** animate by plotting: stroke-dashoffset draws, dashed-to-solid rules, leader lines extending, always from a default state that already shows the finished drawing.
-- **Do** keep a single pinned stage (CondoMate) and drop Lenis and the pin entirely under prefers-reduced-motion.
-- **Do** use real CondoMate screens with dimension marks as proof; label them, never mock them up.
+- **Do** alternate charcoal (#222831) and fog-light (#F4F5F5) grounds and join them with the trapezoid notch.
+- **Do** keep Cero Cyan (#00ADB5) to primary actions, live events and the hero headline's last letter, with Charcoal text on it.
+- **Do** set Latin statements in Inter 400 with negative tracking, and Thai headings in Noto Sans Thai 500 with near-zero tracking and at least 1.25 line height.
+- **Do** use Geist Mono uppercase (0.72rem, 0.06em) only for Latin data labels; switch to Noto Sans Thai, no case, no tracking, in Thai.
+- **Do** give light cards a 14px radius and a 1px Line border; give dark cards the single 26px clipped corner.
+- **Do** show real CondoMate screens and the wireframe twin as proof; give every animation a reduced-motion state that shows the finished result.
 
 ### Don't:
-- **Don't** use cyan for decoration, headings, icons, borders of non-actions or background washes.
-- **Don't** put an eyebrow or kicker line above a heading.
-- **Don't** track or uppercase Thai, or set Thai in Geist Mono.
-- **Don't** build feature-card grids, rounded cards, pills, glows or gradient heroes; use schedules, ruled lists and title-block cells.
-- **Don't** add a second pinned or scroll-jacked section.
-- **Don't** hide content behind animation: nothing may depend on a script running to become visible.
-- **Don't** use shadows for hierarchy; the device drop under real phone screenshots is the only shadow.
+- **Don't** use cyan as a section fill, card background, gradient or decoration.
+- **Don't** set Thai in mono, uppercase or tracked type.
+- **Don't** bold Latin display or headline text.
+- **Don't** add shadows to text cards; only product imagery floats.
+- **Don't** return to the drafting-sheet look of the rejected "Drawing Set" world (title blocks, sheet borders, dimension lines) or to a generic grid of glowing dark SaaS cards.
+- **Don't** use stock photography; illustrate with real UI, the twin, or simple system diagrams.
+- **Don't** leave Reveal Start grey (#A2A8AE) as resting text; it is a scroll transition start only.
