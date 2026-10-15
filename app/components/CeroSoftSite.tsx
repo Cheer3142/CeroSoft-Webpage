@@ -554,7 +554,6 @@ function Footer({ lang }: { lang: Lang }) {
         </div>
         <div>
           <h3>{c.footer.contact}</h3>
-          <a href="mailto:info@cerosoft.net">info@cerosoft.net</a>
           <a href="https://cerosoft.net">cerosoft.net</a>
           <a href="https://cheer.cerosoft.net/" target="_blank" rel="noopener">{c.footer.founder}</a>
           <span>{c.footer.city}</span>
