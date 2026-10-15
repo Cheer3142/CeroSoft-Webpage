@@ -1,5 +1,5 @@
 import { SyntheticEvent, useEffect, useId, useMemo, useRef, useState } from 'react';
-import { ArrowRight, ArrowDownRight, Check, CircleAlert, Menu, Plus, X } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, ArrowDownRight, Check, CircleAlert, Menu, Plus, X } from 'lucide-react';
 import { copy, navIds, type Lang } from './content';
 import { setupMotion } from './motion';
 import type { Focus } from './building';
@@ -431,6 +431,20 @@ function About({ lang }: { lang: Lang }) {
             <dl>{c.values.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
           </div>
         </div>
+        <div className="founder" aria-labelledby="founder-title">
+          <img className="founder-photo" src="/founder/portrait.webp" alt={c.founder.name} width={600} height={724} loading="lazy" decoding="async" />
+          <div className="founder-body">
+            <h3 id="founder-title">{c.founder.title}</h3>
+            <p className="founder-name"><b>{c.founder.name}</b><span>{c.founder.role} · CeroSoft</span></p>
+            <p className="founder-text">{c.founder.text}</p>
+            <ul className="founder-exp">
+              {c.founder.experience.map(x => (
+                <li key={x.org}><b>{x.org}</b><span>{x.role}</span><small>{x.when}</small></li>
+              ))}
+            </ul>
+            <a className="founder-cta" href="https://cheer.cerosoft.net/" target="_blank" rel="noopener">{c.founder.cta}<ArrowUpRight aria-hidden="true" /></a>
+          </div>
+        </div>
       </div>
     </section>
   );
@@ -545,8 +559,8 @@ function Footer({ lang }: { lang: Lang }) {
         </div>
         <div>
           <h3>{c.footer.contact}</h3>
-          <a href="mailto:info@cerosoft.net">info@cerosoft.net</a>
           <a href="https://cerosoft.net">cerosoft.net</a>
+          <a href="https://cheer.cerosoft.net/" target="_blank" rel="noopener">{c.footer.founder}</a>
           <span>{c.footer.city}</span>
         </div>
       </div>

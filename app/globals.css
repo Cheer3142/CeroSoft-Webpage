@@ -329,6 +329,35 @@ input[type='range']::-moz-range-thumb { width: 18px; height: 18px; border-radius
 .about-card dl div:last-child { border-bottom: 0; }
 .about-card dt { font-weight: 600; }
 .about-card dd { color: var(--muted); }
+.founder {
+  display: grid; grid-template-columns: minmax(180px, 260px) 1fr; gap: clamp(24px, 4vw, 56px); align-items: center;
+  margin-top: 16px; padding: clamp(20px, 3vw, 32px); border-radius: var(--radius);
+  background: var(--dark); color: var(--on-dark);
+  clip-path: polygon(0 0, calc(100% - 26px) 0, 100% 26px, 100% 100%, 0 100%);
+}
+.founder-photo { width: 100%; height: auto; aspect-ratio: 600 / 724; object-fit: cover; border-radius: 10px; }
+.founder-body h3 { font-size: clamp(1.5rem, 2.4vw, 2.1rem); font-weight: 400; letter-spacing: -0.03em; line-height: 1.2; }
+.site[lang='th'] .founder-body h3 { font-weight: 500; letter-spacing: 0; line-height: 1.35; }
+.founder-name { display: grid; gap: 2px; margin-top: 16px; }
+.founder-name b { font-size: 1.15rem; font-weight: 600; }
+.founder-name span { color: var(--on-dark-muted); font-size: 0.95rem; }
+.founder-text { margin-top: 14px; max-width: 60ch; color: #c9ced3; }
+.founder-exp { margin-top: 20px; border-top: 1px solid var(--on-dark-line); }
+.founder-exp li { display: grid; grid-template-columns: 1.3fr 1fr auto; gap: 4px 20px; align-items: baseline; padding: 12px 0; border-bottom: 1px solid var(--on-dark-line); }
+.founder-exp b { font-weight: 500; }
+.founder-exp span { color: #c9ced3; font-size: 0.95rem; }
+.founder-exp small { font-family: var(--mono); font-size: 0.75rem; color: var(--on-dark-muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.site[lang='th'] .founder-exp small { font-family: var(--thai); font-size: 0.85rem; }
+.founder-cta { display: inline-flex; align-items: center; gap: 8px; margin-top: 22px; color: var(--cyan); font-weight: 600; }
+.founder-cta svg { width: 18px; height: 18px; transition: transform 0.3s var(--ease); }
+.founder-cta:hover svg { transform: translate(2px, -2px); }
+.founder-cta:hover { text-decoration: underline; text-underline-offset: 4px; }
+@media (max-width: 860px) {
+  .founder { grid-template-columns: 1fr; }
+  .founder-photo { width: min(220px, 60%); }
+  .founder-exp li { grid-template-columns: 1fr auto; }
+  .founder-exp span { grid-column: 1; grid-row: 2; }
+}
 
 /* ───── FAQ ───── */
 

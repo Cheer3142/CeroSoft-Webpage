@@ -59,7 +59,7 @@ type Copy = {
   };
   services: { title: string; text: string; items: Service[] };
   process: { title: string; text: string; steps: Step[] };
-  about: { title: string; text: string; mission: [string, string]; vision: [string, string]; valuesTitle: string; values: [string, string][] };
+  about: { title: string; text: string; mission: [string, string]; vision: [string, string]; valuesTitle: string; values: [string, string][]; founder: { title: string; role: string; name: string; text: string; experience: { org: string; role: string; when: string }[]; cta: string } };
   faq: { title: string; text: string; items: Faq[] };
   contact: {
     title: string;
@@ -77,7 +77,7 @@ type Copy = {
     honeypot: string;
   };
   closing: { title: string; cta: string };
-  footer: { tagline: string; line: string; menu: string; services: string; contact: string; city: string };
+  footer: { tagline: string; line: string; menu: string; services: string; contact: string; city: string; founder: string };
 };
 
 // Real CondoMate Online captures (15 Oct 2026, personal data pixelated), exported from CondoMateV2/docs/manuals/UI/current.
@@ -186,6 +186,18 @@ export const copy: Record<Lang, Copy> = {
       text: 'CeroSoft combines software engineering with an understanding of business operations. We translate complex workflows into systems that people can actually use, maintain, and trust.',
       mission: ['Mission', 'Make technology simpler and more accessible through practical software that solves real-world problems.'],
       vision: ['Vision', 'Become the trusted technology partner for businesses seeking practical and sustainable digital systems.'],
+      founder: {
+        title: 'Who builds your system',
+        role: 'Founder and Software Developer',
+        name: 'Patcharadanai Sombatsatien (Cheer)',
+        text: 'Designs and builds CeroSoft systems end to end, from requirements to deployment and support, including CondoMate. The background is engineering work where software has to run reliably on real hardware and production lines.',
+        experience: [
+          { org: 'AirGradient', role: 'Embedded Firmware Engineer', when: 'From Nov 2026' },
+          { org: 'NARIT · National Astronomical Research Institute of Thailand', role: 'Embedded Software Engineer', when: '2023–2024' },
+          { org: 'Hana Microelectronics × Keysight Technologies', role: 'Electrical Test Engineer', when: '2021–2023' },
+        ],
+        cta: 'Full profile at cheer.cerosoft.net',
+      },
       valuesTitle: 'Values',
       values: [['Simple', 'Complex behind. Simple in front.'], ['Practical', 'Build what matters.'], ['Reliable', 'Software you can depend on.'], ['Adaptable', 'Built around your workflow.'], ['Transparent', 'Clear technology. Clear communication.']],
     },
@@ -212,11 +224,11 @@ export const copy: Record<Lang, Copy> = {
       sending: 'Sending…',
       success: 'Thank you. Your message has been sent. We’ll be in touch soon.',
       invalid: 'Please fill in the required fields and check the email format.',
-      failed: 'Message could not be sent. Please try again or email info@cerosoft.net.',
+      failed: 'Message could not be sent. Please try again in a moment.',
       honeypot: 'Leave this field empty',
     },
     closing: { title: 'Every solution starts from zero.', cta: 'Start from zero with us' },
-    footer: { tagline: 'From Zero to Solution.', line: 'Simple Software. Real Solutions.', menu: 'Explore', services: 'Services', contact: 'Contact', city: 'Thailand' },
+    footer: { tagline: 'From Zero to Solution.', line: 'Simple Software. Real Solutions.', menu: 'Explore', services: 'Services', contact: 'Contact', city: 'Thailand', founder: 'Founder · cheer.cerosoft.net' },
   },
   th: {
     skip: 'ข้ามไปยังเนื้อหา',
@@ -319,6 +331,18 @@ export const copy: Record<Lang, Copy> = {
       text: 'CeroSoft ผสานความเชี่ยวชาญด้านวิศวกรรมซอฟต์แวร์เข้ากับความเข้าใจในการดำเนินธุรกิจ เพื่อเปลี่ยนกระบวนการที่ซับซ้อนให้เป็นระบบที่คนใช้งานได้จริง ดูแลต่อได้ และไว้วางใจได้',
       mission: ['พันธกิจ', 'ทำให้เทคโนโลยีเป็นเรื่องง่ายและเข้าถึงได้ ผ่านซอฟต์แวร์ที่ตอบโจทย์การใช้งานและแก้ปัญหาได้จริง'],
       vision: ['วิสัยทัศน์', 'เป็นพาร์ตเนอร์ด้านเทคโนโลยีที่ธุรกิจไว้วางใจ ในการสร้างระบบดิจิทัลที่ใช้ได้จริงและเติบโตได้อย่างยั่งยืน'],
+      founder: {
+        title: 'ใครเป็นคนสร้างระบบให้คุณ',
+        role: 'ผู้ก่อตั้งและนักพัฒนาซอฟต์แวร์',
+        name: 'Patcharadanai Sombatsatien (Cheer)',
+        text: 'ออกแบบและพัฒนาระบบของ CeroSoft เองตั้งแต่เก็บความต้องการจนถึงติดตั้งและดูแลหลังส่งมอบ รวมถึง CondoMate พื้นฐานมาจากงานวิศวกรรมที่ซอฟต์แวร์ต้องทำงานกับฮาร์ดแวร์และสายการผลิตจริงอย่างเชื่อถือได้',
+        experience: [
+          { org: 'AirGradient', role: 'Embedded Firmware Engineer', when: 'เริ่ม พ.ย. 2569' },
+          { org: 'NARIT · สถาบันวิจัยดาราศาสตร์แห่งชาติ', role: 'Embedded Software Engineer', when: '2566–2567' },
+          { org: 'Hana Microelectronics × Keysight Technologies', role: 'Electrical Test Engineer', when: '2564–2566' },
+        ],
+        cta: 'ดูโปรไฟล์เต็มที่ cheer.cerosoft.net',
+      },
       valuesTitle: 'คุณค่าที่เรายึดถือ',
       values: [['เรียบง่าย', 'ระบบเบื้องหลังอาจซับซ้อน แต่ประสบการณ์ของผู้ใช้ควรง่าย'], ['ใช้ได้จริง', 'พัฒนาเฉพาะสิ่งที่สร้างคุณค่าและตอบโจทย์การใช้งานจริง'], ['เชื่อถือได้', 'เสถียร ปลอดภัย ดูแลรักษาได้'], ['ยืดหยุ่น', 'ระบบปรับตามธุรกิจ ไม่ใช่บังคับธุรกิจให้เข้ากับระบบ'], ['โปร่งใส', 'สื่อสารขอบเขต ค่าใช้จ่าย และข้อจำกัดอย่างชัดเจน']],
     },
@@ -345,10 +369,10 @@ export const copy: Record<Lang, Copy> = {
       sending: 'กำลังส่ง…',
       success: 'ขอบคุณครับ เราได้รับข้อความแล้ว และจะติดต่อกลับโดยเร็ว',
       invalid: 'กรุณากรอกข้อมูลที่จำเป็นให้ครบ และตรวจสอบรูปแบบอีเมลอีกครั้ง',
-      failed: 'ยังส่งข้อความไม่ได้ กรุณาลองอีกครั้ง หรือติดต่อเราทางอีเมล info@cerosoft.net',
+      failed: 'ยังส่งข้อความไม่ได้ กรุณาลองอีกครั้งในอีกสักครู่',
       honeypot: 'เว้นช่องนี้ว่างไว้',
     },
     closing: { title: 'ทุกโซลูชันเริ่มต้นจากศูนย์', cta: 'เริ่มจากศูนย์ไปกับเรา' },
-    footer: { tagline: 'จากศูนย์ สู่โซลูชันที่ใช่', line: 'ซอฟต์แวร์ที่เรียบง่าย แก้ปัญหาได้จริง', menu: 'เมนู', services: 'บริการ', contact: 'ติดต่อ', city: 'ประเทศไทย' },
+    footer: { tagline: 'จากศูนย์ สู่โซลูชันที่ใช่', line: 'ซอฟต์แวร์ที่เรียบง่าย แก้ปัญหาได้จริง', menu: 'เมนู', services: 'บริการ', contact: 'ติดต่อ', city: 'ประเทศไทย', founder: 'ผู้ก่อตั้ง · cheer.cerosoft.net' },
   },
 };
