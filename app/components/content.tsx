@@ -7,7 +7,7 @@ type Step = { n: string; title: string; text: string };
 type Path = { key: 'one' | 'few' | 'all'; title: string; text: string; service: string };
 type Service = { title: string; text: string; items: string[] };
 type Callout = { label: string };
-type Screen = { src: string; w: number; h: number; tag: string; title: string; text: string; callouts: Callout[] };
+type Screen = { key: 'home' | 'repairs' | 'booking' | 'finance' | 'room'; src: string; w: number; h: number; tag: string; title: string; text: string; callouts: Callout[] };
 type Faq = { q: string; a: string };
 
 type Copy = {
@@ -53,7 +53,7 @@ type Copy = {
     live: string;
     screens: Screen[];
     note: string;
-    console: { title: string; text: string; tabs: { name: string; title: string; text: string }[] };
+    console: { title: string; text: string; tabs: { name: string; src: string; w: number; h: number; title: string; text: string }[] };
     features: string[];
     cta: string;
   };
@@ -80,7 +80,9 @@ type Copy = {
   footer: { tagline: string; line: string; menu: string; services: string; contact: string; city: string };
 };
 
-const screen = (name: string, h = 844) => ({ src: `/portfolio/condomate-resident-${name}.png`, w: 390, h });
+// Real CondoMate Online captures (15 Oct 2026, personal data pixelated), exported from CondoMateV2/docs/manuals/UI/current.
+const screen = (key: Screen['key']) => ({ key, src: `/portfolio/v2/resident-${key}.webp`, w: 375, h: 812 });
+const desk = (name: string, w = 1366, h = 900) => ({ name, src: `/portfolio/v2/console-${name}.webp`, w, h });
 
 export const copy: Record<Lang, Copy> = {
   en: {
@@ -137,19 +139,21 @@ export const copy: Record<Lang, Copy> = {
       text: 'A real operational platform for condominium management teams and residents. Maintenance, parcels, shared-space booking, announcements, finance, accounts, and reporting in one connected workflow.',
       live: 'Live at Punna Residence 5',
       screens: [
-        { ...screen('dashboard', 1105), tag: 'Resident home', title: 'Everything for the room on one screen', text: 'Announcements, parcels, maintenance, and daily tasks in one focused home.', callouts: [{ label: 'Parcels and open repairs, counted' }, { label: 'Latest announcement' }] },
-        { ...screen('repairs'), tag: 'Maintenance', title: 'Report a repair. Follow it to done.', text: 'Residents submit, track, and review repair requests in one place. Every job gets a reference number.', callouts: [{ label: 'Received · In progress · Done' }, { label: 'VIS-REP-1 · Room 715' }] },
-        { ...screen('parcels'), tag: 'Parcels', title: 'No more calling the front desk', text: 'Residents can check deliveries and pickup details themselves.', callouts: [{ label: 'Waiting · Collected' }, { label: 'Carrier and tracking number' }] },
-        { ...screen('booking'), tag: 'Shared spaces', title: 'Book the common room by the hour', text: 'Clear availability, capacity checks, and time-slot requests the office can approve.', callouts: [{ label: 'Pending · Approved · Cancelled' }, { label: '1-hour slots' }] },
-        { ...screen('finance'), tag: 'Finance', title: 'Fees, QR payment and proof in one flow', text: 'Payment information and financial activity in one place, for residents and the office.', callouts: [{ label: 'Bank account and QR' }, { label: 'Amount and due date' }] },
+        { ...screen('home'), tag: 'Resident home', title: 'Everything for the room on one screen', text: 'Amount due, parcels, open repairs, and the next booking in one focused home, with announcements below.', callouts: [{ label: 'Amount due · Pay now' }, { label: 'Parcels · Repairs · Bookings' }] },
+        { ...screen('repairs'), tag: 'Maintenance', title: 'Report a repair. Follow it to done.', text: 'Residents submit, track, and review repair requests in one place.', callouts: [{ label: 'Received · In progress · Done' }, { label: 'New request in one tap' }] },
+        { ...screen('booking'), tag: 'Shared spaces', title: 'Book the meeting room by the hour', text: 'Pick a space, the number of people, the date, and a 1-hour slot. The system checks total capacity before the request goes to the office.', callouts: [{ label: 'Space · People · Date' }, { label: '1-hour slots, capacity checked' }] },
+        { ...screen('finance'), tag: 'Finance', title: 'Pay, send the slip, watch it get confirmed', text: 'Every bill shows where it stands: proof sent, office checking, paid with a receipt.', callouts: [{ label: 'Proof sent → Checking → Paid' }, { label: 'Receipt issued when paid' }] },
+        { ...screen('room'), tag: 'My room', title: 'The room and everyone in it', text: 'Residents see their room number and household members, and can copy the address in one tap.', callouts: [{ label: 'Room number · Members' }, { label: 'Copy address' }] },
       ],
-      note: 'Illustrative screens of CondoMate at Punna Residence 5, shown with test data.',
+      note: 'Real CondoMate screens, captured 15 Oct 2026. Personal data is pixelated.',
       console: {
         title: 'The office runs the same data from a desktop console.',
         text: 'One operational system. Two clear experiences.',
         tabs: [
-          { name: 'finance', title: 'Finance workspace', text: 'Manage condominium income and expenses in one workflow.' },
-          { name: 'report', title: 'Financial reports', text: 'Review daily totals, transactions, and printable reports.' },
+          { ...desk('today'), title: 'Today', text: 'Pending work, repairs waiting, bookings to approve, and parcels to hand over, at a glance.' },
+          { ...desk('parcels'), title: 'Parcels', text: 'Log incoming parcels and track pickup status for every room.' },
+          { ...desk('reports', 1351, 890), title: 'Financial reports', text: 'Monthly income and expenses with a printable daily report.' },
+          { ...desk('overdue', 1351, 890), title: 'Overdue', text: 'Who still owes what, with collection status at a glance.' },
         ],
       },
       features: ['Resident management', 'Maintenance requests', 'Parcel tracking', 'Shared-space booking', 'Announcements', 'Finance and accounting', 'Reporting', 'Admin tools', 'Audit logs'],
@@ -268,19 +272,21 @@ export const copy: Record<Lang, Copy> = {
       text: 'แพลตฟอร์มที่พัฒนาขึ้นเพื่อการใช้งานจริงของนิติบุคคลและลูกบ้าน เชื่อมงานแจ้งซ่อม รับพัสดุ จองพื้นที่ส่วนกลาง ประกาศ การเงิน บัญชี และรายงานไว้ในระบบเดียว',
       live: 'ใช้งานจริงที่ Punna Residence 5',
       screens: [
-        { ...screen('dashboard', 1105), tag: 'หน้าหลักลูกบ้าน', title: 'ทุกเรื่องของห้องอยู่ในหน้าเดียว', text: 'รวมประกาศ พัสดุ งานแจ้งซ่อม และบริการประจำวันไว้ในที่เดียว', callouts: [{ label: 'นับพัสดุและงานซ่อมให้อัตโนมัติ' }, { label: 'ประกาศล่าสุดจากนิติบุคคล' }] },
-        { ...screen('repairs'), tag: 'แจ้งซ่อม', title: 'แจ้งซ่อม แล้วติดตามได้จนเสร็จ', text: 'แจ้งเรื่อง ติดตามความคืบหน้า และตรวจสอบสถานะงานซ่อมได้ในที่เดียว ทุกงานมีเลขอ้างอิง', callouts: [{ label: 'รอรับงาน · กำลังดำเนินการ · เสร็จสิ้น' }, { label: 'VIS-REP-1 · ห้อง 715' }] },
-        { ...screen('parcels'), tag: 'พัสดุ', title: 'ไม่ต้องโทรถามนิติฯ อีกต่อไป', text: 'ลูกบ้านตรวจสอบพัสดุและรายละเอียดการรับได้เอง', callouts: [{ label: 'รอรับ · รับแล้ว' }, { label: 'ผู้ให้บริการและเลขพัสดุ' }] },
-        { ...screen('booking'), tag: 'พื้นที่ส่วนกลาง', title: 'จองพื้นที่ส่วนกลางเป็นรายชั่วโมง', text: 'ตรวจสอบช่วงเวลาว่าง จำนวนผู้ใช้ และความจุของพื้นที่ได้ชัดเจน นิติบุคคลอนุมัติได้ทันที', callouts: [{ label: 'รออนุมัติ · อนุมัติแล้ว · ยกเลิกแล้ว' }, { label: 'รอบละ 1 ชั่วโมง' }] },
-        { ...screen('finance'), tag: 'การเงิน', title: 'ค่าส่วนกลาง QR และหลักฐานการชำระในขั้นตอนเดียว', text: 'ดูข้อมูลชำระเงินและรายการทางการเงินในที่เดียว ทั้งฝั่งลูกบ้านและนิติบุคคล', callouts: [{ label: 'บัญชีรับเงินและ QR' }, { label: 'ยอดเงินและวันครบกำหนด' }] },
+        { ...screen('home'), tag: 'หน้าหลักลูกบ้าน', title: 'ทุกเรื่องของห้องอยู่ในหน้าเดียว', text: 'ยอดที่ต้องชำระ พัสดุ งานซ่อม และการจองครั้งถัดไป รวมไว้ในหน้าแรก พร้อมประกาศล่าสุดด้านล่าง', callouts: [{ label: 'ยอดที่ต้องชำระ · แจ้งชำระได้ทันที' }, { label: 'พัสดุ · งานซ่อม · การจอง' }] },
+        { ...screen('repairs'), tag: 'แจ้งซ่อม', title: 'แจ้งซ่อม แล้วติดตามได้จนเสร็จ', text: 'แจ้งเรื่อง ติดตามความคืบหน้า และตรวจสอบสถานะงานซ่อมได้ในที่เดียว', callouts: [{ label: 'รอรับงาน · กำลังดำเนินการ · เสร็จสิ้น' }, { label: 'แจ้งซ่อมใหม่ได้ในแตะเดียว' }] },
+        { ...screen('booking'), tag: 'พื้นที่ส่วนกลาง', title: 'จองห้องประชุมเป็นรายชั่วโมง', text: 'เลือกพื้นที่ จำนวนผู้ใช้ วันที่ และรอบเวลา 1 ชั่วโมง ระบบตรวจสอบความจุรวมให้ก่อนส่งคำขอถึงนิติบุคคล', callouts: [{ label: 'พื้นที่ · จำนวนคน · วันที่' }, { label: 'รอบละ 1 ชั่วโมง ตรวจความจุให้' }] },
+        { ...screen('finance'), tag: 'การเงิน', title: 'ชำระ ส่งสลิป แล้วเห็นสถานะจนยืนยัน', text: 'ทุกรายการบอกชัดว่าอยู่ขั้นไหน ส่งหลักฐานแล้ว นิติกำลังตรวจสอบ หรือชำระแล้วพร้อมใบรับ', callouts: [{ label: 'ส่งหลักฐาน → ตรวจสอบ → ชำระแล้ว' }, { label: 'ออกใบรับเมื่อชำระแล้ว' }] },
+        { ...screen('room'), tag: 'ห้องของฉัน', title: 'ข้อมูลห้องและสมาชิกในห้อง', text: 'ลูกบ้านดูเลขห้องและสมาชิกในห้องได้เอง และคัดลอกที่อยู่ได้ในแตะเดียว', callouts: [{ label: 'เลขห้อง · สมาชิก' }, { label: 'คัดลอกที่อยู่' }] },
       ],
-      note: 'ภาพจำลองหน้าจอการใช้งาน CondoMate สำหรับ Punna Residence 5 แสดงด้วยข้อมูลทดสอบ',
+      note: 'ภาพหน้าจอจริงจาก CondoMate ถ่ายเมื่อ 15 ต.ค. 2569 ข้อมูลส่วนตัวถูกเบลอไว้',
       console: {
         title: 'นิติบุคคลใช้ข้อมูลชุดเดียวกันผ่านหน้าจอคอมพิวเตอร์',
         text: 'ระบบเดียว ใช้งานลงตัวทั้งลูกบ้านและนิติบุคคล',
         tabs: [
-          { name: 'finance', title: 'งานการเงิน', text: 'จัดการรายรับและรายจ่ายของคอนโดในขั้นตอนเดียว' },
-          { name: 'report', title: 'รายงานการเงิน', text: 'ดูยอดประจำวัน รายการธุรกรรม และรายงานสำหรับพิมพ์' },
+          { ...desk('today'), title: 'งานวันนี้', text: 'เห็นงานรอดำเนินการ งานซ่อมรอรับ คำขอจองรออนุมัติ และพัสดุรอส่งมอบในหน้าเดียว' },
+          { ...desk('parcels'), title: 'พัสดุ', text: 'บันทึกพัสดุเข้าและติดตามสถานะการรับของทุกห้อง' },
+          { ...desk('reports', 1351, 890), title: 'รายงานการเงิน', text: 'รายรับรายจ่ายรายเดือน พร้อมรายงานประจำวันสำหรับพิมพ์' },
+          { ...desk('overdue', 1351, 890), title: 'ค้างชำระ', text: 'ดูว่าใครค้างชำระเท่าไร และสถานะการเรียกเก็บในภาพเดียว' },
         ],
       },
       features: ['จัดการข้อมูลลูกบ้าน', 'งานแจ้งซ่อม', 'ติดตามพัสดุ', 'จองพื้นที่ส่วนกลาง', 'ประกาศข่าวสาร', 'การเงินและบัญชี', 'รายงาน', 'เครื่องมือผู้ดูแล', 'บันทึกการใช้งาน'],

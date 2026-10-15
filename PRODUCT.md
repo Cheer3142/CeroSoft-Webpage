@@ -41,7 +41,7 @@ Visitors read on phones (LINE links) and office desktops, often in Thai. The fla
 
 ## Evidence on Hand
 
-- CondoMate screens: `public/portfolio/` (resident app ×10, access screen, management finance/report desktop + mobile). Raw captures in `web img/` and `mobile img/`.
+- CondoMate screens: `public/portfolio/v2/` (WebP): resident home, repairs, booking, finance status, my room; console today, parcels, financial reports, overdue. Exported from real CondoMate Online captures dated 2026-10-15 in `D:/Bussy/CondoMateV2/docs/manuals/UI/current/` (personal data pixelated). Older captures in `web img/` and `mobile img/`.
 - Brand profile: `documents/CeroSoft_Brand_Identity_Company_Profile.docx`.
 - No testimonials, client logos, metrics, team photos or pricing exist. Do not invent them.
 

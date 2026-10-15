@@ -306,10 +306,7 @@ function CondoMate({ lang }: { lang: Lang }) {
         {c.console.tabs.map((t, i) => (
           <div key={t.name} id={`panel-${t.name}`} role="tabpanel" aria-labelledby={`tab-${t.name}`} hidden={tab !== i} className="console-panel">
             <div className="console-shot">
-              <picture>
-                <source media="(max-width: 680px)" srcSet={`/portfolio/condomate-${t.name}-mobile.png`} />
-                <img src={`/portfolio/condomate-${t.name}-desktop.png`} alt={`CondoMate — ${t.title}`} width={1366} height={t.name === 'finance' ? 3440 : 2850} loading="lazy" decoding="async" />
-              </picture>
+              <img src={t.src} alt={`CondoMate — ${t.title}`} width={t.w} height={t.h} loading="lazy" decoding="async" />
             </div>
             <p className="console-caption"><b>{t.title}</b> {t.text}</p>
           </div>
