@@ -1,5 +1,5 @@
 import { SyntheticEvent, useEffect, useId, useMemo, useRef, useState } from 'react';
-import { ArrowRight, ArrowDownRight, Check, CircleAlert, Menu, Plus, X } from 'lucide-react';
+import { ArrowRight, ArrowUpRight, ArrowDownRight, Check, CircleAlert, Menu, Plus, X } from 'lucide-react';
 import { copy, navIds, type Lang } from './content';
 import { setupMotion } from './motion';
 import type { Focus } from './building';
@@ -431,6 +431,15 @@ function About({ lang }: { lang: Lang }) {
             <dl>{c.values.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
           </div>
         </div>
+        <a className="founder" href="https://cheer.cerosoft.net/" target="_blank" rel="noopener">
+          <img src={logo} alt="" width={40} height={40} />
+          <span className="founder-text">
+            <small>{c.founder.role}</small>
+            <b>{c.founder.name}</b>
+            <span>{c.founder.text}</span>
+          </span>
+          <span className="founder-cta">{c.founder.cta}<ArrowUpRight aria-hidden="true" /></span>
+        </a>
       </div>
     </section>
   );
@@ -547,6 +556,7 @@ function Footer({ lang }: { lang: Lang }) {
           <h3>{c.footer.contact}</h3>
           <a href="mailto:info@cerosoft.net">info@cerosoft.net</a>
           <a href="https://cerosoft.net">cerosoft.net</a>
+          <a href="https://cheer.cerosoft.net/" target="_blank" rel="noopener">{c.footer.founder}</a>
           <span>{c.footer.city}</span>
         </div>
       </div>
