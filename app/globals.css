@@ -265,6 +265,15 @@ input[type='range']::-moz-range-thumb { width: 18px; height: 18px; border-radius
 .panel-labels i { width: 6px; height: 6px; border-radius: 50%; background: var(--cyan); }
 @keyframes rise { from { opacity: 0; transform: translateY(8px); } }
 .panel-count { position: absolute; top: 22px; right: 46px; color: var(--on-dark-muted); }
+/* The small twin sits left of the phone and above the labels; only the place the current screen is about stays cyan. */
+.scroller-panel .panel-phone { justify-self: end; margin-right: 8%; z-index: 1; }
+.panel-twin { inset: 9% auto auto 1%; width: 48%; height: 66%; }
+.panel-place { position: absolute; top: 22px; left: 24px; font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--on-dark-muted); }
+.panel-twin .twin-marker span { display: none; }
+.panel-twin .twin-marker i { background: #6b727b; box-shadow: none; transition: background-color 0.4s var(--ease), box-shadow 0.4s var(--ease); }
+.panel-twin .twin-marker i::after { display: none; }
+.panel-twin .twin-marker.is-focus i { background: var(--cyan); box-shadow: 0 0 0 3px rgba(0, 173, 181, 0.25); }
+.panel-twin .twin-marker.is-focus i::after { display: block; }
 
 .console { margin-top: clamp(80px, 10vw, 140px); }
 .console-head { text-align: center; max-width: 760px; margin: 0 auto 28px; }
