@@ -39,6 +39,7 @@ function Navbar({ lang, onLang }: { lang: Lang; onLang: () => void }) {
             <span className="sr-only">{c.langLabel}</span>
           </button>
           <a className="chip cta" href="#contact">{c.talk}</a>
+          <a className="chip call-chip" href={PHONE_HREF} aria-label={`${c.footer.call} ${PHONE}`}><Phone aria-hidden="true" /></a>
           <button className="chip menu-toggle" type="button" onClick={() => setOpen(!open)} aria-expanded={open} aria-controls="mobile-menu" aria-label={c.menu}>
             {open ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
           </button>
@@ -59,16 +60,28 @@ const graphemes = (text: string) => {
   return seg ? Array.from(seg.segment(text), s => s.segment) : Array.from(text);
 };
 
-function Typed({ text, className, accent = false }: { text: string; className?: string; accent?: boolean }) {
+/** First character offset of the accented tail: the whole last word in Thai, the last letter elsewhere. */
+function accentStart(text: string, lang: Lang) {
+  if (lang === 'th' && typeof Intl !== 'undefined' && 'Segmenter' in Intl) {
+    const words = Array.from(new Intl.Segmenter('th', { granularity: 'word' }).segment(text)).filter(w => w.isWordLike);
+    const last = words[words.length - 1];
+    if (last) return last.index;
+  }
+  for (let i = text.length - 1; i >= 0; i--) if (/\p{L}/u.test(text[i])) return i;
+  return text.length;
+}
+
+function Typed({ text, className, accent = false, lang = 'en' }: { text: string; className?: string; accent?: boolean; lang?: Lang }) {
   const chars = graphemes(text);
-  let last = -1;
-  if (accent) for (let i = chars.length - 1; i >= 0; i--) if (/\p{L}/u.test(chars[i])) { last = i; break; }
+  const from = accent ? accentStart(text, lang) : Infinity;
+  const starts = chars.map((_, i) => chars.slice(0, i).join('').length);
   return (
     <span className={`typed ${className ?? ''}`}>
       <span className="sr-only">{text}</span>
-      {chars.map((ch, i) => (
-        <span key={i} aria-hidden="true" className={i === last ? 'ch last' : 'ch'}>{ch === ' ' ? ' ' : ch}</span>
-      ))}
+      {chars.map((ch, i) => {
+        const hot = starts[i] >= from && /\p{L}|\p{M}/u.test(ch);
+        return <span key={i} aria-hidden="true" className={hot ? 'ch last' : 'ch'}>{ch === ' ' ? '\u00a0' : ch}</span>;
+      })}
     </span>
   );
 }
@@ -107,7 +120,7 @@ function Hero({ lang }: { lang: Lang }) {
       <div className="hero-copy wrap">
         <h1 id="hero-title">
           <Typed text={c.line1} className="l1" />
-          <Typed text={c.line2} className="l2" accent />
+          <Typed text={c.line2} className="l2" accent lang={lang} />
         </h1>
         <p>{c.text}</p>
         <div className="hero-actions">
@@ -218,7 +231,7 @@ function Calculator({ lang }: { lang: Lang }) {
   return (
     <section className="calc light" aria-labelledby="calc-title">
       <div className="wrap">
-        <div className="center-head">
+        <div className="split-head">
           <h2 id="calc-title">{c.title}</h2>
           <p>{c.text}</p>
         </div>
@@ -299,6 +312,7 @@ function CondoMate({ lang }: { lang: Lang }) {
           <h2 id="condo-title">{c.title}</h2>
           <p className="live-line"><i className="live-dot" />{c.live}</p>
           <p>{c.text}</p>
+          <p className="bridge">{c.bridge}</p>
         </div>
       </div>
       <div className="wrap scroller">
@@ -307,6 +321,7 @@ function CondoMate({ lang }: { lang: Lang }) {
             <article key={s.src} ref={el => { blocks.current[i] = el; }} data-i={i} className={`step ${i === active ? 'is-active' : ''}`}>
               <h3>{s.title}</h3>
               <p>{s.text}</p>
+              <span className="demo-badge inline">{c.demo}</span>
               <figure className="inline-phone">
                 <img src={s.src} alt={`CondoMate — ${s.title}`} width={s.w} height={s.h} loading="lazy" decoding="async" />
               </figure>
@@ -316,7 +331,7 @@ function CondoMate({ lang }: { lang: Lang }) {
         </div>
         <div className="scroller-panel dark-card" aria-hidden="true">
           <div className="twin panel-twin" ref={twin} />
-          <p className="panel-place">Punna Residence 5</p>
+          <p className="panel-place">Punna Residence 5 <span className="demo-badge inline on-dark">{c.demo}</span></p>
           <div className="panel-phone">
             {c.screens.map((s, i) => (
               <img key={s.src} src={s.src} alt="" width={s.w} height={s.h} className={i === active ? 'is-active' : ''} loading={i === 0 ? 'eager' : 'lazy'} decoding="async" />
@@ -345,9 +360,12 @@ function CondoMate({ lang }: { lang: Lang }) {
         {c.console.tabs.map((t, i) => (
           <div key={t.name} id={`panel-${t.name}`} role="tabpanel" aria-labelledby={`tab-${t.name}`} hidden={tab !== i} className="console-panel">
             <div className="console-shot">
-              <img src={t.src} alt={`CondoMate — ${t.title}`} width={t.w} height={t.h} loading="lazy" decoding="async" />
+              <picture>
+                <source media="(max-width: 640px)" srcSet={t.mobile} />
+                <img src={t.src} alt={`CondoMate — ${t.title}`} width={t.w} height={t.h} loading="lazy" decoding="async" />
+              </picture>
             </div>
-            <p className="console-caption"><b>{t.title}</b> {t.text}</p>
+            <p className="console-caption"><span className="demo-badge inline">{c.demo}</span> <b>{t.title}</b> {t.text}</p>
           </div>
         ))}
         <ul className="feature-chips">
@@ -361,56 +379,33 @@ function CondoMate({ lang }: { lang: Lang }) {
 
 function Services({ lang }: { lang: Lang }) {
   const c = copy[lang].services;
-  const [tab, setTab] = useState(0);
-  const s = c.items[tab];
+  const pr = copy[lang].process;
   return (
     <section id="services" className="services dark" aria-labelledby="services-title">
       <div className="notch top" aria-hidden="true" />
       <div className="wrap">
-        <div className="center-head">
+        <div className="split-head on-dark">
           <h2 id="services-title">{c.title}</h2>
           <p>{c.text}</p>
         </div>
-        <div className="tabs center" role="tablist" aria-label={c.title}>
-          {c.items.map((it, i) => (
-            <button key={it.title} type="button" role="tab" id={`svc-${i}`} aria-selected={tab === i} aria-controls="svc-panel" tabIndex={tab === i ? 0 : -1} className="chip" onClick={() => setTab(i)}
-              onKeyDown={e => { if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { const n = (i + (e.key === 'ArrowRight' ? 1 : -1) + c.items.length) % c.items.length; setTab(n); document.getElementById(`svc-${n}`)?.focus(); } }}>
-              {it.title}
-            </button>
+        <ul className="svc-list">
+          {c.items.map(it => (
+            <li key={it.title}>
+              <h3>{it.title}</h3>
+              <p>{it.text}</p>
+            </li>
           ))}
-        </div>
-        <div id="svc-panel" role="tabpanel" aria-labelledby={`svc-${tab}`} className="svc-panel" key={tab}>
-          <div>
-            <h3>{s.title}</h3>
-            <p>{s.text}</p>
-          </div>
-          <ul>{s.items.map(x => <li key={x}><i className="live-dot static" />{x}</li>)}</ul>
+        </ul>
+        <div id="process" className="process-strip" aria-labelledby="process-title">
+          <h3 id="process-title">{pr.title}</h3>
+          <ol>
+            {pr.steps.map(st => (
+              <li key={st.n}><span className="stage-no">{st.n}</span><b>{st.title}</b><span className="stage-text">{st.text}</span></li>
+            ))}
+          </ol>
         </div>
       </div>
       <div className="notch" aria-hidden="true" />
-    </section>
-  );
-}
-
-function Process({ lang }: { lang: Lang }) {
-  const c = copy[lang].process;
-  return (
-    <section id="process" className="process light" aria-labelledby="process-title">
-      <div className="wrap">
-        <div className="center-head">
-          <h2 id="process-title">{c.title}</h2>
-          <p>{c.text}</p>
-        </div>
-        <ol className="stages">
-          {c.steps.map(s => (
-            <li key={s.n}>
-              <span className="stage-no">{s.n}</span>
-              <h3>{s.title}</h3>
-              <p>{s.text}</p>
-            </li>
-          ))}
-        </ol>
-      </div>
     </section>
   );
 }
@@ -424,19 +419,13 @@ function About({ lang }: { lang: Lang }) {
           <h2 id="about-title">{c.title}</h2>
           <p>{c.text}</p>
         </div>
-        <div className="about-grid">
-          <div className="about-card"><h3>{c.mission[0]}</h3><p>{c.mission[1]}</p></div>
-          <div className="about-card"><h3>{c.vision[0]}</h3><p>{c.vision[1]}</p></div>
-          <div className="about-card values">
-            <h3>{c.valuesTitle}</h3>
-            <dl>{c.values.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
-          </div>
-        </div>
+        <p className="values-line">{c.valuesLine}</p>
         <div className="founder" aria-labelledby="founder-title">
           <img className="founder-photo" src="/founder/portrait.webp" alt={c.founder.name} width={600} height={724} loading="lazy" decoding="async" />
           <div className="founder-body">
             <h3 id="founder-title">{c.founder.title}</h3>
             <p className="founder-name"><b>{c.founder.name}</b><span>{c.founder.role} · CeroSoft</span></p>
+            <p className="founder-available"><i className="live-dot" />{c.founder.available}</p>
             <p className="founder-text">{c.founder.text}</p>
             <ul className="founder-exp">
               {c.founder.experience.map(x => (
@@ -474,7 +463,7 @@ function Faq({ lang }: { lang: Lang }) {
 }
 
 type Status = { kind: 'success' | 'error' | 'failed'; message: string } | null;
-type Field = 'name' | 'email' | 'phone' | 'interest' | 'message';
+type Field = 'name' | 'contact' | 'email' | 'phone' | 'interest' | 'message';
 type Errors = Partial<Record<Field, string>>;
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -492,7 +481,7 @@ function Contact({ lang }: { lang: Lang }) {
     const out: Errors = {};
     if (!v('name')) out.name = c.errors.name;
     const email = v('email'), phone = v('phone');
-    if (!email && !phone) { out.email = c.errors.contact; out.phone = c.errors.contact; }
+    if (!email && !phone) out.contact = c.errors.contact;
     if (email && !EMAIL_RE.test(email)) out.email = c.errors.email;
     if (phone && digits(phone) < 9) out.phone = c.errors.phone;
     if (!v('interest')) out.interest = c.errors.interest;
@@ -503,11 +492,12 @@ function Contact({ lang }: { lang: Lang }) {
   // Clear a field's error as soon as the visitor edits it; email and phone clear together.
   const onInput = (e: SyntheticEvent<HTMLFormElement>) => {
     const name = (e.target as HTMLInputElement).name as Field;
-    if (!name || !(name in errors)) return;
+    const contactField = name === 'email' || name === 'phone';
+    if (!name || (!(name in errors) && !(contactField && errors.contact))) return;
     setErrors(prev => {
       const next = { ...prev };
       delete next[name];
-      if ((name === 'email' || name === 'phone') && prev.email === c.errors.contact) { delete next.email; delete next.phone; }
+      if (contactField) delete next.contact;
       return next;
     });
   };
@@ -518,10 +508,10 @@ function Contact({ lang }: { lang: Lang }) {
     const fd = new FormData(form);
     const found = validate(fd);
     setErrors(found);
-    const firstBad = (['name', 'email', 'phone', 'interest', 'message'] as Field[]).find(k => found[k]);
+    const firstBad = (['name', 'contact', 'email', 'phone', 'interest', 'message'] as Field[]).find(k => found[k]);
     if (firstBad) {
       setStatus({ kind: 'error', message: c.invalid });
-      form.querySelector<HTMLElement>(`[name="${firstBad}"]`)?.focus();
+      form.querySelector<HTMLElement>(`[name="${firstBad === 'contact' ? 'email' : firstBad}"]`)?.focus();
       return;
     }
     setSending(true);
@@ -540,7 +530,11 @@ function Contact({ lang }: { lang: Lang }) {
     }
   };
 
-  const err = (k: Field) => errors[k] ? { 'aria-invalid': true as const, 'aria-describedby': `${id}-${k}-err` } : {};
+  const err = (k: Field) => {
+    if (errors[k]) return { 'aria-invalid': true as const, 'aria-describedby': `${id}-${k}-err` };
+    if ((k === 'email' || k === 'phone') && errors.contact) return { 'aria-invalid': true as const, 'aria-describedby': `${id}-hint` };
+    return {};
+  };
   const errText = (k: Field) => errors[k] ? <small id={`${id}-${k}-err`} className="field-error">{errors[k]}</small> : null;
   return (
     <section id="contact" className="contact light" aria-labelledby="contact-title">
@@ -560,7 +554,7 @@ function Contact({ lang }: { lang: Lang }) {
           <div className="fields">
             <label htmlFor={`${id}-name`}><span>{c.fields[0]} *</span><input id={`${id}-name`} name="name" autoComplete="name" maxLength={100} {...err('name')} />{errText('name')}</label>
             <label htmlFor={`${id}-company`}><span>{c.fields[1]} <em>({c.optional})</em></span><input id={`${id}-company`} name="company" autoComplete="organization" maxLength={150} /></label>
-            <p className="wide contact-hint" id={`${id}-hint`}>{c.contactHint}</p>
+            <p className={`wide contact-hint ${errors.contact ? 'is-error' : ''}`} id={`${id}-hint`}>{errors.contact ?? c.contactHint}</p>
             <label htmlFor={`${id}-email`}><span>{c.fields[2]}</span><input id={`${id}-email`} type="email" inputMode="email" name="email" autoComplete="email" maxLength={200} {...err('email')} />{errText('email')}</label>
             <label htmlFor={`${id}-phone`}><span>{c.fields[3]}</span><input id={`${id}-phone`} type="tel" inputMode="tel" name="phone" autoComplete="tel" maxLength={30} {...err('phone')} />{errText('phone')}</label>
             <label className="wide" htmlFor={`${id}-interest`}><span>{c.fields[4]} *</span>
@@ -601,10 +595,6 @@ function Footer({ lang }: { lang: Lang }) {
           <h3>{c.footer.menu}</h3>
           {navIds.map(id => <a key={id} href={`#${id}`}>{c.nav[id]}</a>)}
         </nav>
-        <div>
-          <h3>{c.footer.services}</h3>
-          {c.services.items.map(s => <span key={s.title}>{s.title}</span>)}
-        </div>
         <div>
           <h3>{c.footer.contact}</h3>
           <a href={PHONE_HREF}>{c.footer.call} {PHONE}</a>
@@ -651,7 +641,6 @@ export default function CeroSoftSite() {
         <Calculator lang={lang} />
         <CondoMate lang={lang} />
         <Services lang={lang} />
-        <Process lang={lang} />
         <About lang={lang} />
         <Faq lang={lang} />
         <Contact lang={lang} />

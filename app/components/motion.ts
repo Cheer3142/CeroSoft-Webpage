@@ -39,7 +39,12 @@ export function setupMotion(root: HTMLElement) {
 
   // The nav capsule turns solid once the hero has scrolled away.
   const nav = root.querySelector<HTMLElement>('.nav');
-  const st = ScrollTrigger.create({ trigger: '.hero', start: 'bottom top+=96', end: 'max', onToggle: self => nav?.classList.toggle('is-solid', self.isActive) });
+  const st = ScrollTrigger.create({
+    trigger: '.hero', start: 'bottom top+=96',
+    onEnter: () => nav?.classList.add('is-solid'),
+    onLeaveBack: () => nav?.classList.remove('is-solid'),
+  });
+  if (st.progress > 0 || window.scrollY > st.start) nav?.classList.add('is-solid');
   cleanups.push(() => st.kill());
 
   const ctx = gsap.context(() => {
