@@ -301,7 +301,7 @@ input[type='range']::-moz-range-thumb { width: 18px; height: 18px; border-radius
 
 /* ───── About ───── */
 
-.about { padding-top: 0; }
+.about { padding-top: calc(var(--section) + 10px); }
 .founder {
   display: grid; grid-template-columns: minmax(180px, 260px) 1fr; gap: clamp(24px, 4vw, 56px); align-items: center;
   margin-top: 16px; padding: clamp(20px, 3vw, 32px); border-radius: var(--radius);
@@ -505,7 +505,7 @@ input[type='range']::-moz-range-thumb { width: 18px; height: 18px; border-radius
 .process-strip .stage-text { color: var(--on-dark-muted); font-size: 0.9rem; }
 
 /* About: the values fit on one line. */
-.values-line { margin: 0 auto 8px; text-align: center; font-weight: 600; color: var(--graphite); letter-spacing: 0.01em; }
+.values-line { margin: 0 auto clamp(48px, 6vw, 72px); text-align: center; font-weight: 600; color: var(--graphite); letter-spacing: 0.01em; }
 
 /* Demo label: once per area. */
 .step:not(:first-child) > .demo-badge.inline { display: none !important; }
