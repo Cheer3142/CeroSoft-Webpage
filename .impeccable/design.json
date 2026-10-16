@@ -1,6 +1,6 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-15T10:58:42Z",
+  "generatedAt": "2026-10-16T09:31:30Z",
   "title": "Design System: CeroSoft",
   "extensions": {
     "colorMeta": {
@@ -274,6 +274,21 @@
           "#eef0f1"
         ]
       },
+      "on-dark-soft": {
+        "role": "neutral",
+        "displayName": "On-Dark Soft",
+        "canonical": "#c9ced3",
+        "tonalRamp": [
+          "#1b1f24",
+          "#323840",
+          "#4b525c",
+          "#666e79",
+          "#878f99",
+          "#a9afb6",
+          "#c9ced3",
+          "#eceef0"
+        ]
+      },
       "on-dark-muted": {
         "role": "neutral",
         "displayName": "On-Dark Muted",
@@ -323,6 +338,96 @@
           "#ff9e9e",
           "#ffe0e0"
         ]
+      },
+      "demo-amber": {
+        "role": "tertiary",
+        "displayName": "Demo Amber",
+        "canonical": "#fff3d6",
+        "tonalRamp": [
+          "#2e2000",
+          "#4f3800",
+          "#6b4a00",
+          "#9a6c06",
+          "#c99a2e",
+          "#f0d58c",
+          "#fbe6b4",
+          "#fff3d6"
+        ]
+      },
+      "demo-amber-ink": {
+        "role": "tertiary",
+        "displayName": "Demo Amber Ink",
+        "canonical": "#6b4a00",
+        "tonalRamp": [
+          "#2e2000",
+          "#4f3800",
+          "#6b4a00",
+          "#9a6c06",
+          "#c99a2e",
+          "#f0d58c",
+          "#fbe6b4",
+          "#fff3d6"
+        ]
+      },
+      "demo-amber-line": {
+        "role": "tertiary",
+        "displayName": "Demo Amber Line",
+        "canonical": "#f0d58c",
+        "tonalRamp": [
+          "#2e2000",
+          "#4f3800",
+          "#6b4a00",
+          "#9a6c06",
+          "#c99a2e",
+          "#f0d58c",
+          "#fbe6b4",
+          "#fff3d6"
+        ]
+      },
+      "demo-amber-dark": {
+        "role": "tertiary",
+        "displayName": "Demo Amber on Dark",
+        "canonical": "rgba(255, 214, 120, 0.14)",
+        "tonalRamp": [
+          "#2e2000",
+          "#4f3800",
+          "#6b4a00",
+          "#9a6c06",
+          "#c99a2e",
+          "#f0d58c",
+          "#fbe6b4",
+          "#fff3d6"
+        ]
+      },
+      "demo-amber-ink-dark": {
+        "role": "tertiary",
+        "displayName": "Demo Amber Ink on Dark",
+        "canonical": "#ffd98a",
+        "tonalRamp": [
+          "#2e2000",
+          "#4f3800",
+          "#6b4a00",
+          "#9a6c06",
+          "#c99a2e",
+          "#f0d58c",
+          "#fbe6b4",
+          "#fff3d6"
+        ]
+      },
+      "demo-amber-line-dark": {
+        "role": "tertiary",
+        "displayName": "Demo Amber Line on Dark",
+        "canonical": "rgba(255, 214, 120, 0.35)",
+        "tonalRamp": [
+          "#2e2000",
+          "#4f3800",
+          "#6b4a00",
+          "#9a6c06",
+          "#c99a2e",
+          "#f0d58c",
+          "#fbe6b4",
+          "#fff3d6"
+        ]
       }
     },
     "typographyMeta": {
@@ -356,7 +461,7 @@
       },
       "title-lg": {
         "displayName": "Title Lg",
-        "purpose": "CondoMate step, service and console heads."
+        "purpose": "CondoMate step heads; family for console, founder and process sub-heads."
       },
       "statement": {
         "displayName": "Statement",
@@ -364,7 +469,11 @@
       },
       "title": {
         "displayName": "Title",
-        "purpose": "Card and stage headings."
+        "purpose": "Card headings."
+      },
+      "title-sm": {
+        "displayName": "Title Small",
+        "purpose": "Service item titles, founder name, call block title and phone number, footer tagline."
       },
       "body-lead": {
         "displayName": "Body Lead",
@@ -378,13 +487,25 @@
         "displayName": "Body Th",
         "purpose": "Default Thai copy."
       },
+      "body-sm": {
+        "displayName": "Body Small",
+        "purpose": "Form field labels, the contact hint, process stage text."
+      },
+      "nav-link": {
+        "displayName": "Nav Link",
+        "purpose": "Capsule navigation links."
+      },
       "control": {
         "displayName": "Control",
         "purpose": "Buttons."
       },
       "caption": {
         "displayName": "Caption",
-        "purpose": "Field labels, data notes, captions."
+        "purpose": "Data notes, captions, copyright."
+      },
+      "badge": {
+        "displayName": "Badge",
+        "purpose": "The amber Demo data label; sans, no case transform."
       },
       "label": {
         "displayName": "Label",
@@ -483,6 +604,10 @@
         "value": "700px"
       },
       {
+        "name": "founder-stack",
+        "value": "860px"
+      },
+      {
         "name": "single-column",
         "value": "1000px"
       },
@@ -518,12 +643,28 @@
       "css": ".ds-light-b{background:#f4f5f5;padding:24px}.ds-btn-outline{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 20px;border-radius:8px;border:1px solid #222831;color:#222831;font:600 0.95rem/1.2 'Inter Variable','Noto Sans Thai',system-ui,sans-serif;text-decoration:none;transition:background-color .25s cubic-bezier(0.16,1,0.3,1),color .25s cubic-bezier(0.16,1,0.3,1)}.ds-btn-outline svg{width:18px;height:18px}.ds-btn-outline:hover{background:#222831;color:#fff}.ds-btn-outline:focus-visible{outline:2px solid #222831;outline-offset:3px}"
     },
     {
+      "name": "Call Button",
+      "kind": "button",
+      "refersTo": "button-call",
+      "description": "Tap-to-call outline button in the contact column's call block.",
+      "html": "<div class=\"ds-call\"><p>Rather talk it through?</p><a class=\"ds-btn-call\" href=\"tel:\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z\"/></svg>0X-XXX-XXXX</a></div>",
+      "css": ".ds-call{background:#f4f5f5;padding:28px 24px 24px;border-top:1px solid #c9cdd1;font-family:'Inter Variable','Noto Sans Thai',system-ui,sans-serif;color:#222831}.ds-call p{margin:0;font-size:1.15rem;font-weight:600}.ds-btn-call{display:inline-flex;align-items:center;gap:10px;margin-top:14px;min-height:52px;padding:10px 20px;border-radius:8px;border:1px solid #222831;color:#222831;font-size:1.15rem;font-weight:600;font-variant-numeric:tabular-nums;letter-spacing:.01em;text-decoration:none;transition:background-color .25s cubic-bezier(0.16,1,0.3,1),color .25s cubic-bezier(0.16,1,0.3,1)}.ds-btn-call svg{width:20px;height:20px}.ds-btn-call:hover{background:#222831;color:#fff}.ds-btn-call:focus-visible{outline:2px solid #222831;outline-offset:3px}"
+    },
+    {
       "name": "Floating Capsule Nav",
       "kind": "nav",
       "refersTo": "nav-capsule",
-      "description": "Translucent blurred capsule with brand, links, language chip and cyan talk cell.",
-      "html": "<div class=\"ds-nav-stage\"><div class=\"ds-capsule\"><b class=\"ds-brand\">Cero<span>Soft</span></b><nav class=\"ds-links\"><a href=\"#\">CondoMate</a><a href=\"#\">Services</a><a href=\"#\">Process</a></nav><button class=\"ds-chip ds-chip-lang\" type=\"button\">TH</button><a class=\"ds-chip ds-chip-cta\" href=\"#\">Talk to us</a></div></div>",
-      "css": ".ds-nav-stage{background:radial-gradient(120% 90% at 70% 40%,#2e3641,#222831 55%,#1d2229);padding:14px}.ds-capsule{display:flex;align-items:center;gap:16px;height:52px;padding:0 8px 0 14px;border-radius:12px;color:#eceef0;background:rgba(58,64,72,.5);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(16px) saturate(130%);-webkit-backdrop-filter:blur(16px) saturate(130%)}.ds-brand{margin-right:auto;font:650 1.05rem 'Inter Variable','Noto Sans Thai',system-ui,sans-serif;letter-spacing:-.02em}.ds-brand span{font-weight:400;opacity:.75}.ds-links{display:flex;gap:2px}.ds-links a{padding:6px 10px;border-radius:6px;font:400 .875rem 'Inter Variable','Noto Sans Thai',system-ui,sans-serif;color:#d9dde1;text-decoration:none;transition:background-color .2s,color .2s}.ds-links a:hover{background:rgba(255,255,255,.08);color:#fff}.ds-chip{display:inline-flex;align-items:center;height:32px;padding:0 12px;border-radius:6px;border:0;font:400 .72rem 'Geist Mono',ui-monospace,monospace;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:background-color .2s}.ds-chip-lang{background:rgba(255,255,255,.9);color:#222831}.ds-chip-lang:hover{background:#fff}.ds-chip-cta{background:#00adb5;color:#222831;font-weight:600}.ds-chip-cta:hover{background:#22c4cc}.ds-chip:focus-visible,.ds-links a:focus-visible{outline:2px solid #00adb5;outline-offset:3px}"
+      "description": "Translucent blurred capsule with brand, links, language chip and cyan talk cell; solid below the hero; on phones 56px tall with 44px chips and a cyan phone chip.",
+      "html": "<div class=\"ds-nav-stage\"><div class=\"ds-capsule\"><b class=\"ds-brand\">Cero<span>Soft</span></b><nav class=\"ds-links\"><a href=\"#\">CondoMate</a><a href=\"#\">Services</a><a href=\"#\">About</a></nav><button class=\"ds-chip ds-chip-lang\" type=\"button\">TH</button><a class=\"ds-chip ds-chip-cta\" href=\"#\">Talk to us</a></div><div class=\"ds-capsule ds-capsule-sm\"><b class=\"ds-brand\">Cero<span>Soft</span></b><button class=\"ds-chip ds-chip-lang ds-touch\" type=\"button\">TH</button><a class=\"ds-chip ds-chip-call ds-touch\" href=\"tel:\" aria-label=\"Call\"><svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z\"/></svg></a></div></div>",
+      "css": ".ds-nav-stage{display:grid;gap:12px;background:radial-gradient(120% 90% at 70% 40%,#2e3641,#222831 55%,#1d2229);padding:14px}.ds-capsule{display:flex;align-items:center;gap:16px;height:52px;padding:0 8px 0 14px;border-radius:12px;color:#eceef0;background:rgba(58,64,72,.5);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(16px) saturate(130%);-webkit-backdrop-filter:blur(16px) saturate(130%)}.ds-brand{margin-right:auto;font:650 1.05rem 'Inter Variable','Noto Sans Thai',system-ui,sans-serif;letter-spacing:-.02em}.ds-brand span{font-weight:400;opacity:.75}.ds-links{display:flex;gap:2px}.ds-links a{padding:6px 10px;border-radius:6px;font:400 .875rem 'Inter Variable','Noto Sans Thai',system-ui,sans-serif;color:#c9ced3;text-decoration:none;transition:background-color .2s,color .2s}.ds-links a:hover{background:rgba(255,255,255,.08);color:#fff}.ds-chip{display:inline-flex;align-items:center;height:32px;padding:0 12px;border-radius:6px;border:0;font:400 .72rem 'Geist Mono',ui-monospace,monospace;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;cursor:pointer;transition:background-color .2s}.ds-chip-lang{background:rgba(255,255,255,.9);color:#222831}.ds-chip-lang:hover{background:#fff}.ds-chip-cta{background:#00adb5;color:#222831;font-weight:600}.ds-chip-cta:hover{background:#22c4cc}.ds-chip:focus-visible,.ds-links a:focus-visible{outline:2px solid #00adb5;outline-offset:3px}.ds-capsule-sm{height:56px;max-width:380px;background:rgba(28,33,40,.92)}.ds-touch{height:44px;min-width:44px}.ds-chip-call{width:44px;padding:0;justify-content:center;background:#00adb5;color:#222831}.ds-chip-call svg{width:18px;height:18px}.ds-chip-call:hover{background:#22c4cc}"
+    },
+    {
+      "name": "Demo Data Label",
+      "kind": "chip",
+      "refersTo": "demo-label",
+      "description": "Amber pill set beside a product screenshot, never over it; once per area.",
+      "html": "<div class=\"ds-demo\"><p class=\"ds-cap\"><span class=\"ds-demo-l\">Demo data</span> <b>Finance</b> Income, arrears and receipts.</p><p class=\"ds-place\">PUNNA RESIDENCE 5 <span class=\"ds-demo-l ds-demo-d\">Demo data</span></p></div>",
+      "css": ".ds-demo{display:grid;font-family:'Inter Variable','Noto Sans Thai',system-ui,sans-serif}.ds-cap{margin:0;padding:20px;background:#f4f5f5;color:#5b616b;text-align:center}.ds-cap b{color:#222831;font-weight:600;margin:0 6px}.ds-place{margin:0;padding:20px;background:#222831;color:#a9afb6;font:400 .72rem 'Geist Mono',ui-monospace,monospace;letter-spacing:.06em}.ds-demo-l{display:inline-flex;align-items:center;vertical-align:middle;padding:3px 9px;border-radius:999px;background:#fff3d6;color:#6b4a00;border:1px solid #f0d58c;font:600 .75rem 'Inter Variable','Noto Sans Thai',system-ui,sans-serif;letter-spacing:.01em;text-transform:none;white-space:nowrap}.ds-demo-d{margin-left:8px;background:rgba(255,214,120,.14);color:#ffd98a;border-color:rgba(255,214,120,.35)}"
     },
     {
       "name": "Tabs (light)",
@@ -550,12 +691,28 @@
       "css": ".ds-dcard{padding:clamp(28px,3.5vw,44px);background:#222831;color:#eceef0;border-radius:14px;clip-path:polygon(0 0,calc(100% - 26px) 0,100% 26px,100% 100%,0 100%);font-family:'Inter Variable','Noto Sans Thai',system-ui,sans-serif}.ds-dt{margin:0;color:#a9afb6;font-size:1.05rem}.ds-big{margin:18px 0 28px;color:#a9afb6}.ds-big b{display:block;font-size:clamp(2.4rem,4.6vw,3.8rem);font-weight:400;letter-spacing:-.035em;line-height:1.1;color:#fff;font-variant-numeric:tabular-nums}.ds-dbtn{display:inline-flex;align-items:center;min-height:48px;padding:0 20px;border-radius:8px;background:#00adb5;color:#222831;font-weight:600;text-decoration:none;transition:background-color .25s cubic-bezier(0.16,1,0.3,1)}.ds-dbtn:hover{background:#22c4cc}.ds-dbtn:focus-visible{outline:2px solid #00adb5;outline-offset:3px}"
     },
     {
-      "name": "Underline Field",
+      "name": "Founder Card",
+      "kind": "card",
+      "refersTo": "card-dark-notched",
+      "description": "Dark notched card: portrait, name, live availability pill, aligned experience table.",
+      "html": "<div class=\"ds-light\"><div class=\"ds-founder\"><div class=\"ds-photo\"></div><div><h3>Built by an engineer who stays after handover</h3><p class=\"ds-name\"><b>Founder Name</b><span>Founder · CeroSoft</span></p><p class=\"ds-avail\"><i></i>Taking on new projects</p><ul class=\"ds-exp\"><li><b>CeroSoft</b><span>Founder</span><small>2024 – now</small></li><li><b>Previous org</b><span>Software engineer</span><small>2020 – 2024</small></li></ul></div></div></div>",
+      "css": ".ds-light{background:#f4f5f5;padding:24px}.ds-founder{display:grid;grid-template-columns:minmax(120px,180px) 1fr;gap:32px;align-items:center;padding:28px;border-radius:14px;background:#222831;color:#eceef0;clip-path:polygon(0 0,calc(100% - 26px) 0,100% 26px,100% 100%,0 100%);font-family:'Inter Variable','Noto Sans Thai',system-ui,sans-serif}.ds-photo{aspect-ratio:600/724;border-radius:10px;background:#393e46}.ds-founder h3{margin:0;font-size:clamp(1.5rem,2.4vw,2.1rem);font-weight:400;letter-spacing:-.03em;line-height:1.2}.ds-name{display:grid;gap:2px;margin:16px 0 0}.ds-name b{font-size:1.15rem;font-weight:600}.ds-name span{color:#a9afb6;font-size:.95rem}.ds-avail{display:inline-flex;align-items:center;gap:10px;margin:14px 0 0;padding:6px 12px;border-radius:999px;background:rgba(0,173,181,.12);font-size:.92rem}.ds-avail i{position:relative;width:8px;height:8px;border-radius:50%;background:#00adb5}.ds-avail i::after{content:'';position:absolute;inset:-5px;border-radius:50%;border:1px solid #00adb5;animation:ds-pulse2 2.2s cubic-bezier(0.16,1,0.3,1) infinite}@keyframes ds-pulse2{from{transform:scale(.4);opacity:.9}to{transform:scale(1.7);opacity:0}}@media (prefers-reduced-motion:reduce){.ds-avail i::after{animation:none}}.ds-exp{list-style:none;margin:20px 0 0;padding:0;border-top:1px solid rgba(236,238,240,.14)}.ds-exp li{display:grid;grid-template-columns:1.45fr 1fr 7rem;gap:4px 20px;align-items:baseline;padding:12px 0;border-bottom:1px solid rgba(236,238,240,.14)}.ds-exp b{font-weight:500}.ds-exp span{color:#c9ced3;font-size:.95rem}.ds-exp small{justify-self:end;font:400 .75rem 'Geist Mono',ui-monospace,monospace;color:#a9afb6;font-variant-numeric:tabular-nums;white-space:nowrap}"
+    },
+    {
+      "name": "Filled Field",
       "kind": "input",
-      "refersTo": "input-line",
-      "description": "Contact field on the dark card; the rule turns cyan on focus.",
-      "html": "<div class=\"ds-dark-f\"><label class=\"ds-field\"><span>Name *</span><input /></label></div>",
-      "css": ".ds-dark-f{background:#222831;padding:24px;font-family:'Inter Variable','Noto Sans Thai',system-ui,sans-serif}.ds-field{display:flex;flex-direction:column;gap:6px}.ds-field span{font-size:.82rem;color:#a9afb6}.ds-field input{padding:8px 0;border:0;border-bottom:1px solid rgba(236,238,240,.28);border-radius:0;background:transparent;color:#fff;outline:none;caret-color:#00adb5;font:inherit;transition:border-color .2s}.ds-field input:focus{border-bottom-color:#00adb5}.ds-field input:user-invalid{border-bottom-color:#ff9d9d}"
+      "refersTo": "input-filled",
+      "description": "Contact field on the dark card: filled, 8px radius, 44px tall; cyan border on focus; its own error message under the field.",
+      "html": "<div class=\"ds-dark-f\"><label class=\"ds-field\"><span>Name *</span><input /></label><label class=\"ds-field\"><span>Email</span><input aria-invalid=\"true\" value=\"name@\" /><small>Check the email address, e.g. name@company.com</small></label></div>",
+      "css": ".ds-dark-f{display:grid;gap:20px;background:#222831;padding:24px;font-family:'Inter Variable','Noto Sans Thai',system-ui,sans-serif}.ds-field{display:flex;flex-direction:column;gap:6px}.ds-field span{font-size:.9rem;color:#a9afb6}.ds-field input{min-height:44px;padding:10px 12px;border-radius:8px;background:rgba(255,255,255,.06);border:1px solid rgba(236,238,240,.16);border-bottom-color:rgba(236,238,240,.32);color:#fff;outline:none;caret-color:#00adb5;font:inherit;transition:border-color .2s,background-color .2s}.ds-field input:focus{border-color:#00adb5;background:rgba(255,255,255,.09)}.ds-field input[aria-invalid=true]{border-color:#ff9d9d}.ds-field small{font-size:.85rem;line-height:1.45;color:#ff9d9d}"
+    },
+    {
+      "name": "Services List",
+      "kind": "custom",
+      "refersTo": "",
+      "description": "Title-plus-one-line services under a hairline (five across on desktop), with the process strip in the same dark section.",
+      "html": "<div class=\"ds-svc\"><ul class=\"ds-svc-l\"><li><h3>Custom software</h3><p>Built around how you already work.</p></li><li><h3>Integration</h3><p>Connect the tools you already use.</p></li><li><h3>Data</h3><p>Reports people actually read.</p></li></ul><div class=\"ds-proc\"><h3>How we work</h3><ol><li><span>01</span><b>Listen</b><em>Walk the real job with you.</em></li><li><span>02</span><b>Build</b><em>Ship one small piece first.</em></li><li><span>03</span><b>Stay</b><em>Support after handover.</em></li></ol></div></div>",
+      "css": ".ds-svc{background:#222831;color:#eceef0;padding:28px;font-family:'Inter Variable','Noto Sans Thai',system-ui,sans-serif}.ds-svc-l{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 24px;border-top:1px solid rgba(236,238,240,.14)}.ds-svc-l li{padding-top:22px}.ds-svc-l h3{margin:0;font-size:1.15rem;font-weight:500;letter-spacing:-.015em}.ds-svc-l p{margin:8px 0 0;font-size:.95rem;color:#a9afb6}.ds-proc{margin-top:48px;padding-top:28px;border-top:1px solid rgba(236,238,240,.14)}.ds-proc h3{margin:0;font-size:clamp(1.3rem,2vw,1.6rem);font-weight:500}.ds-proc ol{list-style:none;margin:20px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px 24px}.ds-proc li{display:grid;gap:4px}.ds-proc span{font:400 .72rem 'Geist Mono',ui-monospace,monospace;letter-spacing:.06em;color:#a9afb6}.ds-proc b{font-weight:600;font-size:1.05rem}.ds-proc em{font-style:normal;font-size:.9rem;color:#a9afb6}"
     },
     {
       "name": "Live Marker",
@@ -576,13 +733,15 @@
   ],
   "narrative": {
     "northStar": "The Live Twin",
-    "overview": "CeroSoft presents itself the way an operations product would, not the way a studio would: as a cinematic B2B product site in the grammar of Terminal Industries (user-pinned reference), translated into CeroSoft's own brand. The real operation becomes a digital twin. The hero is a full-bleed charcoal stage where a three.js wireframe of Punna Residence 5 draws itself from the ground up, slowly orbits, and lights cyan live markers at the rooms where CondoMate events happen. Everything that follows is product proof, not adjectives.\n\nThe page breathes in long alternating takes: charcoal cinematic grounds for the twin, services and the closing, and light fog-grey (#F4F5F5) sections for statements, calculators and the CondoMate walkthrough. The two grounds meet at a trapezoid notch, a shallow tab of the light ground that bites into the dark edge, so a section change reads as a cut rather than a stripe. Statements are set big, light and tight in Inter 400; Thai carries the same scale in Noto Sans Thai 500 so vowels and tone marks stay clear. Geist Mono appears only as small uppercase Latin data labels, the instrument readout of the world.\n\nOne accent does all the signalling. Cero Cyan marks the primary action, every live event, and the last letter of the typed hero headline. Nowhere else. Density is low; the light sections are mostly air with a few 14px cards; the dark panels carry one clipped corner as their signature. The previous drafting-sheet world (\"The Drawing Set\") and the generic dark-SaaS-cards template are both rejected.",
+    "overview": "CeroSoft presents itself the way an operations product would, not the way a studio would: as a cinematic B2B product site in the grammar of Terminal Industries (user-pinned reference), translated into CeroSoft's own brand. The real operation becomes a digital twin. The hero is a full-bleed charcoal stage where a three.js wireframe of Punna Residence 5 draws itself from the ground up, slowly orbits, and lights cyan live markers at the rooms where CondoMate events happen. Everything that follows is product proof, not adjectives, and every product screen is honestly labelled as demo data.\n\nThe page breathes in long alternating takes: charcoal cinematic grounds for the twin, services with the process, and the closing; light fog-grey (#F4F5F5) sections for statements, calculators, the CondoMate walkthrough, the founder, FAQ and contact. The two grounds meet at a trapezoid notch, a shallow tab of the light ground that bites into the dark edge, so a section change reads as a cut rather than a stripe. Section heads alternate between centred and split (heading left, lead right) so the page does not open every chapter the same way. Statements are set big, light and tight in Inter 400; Thai carries the same scale in Noto Sans Thai 500 so vowels and tone marks stay clear. Geist Mono appears only as small uppercase Latin data labels, the instrument readout of the world.\n\nOne accent does all the signalling. Cero Cyan marks the primary action, every live event, and the last letter of the typed hero headline. Nowhere else. A muted amber exists for one job only: the \"Demo data\" label beside product screenshots. Density is low; the light sections are mostly air with a few 14px cards; the dark panels carry one clipped corner as their signature. A person is always one tap from a phone call. The previous drafting-sheet world (\"The Drawing Set\") and the generic dark-SaaS-cards template are both rejected.",
     "keyCharacteristics": [
       "Charcoal cinematic grounds alternating with fog-light statement sections, joined by trapezoid notches.",
       "A single accent, Cero Cyan, reserved for action, live events and the typed headline's last letter.",
       "Large, tight Inter 400 statements; Noto Sans Thai 500 for Thai; Geist Mono uppercase micro-labels for Latin data only.",
-      "Floating capsule nav with a cyan call-to-action cell.",
+      "Floating capsule nav with a cyan call-to-action cell, a cyan phone chip on phones, and 44px touch chips below 1080px.",
+      "Centred and split section heads alternate; dense content is set as scannable lists, not card grids.",
       "14px card radii; dark cards cut with one 26px clipped corner.",
+      "Real product screens with an amber \"Demo data\" label set beside them, never over them.",
       "A lazy-loaded wireframe digital twin with cyan live markers; reduced motion shows the finished frame."
     ],
     "rules": [
@@ -594,6 +753,11 @@
       {
         "name": "The Charcoal Is Ink Rule",
         "body": "The dark ground and the light-ground text are the same Charcoal. Do not introduce a second near-black.",
+        "section": "colors"
+      },
+      {
+        "name": "The Demo Label Rule",
+        "body": "Amber appears only as the \"Demo data\" label, and the label sits beside a product screenshot (in its caption or panel label), never over the UI it describes. One label per area: the CondoMate panel, the first phone in the stacked mobile walkthrough, the console caption.",
         "section": "colors"
       },
       {
@@ -612,6 +776,16 @@
         "section": "typography"
       },
       {
+        "name": "The Alternating Heads Rule",
+        "body": "Do not open two consecutive sections with the same head form; alternate centred and split.",
+        "section": "layout"
+      },
+      {
+        "name": "The List Over Cards Rule",
+        "body": "When a section holds five or more parallel items (services, process steps), set them as a hairline-ruled list, not a grid of boxes.",
+        "section": "layout"
+      },
+      {
         "name": "The Product Floats, Cards Don't Rule",
         "body": "Only real product imagery (phone, console screenshot) casts a shadow. Text cards are flat.",
         "section": "elevation"
@@ -623,16 +797,22 @@
       "Do set Latin statements in Inter 400 with negative tracking, and Thai headings in Noto Sans Thai 500 with near-zero tracking and at least 1.25 line height.",
       "Do use Geist Mono uppercase (0.72rem, 0.06em) only for Latin data labels; switch to Noto Sans Thai, no case, no tracking, in Thai.",
       "Do give light cards a 14px radius and a 1px Line border; give dark cards the single 26px clipped corner.",
-      "Do show real CondoMate screens and the wireframe twin as proof; give every animation a reduced-motion state that shows the finished result."
+      "Do show real CondoMate screens and the wireframe twin as proof; give every animation a reduced-motion state that shows the finished result.",
+      "Do label every product-screenshot area once with the amber \"Demo data\" pill, set beside the screenshot.",
+      "Do keep a tap-to-call path visible at every width: the call block in contact, the phone row in the mobile menu, the phone chip on phones, the footer link.",
+      "Do make touch controls at least 44px below 1080px, and give each invalid form field its own message in the page language.",
+      "Do alternate centred and split section heads, and set five or more parallel items as a ruled list."
     ],
     "donts": [
       "Don't use cyan as a section fill, card background, gradient or decoration.",
+      "Don't use amber for anything except the demo label, and don't lay the label over product UI.",
       "Don't set Thai in mono, uppercase or tracked type.",
       "Don't bold Latin display or headline text.",
       "Don't add shadows to text cards; only product imagery floats.",
       "Don't return to the drafting-sheet look of the rejected \"Drawing Set\" world (title blocks, sheet borders, dimension lines) or to a generic grid of glowing dark SaaS cards.",
       "Don't use stock photography; illustrate with real UI, the twin, or simple system diagrams.",
-      "Don't leave Reveal Start grey (#A2A8AE) as resting text; it is a scroll transition start only."
+      "Don't leave Reveal Start grey (#A2A8AE) as resting text; it is a scroll transition start only.",
+      "Don't add another on-dark grey; pick from On-Dark Heading, On-Dark, On-Dark Soft and On-Dark Muted."
     ]
   }
 }
