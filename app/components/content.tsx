@@ -58,13 +58,13 @@ type Copy = {
     note: string;
     demo: string;
     bridge: string;
-    console: { title: string; text: string; tabs: { name: string; src: string; w: number; h: number; title: string; text: string }[] };
+    console: { title: string; text: string; tabs: { name: string; src: string; mobile: string; w: number; h: number; title: string; text: string }[] };
     features: string[];
     cta: string;
   };
   services: { title: string; text: string; items: Service[] };
-  process: { title: string; text: string; steps: Step[] };
-  about: { title: string; text: string; mission: [string, string]; vision: [string, string]; valuesTitle: string; values: [string, string][]; founder: { title: string; role: string; name: string; text: string; available: string; experience: { org: string; role: string; when: string }[]; cta: string } };
+  process: { title: string; steps: Step[] };
+  about: { title: string; text: string; valuesLine: string; founder: { title: string; role: string; name: string; text: string; available: string; experience: { org: string; role: string; when: string }[]; cta: string } };
   faq: { title: string; text: string; items: Faq[] };
   contact: {
     title: string;
@@ -92,7 +92,7 @@ type Copy = {
 
 // Real CondoMate Online captures (15 Oct 2026, personal data pixelated), exported from CondoMateV2/docs/manuals/UI/current.
 const screen = (key: Screen['key']) => ({ key, src: `/portfolio/v2/resident-${key}.webp`, w: 628, h: 1208 });
-const desk = (name: string, h: number) => ({ name, src: `/portfolio/v2/console-${name}.webp`, w: 1600, h });
+const desk = (name: string, h: number) => ({ name, src: `/portfolio/v2/console-${name}.webp`, mobile: `/portfolio/v2/console-${name}-m.webp`, w: 1600, h });
 
 export const copy: Record<Lang, Copy> = {
   en: {
@@ -104,12 +104,12 @@ export const copy: Record<Lang, Copy> = {
     hero: {
       line1: 'From Zero',
       line2: 'to Solution.',
-      text: 'We begin with the business problem—not a preferred technology. Then we design software that makes the work simpler, clearer, and ready to scale.',
+      text: 'CeroSoft designs and builds work systems for small and medium businesses. We begin with the business problem, not a preferred technology, then build software that makes the work simpler, clearer, and ready to grow.',
       primary: 'Talk to us',
       secondary: 'See CondoMate',
       markers: { repair: 'Room 415 · Repair received', parcel: 'Room 415 · 3 parcels waiting', booking: 'Meeting room · 1-hour slots', finance: 'Room 415 · Paid, receipt issued' },
       canvasLabel: 'Punna Residence 5 drawn as one connected system: repairs, parcels, bookings and finance in one place.',
-      dataNote: 'Model of Punna Residence 5. Labels show CondoMate demo data.',
+      dataNote: 'Real example: the system we built for the Punna Residence 5 condo (labels show demo data). Shops, offices and factories start the same way.',
     },
     statement: {
       text: 'Most software problems are not really software problems. They are disconnected steps, repeated data entry, unclear ownership, and information trapped between people and tools.',
@@ -147,7 +147,7 @@ export const copy: Record<Lang, Copy> = {
     condo: {
       title: 'CondoMate: one system for the whole condominium.',
       text: 'A real operational platform for condominium management teams and residents. Maintenance, parcels, shared-space booking, announcements, finance, accounts, and reporting in one connected workflow.',
-      live: 'Live at Punna Residence 5',
+      live: 'Live at Punna Residence 5 · screens use demo data',
       screens: [
         { ...screen('home'), tag: 'Resident home', title: 'Everything for the room on one screen', text: 'What is due, parcels waiting, repairs still open, and the next booking, with announcements below.', callouts: [{ label: 'Amount due · View bills' }, { label: 'Parcels · Repairs · Next booking' }] },
         { ...screen('repairs'), tag: 'Maintenance', title: 'Report a repair. Follow it to done.', text: 'Residents submit, track, and review repair requests in one place. Every job gets a reference number.', callouts: [{ label: 'Received · In progress · Done' }, { label: 'Reference number on every job' }] },
@@ -184,7 +184,6 @@ export const copy: Record<Lang, Copy> = {
     },
     process: {
       title: 'Zero assumptions. Five clear stages.',
-      text: 'We do not begin with a predetermined technology. A clear five-stage process helps us discover, shape, and deliver the solution that fits your business.',
       steps: [
         { n: '01', title: 'Understand', text: 'Understand the business, users, and workflow.' },
         { n: '02', title: 'Define', text: 'Define scope, requirements, and priorities.' },
@@ -196,8 +195,7 @@ export const copy: Record<Lang, Copy> = {
     about: {
       title: 'Technology should solve problems, not create new ones.',
       text: 'CeroSoft combines software engineering with an understanding of business operations. We translate complex workflows into systems that people can actually use, maintain, and trust.',
-      mission: ['Mission', 'Make technology simpler and more accessible through practical software that solves real-world problems.'],
-      vision: ['Vision', 'Become the trusted technology partner for businesses seeking practical and sustainable digital systems.'],
+      valuesLine: 'Simple · Practical · Reliable · Adaptable · Transparent',
       founder: {
         title: 'Who builds your system',
         role: 'Founder and Software Developer',
@@ -212,8 +210,6 @@ export const copy: Record<Lang, Copy> = {
         ],
         cta: 'Full profile at cheer.cerosoft.net',
       },
-      valuesTitle: 'Values',
-      values: [['Simple', 'Complex behind. Simple in front.'], ['Practical', 'Build what matters.'], ['Reliable', 'Software you can depend on.'], ['Adaptable', 'Built around your workflow.'], ['Transparent', 'Clear technology. Clear communication.']],
     },
     faq: {
       title: 'Questions owners ask first',
@@ -224,7 +220,7 @@ export const copy: Record<Lang, Copy> = {
         { q: 'Do I need a technical specification before we talk?', a: 'No. Show us how the work happens today and what needs to improve. We listen first, map the workflow, and recommend a practical next step.' },
         { q: 'Do you start with a particular technology?', a: 'No. We begin with the business problem. Only after we understand the work and define the outcome do we choose the architecture and technology.' },
         { q: 'Can we start small?', a: 'Yes. We remove friction with the smallest system that can create meaningful change, then grow it on your timeline.' },
-        { q: 'What happens after launch?', a: 'Support & Maintenance covers monitoring, backup, updates, and ongoing technical support, so the system keeps working as the business changes.' },
+        { q: 'Who supports the system after handover, and how fast?', a: 'CeroSoft supports it directly. When you report a problem, we reply within 24 hours. Support & Maintenance also covers monitoring, backup, and updates as the business changes.' },
         { q: 'Can you connect the tools we already use?', a: 'Yes. System Integration connects APIs, databases, existing tools, and operational data so information is entered once.' },
       ],
     },
@@ -267,12 +263,12 @@ export const copy: Record<Lang, Copy> = {
     hero: {
       line1: 'เริ่มจากศูนย์',
       line2: 'สู่โซลูชันที่ใช่',
-      text: 'เราเริ่มจากโจทย์ของธุรกิจ ไม่ได้เริ่มจากการเลือกเทคโนโลยี แล้วจึงออกแบบซอฟต์แวร์ที่ช่วยให้งานง่ายขึ้น เป็นระบบขึ้น และพร้อมเติบโตไปพร้อมกับธุรกิจ',
+      text: 'CeroSoft ออกแบบและพัฒนาระบบงานให้ธุรกิจ SME เราเริ่มจากโจทย์ของธุรกิจ ไม่ได้เริ่มจากการเลือกเทคโนโลยี แล้วจึงสร้างซอฟต์แวร์ที่ช่วยให้งานง่ายขึ้น เป็นระบบขึ้น และพร้อมเติบโต',
       primary: 'ปรึกษาเรา',
       secondary: 'ดูผลงาน CondoMate',
       markers: { repair: 'ห้อง 415 · แจ้งซ่อม รอรับงาน', parcel: 'ห้อง 415 · พัสดุรอรับ 3 ชิ้น', booking: 'ห้องประชุม · จองรอบละ 1 ชม.', finance: 'ห้อง 415 · ชำระแล้ว ออกใบสำคัญรับ' },
       canvasLabel: 'Punna Residence 5 ที่ถูกวาดเป็นระบบเดียว: งานแจ้งซ่อม พัสดุ การจอง และการเงิน เชื่อมกันในที่เดียว',
-      dataNote: 'โมเดลอาคาร Punna Residence 5 ป้ายกำกับเป็นข้อมูลตัวอย่าง (Demo) จาก CondoMate',
+      dataNote: 'ตัวอย่างจริง: ระบบที่เราทำให้คอนโด Punna Residence 5 (ป้ายกำกับเป็นข้อมูลตัวอย่าง) ร้านค้า สำนักงาน หรือโรงงาน ก็เริ่มแบบเดียวกันได้',
     },
     statement: {
       text: 'ปัญหาที่ดูเหมือนเป็นเรื่องซอฟต์แวร์ หลายครั้งเกิดจากขั้นตอนที่ไม่เชื่อมต่อกัน การกรอกข้อมูลซ้ำ หน้าที่รับผิดชอบที่ไม่ชัดเจน หรือข้อมูลที่กระจัดกระจายอยู่ในหลายเครื่องมือ',
@@ -310,7 +306,7 @@ export const copy: Record<Lang, Copy> = {
     condo: {
       title: 'CondoMate ระบบเดียวสำหรับทั้งคอนโดมิเนียม',
       text: 'แพลตฟอร์มที่พัฒนาขึ้นเพื่อการใช้งานจริงของนิติบุคคลและลูกบ้าน เชื่อมงานแจ้งซ่อม รับพัสดุ จองพื้นที่ส่วนกลาง ประกาศ การเงิน บัญชี และรายงานไว้ในระบบเดียว',
-      live: 'ใช้งานจริงที่ Punna Residence 5',
+      live: 'ใช้งานจริงที่ Punna Residence 5 · ภาพใช้ข้อมูลตัวอย่าง',
       screens: [
         { ...screen('home'), tag: 'หน้าหลักลูกบ้าน', title: 'ทุกเรื่องของห้องอยู่ในหน้าเดียว', text: 'ยอดค้างชำระ พัสดุรอรับ งานซ่อมที่ยังไม่เสร็จ และการจองครั้งถัดไป รวมไว้ในหน้าแรก พร้อมประกาศล่าสุดด้านล่าง', callouts: [{ label: 'ยอดค้างชำระ · ดูค่าใช้จ่าย' }, { label: 'พัสดุ · งานซ่อม · การจองถัดไป' }] },
         { ...screen('repairs'), tag: 'แจ้งซ่อม', title: 'แจ้งซ่อม แล้วติดตามได้จนเสร็จ', text: 'แจ้งเรื่อง ติดตามความคืบหน้า และตรวจสอบสถานะงานซ่อมได้ในที่เดียว ทุกงานมีเลขอ้างอิง', callouts: [{ label: 'รอรับงาน · กำลังดำเนินการ · เสร็จสิ้น' }, { label: 'ทุกงานมีเลขอ้างอิง' }] },
@@ -347,7 +343,6 @@ export const copy: Record<Lang, Copy> = {
     },
     process: {
       title: 'ไม่ด่วนสรุป ค่อย ๆ หาคำตอบที่ใช่',
-      text: 'เราไม่กำหนดเทคโนโลยีไว้ล่วงหน้า แต่ใช้กระบวนการทำงาน 5 ขั้นตอนเพื่อทำความเข้าใจ กำหนดทิศทาง และพัฒนาโซลูชันที่เหมาะกับธุรกิจของคุณจริง ๆ',
       steps: [
         { n: '01', title: 'เข้าใจ', text: 'เข้าใจธุรกิจ ผู้ใช้ และวิธีทำงาน' },
         { n: '02', title: 'กำหนด', text: 'กำหนดขอบเขต ความต้องการ และลำดับความสำคัญ' },
@@ -359,8 +354,7 @@ export const copy: Record<Lang, Copy> = {
     about: {
       title: 'เทคโนโลยีควรช่วยแก้ปัญหา ไม่ใช่เพิ่มปัญหาใหม่',
       text: 'CeroSoft ผสานความเชี่ยวชาญด้านวิศวกรรมซอฟต์แวร์เข้ากับความเข้าใจในการดำเนินธุรกิจ เพื่อเปลี่ยนกระบวนการที่ซับซ้อนให้เป็นระบบที่คนใช้งานได้จริง ดูแลต่อได้ และไว้วางใจได้',
-      mission: ['พันธกิจ', 'ทำให้เทคโนโลยีเป็นเรื่องง่ายและเข้าถึงได้ ผ่านซอฟต์แวร์ที่ตอบโจทย์การใช้งานและแก้ปัญหาได้จริง'],
-      vision: ['วิสัยทัศน์', 'เป็นพาร์ตเนอร์ด้านเทคโนโลยีที่ธุรกิจไว้วางใจ ในการสร้างระบบดิจิทัลที่ใช้ได้จริงและเติบโตได้อย่างยั่งยืน'],
+      valuesLine: 'เรียบง่าย · ใช้ได้จริง · เชื่อถือได้ · ยืดหยุ่น · โปร่งใส',
       founder: {
         title: 'ใครเป็นคนสร้างระบบให้คุณ',
         role: 'ผู้ก่อตั้งและนักพัฒนาซอฟต์แวร์',
@@ -375,8 +369,6 @@ export const copy: Record<Lang, Copy> = {
         ],
         cta: 'ดูโปรไฟล์เต็มที่ cheer.cerosoft.net',
       },
-      valuesTitle: 'คุณค่าที่เรายึดถือ',
-      values: [['เรียบง่าย', 'ระบบเบื้องหลังอาจซับซ้อน แต่ประสบการณ์ของผู้ใช้ควรง่าย'], ['ใช้ได้จริง', 'พัฒนาเฉพาะสิ่งที่สร้างคุณค่าและตอบโจทย์การใช้งานจริง'], ['เชื่อถือได้', 'เสถียร ปลอดภัย ดูแลรักษาได้'], ['ยืดหยุ่น', 'ระบบปรับตามธุรกิจ ไม่ใช่บังคับธุรกิจให้เข้ากับระบบ'], ['โปร่งใส', 'สื่อสารขอบเขต ค่าใช้จ่าย และข้อจำกัดอย่างชัดเจน']],
     },
     faq: {
       title: 'คำถามที่เจ้าของธุรกิจถามบ่อย',
@@ -387,7 +379,7 @@ export const copy: Record<Lang, Copy> = {
         { q: 'ต้องเตรียมเอกสารสเปกก่อนคุยไหม', a: 'ไม่จำเป็น เพียงเล่าให้เราฟังว่าวันนี้งานเป็นอย่างไร และอยากเห็นอะไรดีขึ้น เราจะรับฟัง ทำความเข้าใจกระบวนการทำงาน และแนะนำขั้นตอนถัดไปที่เหมาะกับธุรกิจของคุณ' },
         { q: 'CeroSoft เริ่มจากเทคโนโลยีตัวไหน', a: 'เราไม่กำหนดเทคโนโลยีไว้ล่วงหน้า เราเริ่มจากโจทย์ของธุรกิจ ทำความเข้าใจงานและกำหนดเป้าหมายก่อน แล้วจึงเลือกโครงสร้างและเทคโนโลยีที่เหมาะกับโจทย์' },
         { q: 'เริ่มจากโปรเจกต์เล็ก ๆ ได้ไหม', a: 'ได้ เราออกแบบระบบที่เล็กที่สุดที่สร้างความเปลี่ยนแปลงได้จริงก่อน แล้วค่อยขยายตามจังหวะของธุรกิจ' },
-        { q: 'หลังส่งมอบแล้วมีคนดูแลไหม', a: 'มีบริการดูแลและบำรุงรักษา ครอบคลุมการเฝ้าระวังระบบ สำรองข้อมูล อัปเดต และสนับสนุนด้านเทคนิคอย่างต่อเนื่อง' },
+        { q: 'ใครดูแลระบบหลังส่งมอบ และตอบกลับเร็วแค่ไหน', a: 'CeroSoft ดูแลเองโดยตรง เมื่อแจ้งปัญหา เราจะตอบกลับภายใน 24 ชั่วโมง และมีบริการดูแลและบำรุงรักษาที่ครอบคลุมการเฝ้าระวังระบบ สำรองข้อมูล และอัปเดตต่อเนื่อง' },
         { q: 'เชื่อมกับโปรแกรมที่ใช้อยู่ได้ไหม', a: 'ได้ บริการเชื่อมต่อระบบช่วยเชื่อม API ฐานข้อมูล เครื่องมือเดิม และข้อมูลจากการทำงานจริง ให้กรอกข้อมูลครั้งเดียว' },
       ],
     },

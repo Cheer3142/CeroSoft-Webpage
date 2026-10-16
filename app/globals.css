@@ -516,3 +516,52 @@ input[type='range']::-moz-range-thumb { width: 18px; height: 18px; border-radius
 @media (max-width: 640px) {
   .chip.call-chip { display: inline-flex; }
 }
+
+/* ───── Round 3 (2026-10-16): distill, clarify, harden, adapt ───── */
+
+/* Paragraphs in centred heads never run past a comfortable measure. */
+.center-head > p { max-width: 60ch; margin-inline: auto; }
+
+/* Services: title + one line, five across, no pills. */
+.svc-list { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 0 24px; border-top: 1px solid var(--on-dark-line); }
+.svc-list > li { display: block; padding: 22px 0 0; border-bottom: 0; }
+.svc-list h3 { font-size: 1.15rem; }
+.svc-list > li > p { margin-top: 8px; font-size: 0.95rem; }
+
+/* Process as one strip inside Services. */
+.process-strip { margin-top: clamp(48px, 6vw, 72px); padding-top: 28px; border-top: 1px solid var(--on-dark-line); scroll-margin-top: 96px; }
+.process-strip h3 { font-size: clamp(1.3rem, 2vw, 1.6rem); font-weight: 500; }
+.process-strip ol { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px 24px; margin-top: 20px; }
+.process-strip li { display: grid; gap: 4px; }
+.process-strip .stage-no { color: var(--cyan); }
+.process-strip b { font-weight: 600; font-size: 1.05rem; }
+.process-strip .stage-text { color: var(--on-dark-muted); font-size: 0.9rem; }
+
+/* About: the values fit on one line. */
+.values-line { margin: 0 auto 8px; text-align: center; font-weight: 600; color: var(--graphite); letter-spacing: 0.01em; }
+
+/* Demo label: once per area. */
+.step:not(:first-child) > .demo-badge.inline { display: none !important; }
+
+/* Form: filled fields, readable labels, focus never hides under the nav. */
+.fields span { font-size: 0.9rem; }
+.fields input, .fields select, .fields textarea {
+  min-height: 44px; padding: 10px 12px; border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(236, 238, 240, 0.16); border-bottom-color: rgba(236, 238, 240, 0.32);
+  scroll-margin-top: 110px;
+}
+.fields input:focus, .fields select:focus, .fields textarea:focus { border-color: var(--cyan); background: rgba(255, 255, 255, 0.09); }
+.contact-hint { font-size: 0.9rem; }
+.contact-hint.is-error { color: var(--danger-dark); }
+
+@media (max-width: 1000px) {
+  .svc-list, .process-strip ol { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 640px) {
+  .svc-list { grid-template-columns: 1fr; }
+  .svc-list > li { padding: 16px 0; border-bottom: 1px solid var(--on-dark-line); }
+  .process-strip ol { grid-template-columns: 1fr; }
+  .process-strip li { grid-template-columns: 2.2em auto 1fr; align-items: baseline; gap: 10px; }
+  .tabs .chip, .light .tabs .chip { height: 44px; }
+  .console-shot { aspect-ratio: auto; }
+}
