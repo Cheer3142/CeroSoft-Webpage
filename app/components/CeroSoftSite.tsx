@@ -39,6 +39,7 @@ function Navbar({ lang, onLang }: { lang: Lang; onLang: () => void }) {
             <span className="sr-only">{c.langLabel}</span>
           </button>
           <a className="chip cta" href="#contact">{c.talk}</a>
+          <a className="chip call-chip" href={PHONE_HREF} aria-label={`${c.footer.call} ${PHONE}`}><Phone aria-hidden="true" /></a>
           <button className="chip menu-toggle" type="button" onClick={() => setOpen(!open)} aria-expanded={open} aria-controls="mobile-menu" aria-label={c.menu}>
             {open ? <X aria-hidden="true" /> : <Menu aria-hidden="true" />}
           </button>
@@ -218,7 +219,7 @@ function Calculator({ lang }: { lang: Lang }) {
   return (
     <section className="calc light" aria-labelledby="calc-title">
       <div className="wrap">
-        <div className="center-head">
+        <div className="split-head">
           <h2 id="calc-title">{c.title}</h2>
           <p>{c.text}</p>
         </div>
@@ -299,6 +300,7 @@ function CondoMate({ lang }: { lang: Lang }) {
           <h2 id="condo-title">{c.title}</h2>
           <p className="live-line"><i className="live-dot" />{c.live}</p>
           <p>{c.text}</p>
+          <p className="bridge">{c.bridge}</p>
         </div>
       </div>
       <div className="wrap scroller">
@@ -307,6 +309,7 @@ function CondoMate({ lang }: { lang: Lang }) {
             <article key={s.src} ref={el => { blocks.current[i] = el; }} data-i={i} className={`step ${i === active ? 'is-active' : ''}`}>
               <h3>{s.title}</h3>
               <p>{s.text}</p>
+              <span className="demo-badge inline">{c.demo}</span>
               <figure className="inline-phone">
                 <img src={s.src} alt={`CondoMate — ${s.title}`} width={s.w} height={s.h} loading="lazy" decoding="async" />
               </figure>
@@ -316,7 +319,7 @@ function CondoMate({ lang }: { lang: Lang }) {
         </div>
         <div className="scroller-panel dark-card" aria-hidden="true">
           <div className="twin panel-twin" ref={twin} />
-          <p className="panel-place">Punna Residence 5</p>
+          <p className="panel-place">Punna Residence 5 <span className="demo-badge inline on-dark">{c.demo}</span></p>
           <div className="panel-phone">
             {c.screens.map((s, i) => (
               <img key={s.src} src={s.src} alt="" width={s.w} height={s.h} className={i === active ? 'is-active' : ''} loading={i === 0 ? 'eager' : 'lazy'} decoding="async" />
@@ -347,7 +350,7 @@ function CondoMate({ lang }: { lang: Lang }) {
             <div className="console-shot">
               <img src={t.src} alt={`CondoMate — ${t.title}`} width={t.w} height={t.h} loading="lazy" decoding="async" />
             </div>
-            <p className="console-caption"><b>{t.title}</b> {t.text}</p>
+            <p className="console-caption"><span className="demo-badge inline">{c.demo}</span> <b>{t.title}</b> {t.text}</p>
           </div>
         ))}
         <ul className="feature-chips">
@@ -361,31 +364,23 @@ function CondoMate({ lang }: { lang: Lang }) {
 
 function Services({ lang }: { lang: Lang }) {
   const c = copy[lang].services;
-  const [tab, setTab] = useState(0);
-  const s = c.items[tab];
   return (
     <section id="services" className="services dark" aria-labelledby="services-title">
       <div className="notch top" aria-hidden="true" />
       <div className="wrap">
-        <div className="center-head">
+        <div className="split-head on-dark">
           <h2 id="services-title">{c.title}</h2>
           <p>{c.text}</p>
         </div>
-        <div className="tabs center" role="tablist" aria-label={c.title}>
-          {c.items.map((it, i) => (
-            <button key={it.title} type="button" role="tab" id={`svc-${i}`} aria-selected={tab === i} aria-controls="svc-panel" tabIndex={tab === i ? 0 : -1} className="chip" onClick={() => setTab(i)}
-              onKeyDown={e => { if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') { const n = (i + (e.key === 'ArrowRight' ? 1 : -1) + c.items.length) % c.items.length; setTab(n); document.getElementById(`svc-${n}`)?.focus(); } }}>
-              {it.title}
-            </button>
+        <ul className="svc-list">
+          {c.items.map(it => (
+            <li key={it.title}>
+              <h3>{it.title}</h3>
+              <p>{it.text}</p>
+              <ul>{it.items.map(x => <li key={x}>{x}</li>)}</ul>
+            </li>
           ))}
-        </div>
-        <div id="svc-panel" role="tabpanel" aria-labelledby={`svc-${tab}`} className="svc-panel" key={tab}>
-          <div>
-            <h3>{s.title}</h3>
-            <p>{s.text}</p>
-          </div>
-          <ul>{s.items.map(x => <li key={x}><i className="live-dot static" />{x}</li>)}</ul>
-        </div>
+        </ul>
       </div>
       <div className="notch" aria-hidden="true" />
     </section>
@@ -397,7 +392,7 @@ function Process({ lang }: { lang: Lang }) {
   return (
     <section id="process" className="process light" aria-labelledby="process-title">
       <div className="wrap">
-        <div className="center-head">
+        <div className="split-head">
           <h2 id="process-title">{c.title}</h2>
           <p>{c.text}</p>
         </div>
@@ -425,8 +420,10 @@ function About({ lang }: { lang: Lang }) {
           <p>{c.text}</p>
         </div>
         <div className="about-grid">
-          <div className="about-card"><h3>{c.mission[0]}</h3><p>{c.mission[1]}</p></div>
-          <div className="about-card"><h3>{c.vision[0]}</h3><p>{c.vision[1]}</p></div>
+          <div className="about-card purpose">
+            <h3>{c.mission[0]}</h3><p>{c.mission[1]}</p>
+            <h3>{c.vision[0]}</h3><p>{c.vision[1]}</p>
+          </div>
           <div className="about-card values">
             <h3>{c.valuesTitle}</h3>
             <dl>{c.values.map(([k, v]) => <div key={k}><dt>{k}</dt><dd>{v}</dd></div>)}</dl>
@@ -437,6 +434,7 @@ function About({ lang }: { lang: Lang }) {
           <div className="founder-body">
             <h3 id="founder-title">{c.founder.title}</h3>
             <p className="founder-name"><b>{c.founder.name}</b><span>{c.founder.role} · CeroSoft</span></p>
+            <p className="founder-available"><i className="live-dot" />{c.founder.available}</p>
             <p className="founder-text">{c.founder.text}</p>
             <ul className="founder-exp">
               {c.founder.experience.map(x => (
