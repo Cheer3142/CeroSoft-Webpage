@@ -1,5 +1,8 @@
 export type Lang = 'en' | 'th';
 
+export const PHONE = '095-447-0925';
+export const PHONE_HREF = 'tel:+66954470925';
+
 export const navIds = ['condomate', 'services', 'process', 'about', 'faq'] as const;
 export type NavId = (typeof navIds)[number];
 
@@ -75,9 +78,14 @@ type Copy = {
     invalid: string;
     failed: string;
     honeypot: string;
+    callTitle: string;
+    callNote: string;
+    contactHint: string;
+    errors: { name: string; contact: string; email: string; phone: string; interest: string; message: string };
+    failedCall: string;
   };
   closing: { title: string; cta: string };
-  footer: { tagline: string; line: string; menu: string; services: string; contact: string; city: string; founder: string };
+  footer: { tagline: string; line: string; menu: string; services: string; contact: string; city: string; founder: string; call: string };
 };
 
 // Real CondoMate Online captures (15 Oct 2026, personal data pixelated), exported from CondoMateV2/docs/manuals/UI/current.
@@ -219,16 +227,28 @@ export const copy: Record<Lang, Copy> = {
       fields: ['Name', 'Company / Organization', 'Email', 'Phone', 'What do you want to improve?', 'Message'],
       optional: 'optional',
       select: 'Select a topic',
-      interests: ['Custom Software', 'Business Automation', 'Web Solutions', 'System Integration', 'Support & Maintenance'],
+      interests: ['Not sure yet, help me figure it out', 'Custom Software', 'Business Automation', 'Web Solutions', 'System Integration', 'Support & Maintenance'],
       send: 'Start a conversation',
       sending: 'Sending…',
-      success: 'Thank you. Your message has been sent. We’ll be in touch soon.',
-      invalid: 'Please fill in the required fields and check the email format.',
-      failed: 'Message could not be sent. Please try again in a moment.',
+      success: 'Thank you. Your message has been sent. We’ll reply by the email or phone you gave us.',
+      invalid: 'Please check the highlighted fields.',
+      failed: 'Message could not be sent. Please try again, or call us on',
       honeypot: 'Leave this field empty',
+      callTitle: 'Rather talk now?',
+      callNote: 'Call us. Or leave a message and we’ll get back to you.',
+      contactHint: 'Email or phone, at least one.',
+      errors: {
+        name: 'Please enter your name.',
+        contact: 'Add an email or a phone number so we can reply.',
+        email: 'This email doesn’t look right, e.g. name@company.com.',
+        phone: 'Please enter a phone number with at least 9 digits.',
+        interest: 'Choose a topic, or pick “Not sure yet”.',
+        message: 'Tell us a little about the work you want to improve.',
+      },
+      failedCall: 'Call',
     },
     closing: { title: 'Every solution starts from zero.', cta: 'Start from zero with us' },
-    footer: { tagline: 'From Zero to Solution.', line: 'Simple Software. Real Solutions.', menu: 'Explore', services: 'Services', contact: 'Contact', city: 'Thailand', founder: 'Founder · cheer.cerosoft.net' },
+    footer: { tagline: 'From Zero to Solution.', line: 'Simple Software. Real Solutions.', menu: 'Explore', services: 'Services', contact: 'Contact', city: 'Thailand', founder: 'Founder · cheer.cerosoft.net', call: 'Call' },
   },
   th: {
     skip: 'ข้ามไปยังเนื้อหา',
@@ -364,15 +384,27 @@ export const copy: Record<Lang, Copy> = {
       fields: ['ชื่อ', 'บริษัท / องค์กร', 'อีเมล', 'เบอร์โทรศัพท์', 'เรื่องที่อยากปรับปรุง', 'เล่ารายละเอียดเพิ่มเติม'],
       optional: 'ไม่บังคับ',
       select: 'เลือกหัวข้อ',
-      interests: ['ซอฟต์แวร์เฉพาะธุรกิจ', 'ระบบงานอัตโนมัติ', 'โซลูชันเว็บไซต์', 'การเชื่อมต่อระบบ', 'ดูแลและบำรุงรักษา'],
+      interests: ['ยังไม่แน่ใจ อยากให้ช่วยดู', 'ซอฟต์แวร์เฉพาะธุรกิจ', 'ระบบงานอัตโนมัติ', 'โซลูชันเว็บไซต์', 'การเชื่อมต่อระบบ', 'ดูแลและบำรุงรักษา'],
       send: 'ส่งข้อความถึงเรา',
       sending: 'กำลังส่ง…',
-      success: 'ขอบคุณครับ เราได้รับข้อความแล้ว และจะติดต่อกลับโดยเร็ว',
-      invalid: 'กรุณากรอกข้อมูลที่จำเป็นให้ครบ และตรวจสอบรูปแบบอีเมลอีกครั้ง',
-      failed: 'ยังส่งข้อความไม่ได้ กรุณาลองอีกครั้งในอีกสักครู่',
+      success: 'ขอบคุณครับ เราได้รับข้อความแล้ว และจะติดต่อกลับทางอีเมลหรือโทรศัพท์ที่ให้ไว้',
+      invalid: 'กรุณาตรวจสอบช่องที่ทำเครื่องหมายไว้',
+      failed: 'ยังส่งข้อความไม่ได้ กรุณาลองอีกครั้ง หรือโทรหาเราที่',
       honeypot: 'เว้นช่องนี้ว่างไว้',
+      callTitle: 'อยากคุยเลยไหม',
+      callNote: 'โทรหาเราได้เลย หรือฝากข้อความไว้ แล้วเราจะติดต่อกลับ',
+      contactHint: 'กรอกอีเมลหรือเบอร์โทร อย่างน้อยหนึ่งช่อง',
+      errors: {
+        name: 'กรุณากรอกชื่อ',
+        contact: 'ใส่อีเมลหรือเบอร์โทรอย่างน้อยหนึ่งช่อง เพื่อให้เราติดต่อกลับได้',
+        email: 'รูปแบบอีเมลไม่ถูกต้อง เช่น name@company.com',
+        phone: 'กรุณาใส่เบอร์โทรอย่างน้อย 9 หลัก',
+        interest: 'เลือกหัวข้อ หรือเลือก “ยังไม่แน่ใจ”',
+        message: 'เล่าสั้น ๆ ว่าอยากปรับปรุงงานส่วนไหน',
+      },
+      failedCall: 'โทร',
     },
     closing: { title: 'ทุกโซลูชันเริ่มต้นจากศูนย์', cta: 'เริ่มจากศูนย์ไปกับเรา' },
-    footer: { tagline: 'จากศูนย์ สู่โซลูชันที่ใช่', line: 'ซอฟต์แวร์ที่เรียบง่าย แก้ปัญหาได้จริง', menu: 'เมนู', services: 'บริการ', contact: 'ติดต่อ', city: 'ประเทศไทย', founder: 'ผู้ก่อตั้ง · cheer.cerosoft.net' },
+    footer: { tagline: 'จากศูนย์ สู่โซลูชันที่ใช่', line: 'ซอฟต์แวร์ที่เรียบง่าย แก้ปัญหาได้จริง', menu: 'เมนู', services: 'บริการ', contact: 'ติดต่อ', city: 'ประเทศไทย', founder: 'ผู้ก่อตั้ง · cheer.cerosoft.net', call: 'โทร' },
   },
 };

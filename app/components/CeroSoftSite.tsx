@@ -1,6 +1,6 @@
 import { SyntheticEvent, useEffect, useId, useMemo, useRef, useState } from 'react';
-import { ArrowRight, ArrowUpRight, ArrowDownRight, Check, CircleAlert, Menu, Plus, X } from 'lucide-react';
-import { copy, navIds, type Lang } from './content';
+import { ArrowRight, ArrowUpRight, ArrowDownRight, Check, CircleAlert, Menu, Phone, Plus, X } from 'lucide-react';
+import { copy, PHONE, PHONE_HREF, navIds, type Lang } from './content';
 import { setupMotion } from './motion';
 import type { Focus } from './building';
 
@@ -46,6 +46,7 @@ function Navbar({ lang, onLang }: { lang: Lang; onLang: () => void }) {
       </div>
       <nav id="mobile-menu" className="mobile-menu" aria-label={c.menu} hidden={!open}>
         {navIds.map(id => <a key={id} href={`#${id}`} onClick={() => setOpen(false)}>{c.nav[id]}<ArrowRight aria-hidden="true" /></a>)}
+        <a href={PHONE_HREF} onClick={() => setOpen(false)}>{c.footer.call} {PHONE}<Phone aria-hidden="true" /></a>
         <a href="#contact" onClick={() => setOpen(false)}>{c.talk}<ArrowRight aria-hidden="true" /></a>
       </nav>
     </header>
@@ -472,35 +473,75 @@ function Faq({ lang }: { lang: Lang }) {
   );
 }
 
-type Status = { kind: 'success' | 'error'; message: string } | null;
+type Status = { kind: 'success' | 'error' | 'failed'; message: string } | null;
+type Field = 'name' | 'email' | 'phone' | 'interest' | 'message';
+type Errors = Partial<Record<Field, string>>;
+
+const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const digits = (v: string) => v.replace(/\D/g, '').length;
 
 function Contact({ lang }: { lang: Lang }) {
   const c = copy[lang].contact;
   const id = useId();
   const [status, setStatus] = useState<Status>(null);
   const [sending, setSending] = useState(false);
+  const [errors, setErrors] = useState<Errors>({});
+
+  const validate = (fd: FormData): Errors => {
+    const v = (k: string) => String(fd.get(k) ?? '').trim();
+    const out: Errors = {};
+    if (!v('name')) out.name = c.errors.name;
+    const email = v('email'), phone = v('phone');
+    if (!email && !phone) { out.email = c.errors.contact; out.phone = c.errors.contact; }
+    if (email && !EMAIL_RE.test(email)) out.email = c.errors.email;
+    if (phone && digits(phone) < 9) out.phone = c.errors.phone;
+    if (!v('interest')) out.interest = c.errors.interest;
+    if (!v('message')) out.message = c.errors.message;
+    return out;
+  };
+
+  // Clear a field's error as soon as the visitor edits it; email and phone clear together.
+  const onInput = (e: SyntheticEvent<HTMLFormElement>) => {
+    const name = (e.target as HTMLInputElement).name as Field;
+    if (!name || !(name in errors)) return;
+    setErrors(prev => {
+      const next = { ...prev };
+      delete next[name];
+      if ((name === 'email' || name === 'phone') && prev.email === c.errors.contact) { delete next.email; delete next.phone; }
+      return next;
+    });
+  };
+
   const submit = async (e: SyntheticEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
-    if (!form.checkValidity()) {
-      form.reportValidity();
+    const fd = new FormData(form);
+    const found = validate(fd);
+    setErrors(found);
+    const firstBad = (['name', 'email', 'phone', 'interest', 'message'] as Field[]).find(k => found[k]);
+    if (firstBad) {
       setStatus({ kind: 'error', message: c.invalid });
+      form.querySelector<HTMLElement>(`[name="${firstBad}"]`)?.focus();
       return;
     }
     setSending(true);
     setStatus(null);
     try {
-      const data = Object.fromEntries(new FormData(form).entries());
+      const data = Object.fromEntries(fd.entries());
       const res = await fetch('/api/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...data, language: lang }) });
       if (!res.ok) throw new Error('send failed');
       setStatus({ kind: 'success', message: c.success });
       form.reset();
     } catch {
-      setStatus({ kind: 'error', message: c.failed });
+      // The visitor's input stays in the form; the phone number is the way through.
+      setStatus({ kind: 'failed', message: c.failed });
     } finally {
       setSending(false);
     }
   };
+
+  const err = (k: Field) => errors[k] ? { 'aria-invalid': true as const, 'aria-describedby': `${id}-${k}-err` } : {};
+  const errText = (k: Field) => errors[k] ? <small id={`${id}-${k}-err`} className="field-error">{errors[k]}</small> : null;
   return (
     <section id="contact" className="contact light" aria-labelledby="contact-title">
       <div className="wrap contact-grid">
@@ -508,25 +549,32 @@ function Contact({ lang }: { lang: Lang }) {
           <h2 id="contact-title">{c.title}</h2>
           <p>{c.text}</p>
           <ul className="bullets">{c.bullets.map(b => <li key={b}><i className="live-dot static" />{b}</li>)}</ul>
+          <div className="call">
+            <p className="call-title">{c.callTitle}</p>
+            <a className="btn outline call-btn" href={PHONE_HREF}><Phone aria-hidden="true" />{PHONE}</a>
+            <p className="call-note">{c.callNote}</p>
+          </div>
         </div>
-        <form className="contact-form dark-card" onSubmit={submit} noValidate aria-busy={sending} aria-describedby={`${id}-status`}>
+        <form className="contact-form dark-card" onSubmit={submit} onInput={onInput} noValidate aria-busy={sending} aria-describedby={`${id}-status`}>
           <label className="hp">{c.honeypot}<input type="text" name="website" tabIndex={-1} autoComplete="off" /></label>
           <div className="fields">
-            <label htmlFor={`${id}-name`}><span>{c.fields[0]} *</span><input id={`${id}-name`} required name="name" autoComplete="name" maxLength={100} /></label>
-            <label htmlFor={`${id}-company`}><span>{c.fields[1]} *</span><input id={`${id}-company`} required name="company" autoComplete="organization" maxLength={150} /></label>
-            <label htmlFor={`${id}-email`}><span>{c.fields[2]} *</span><input id={`${id}-email`} required type="email" name="email" autoComplete="email" maxLength={200} /></label>
-            <label htmlFor={`${id}-phone`}><span>{c.fields[3]} <em>({c.optional})</em></span><input id={`${id}-phone`} type="tel" name="phone" autoComplete="tel" maxLength={50} /></label>
+            <label htmlFor={`${id}-name`}><span>{c.fields[0]} *</span><input id={`${id}-name`} name="name" autoComplete="name" maxLength={100} {...err('name')} />{errText('name')}</label>
+            <label htmlFor={`${id}-company`}><span>{c.fields[1]} <em>({c.optional})</em></span><input id={`${id}-company`} name="company" autoComplete="organization" maxLength={150} /></label>
+            <p className="wide contact-hint" id={`${id}-hint`}>{c.contactHint}</p>
+            <label htmlFor={`${id}-email`}><span>{c.fields[2]}</span><input id={`${id}-email`} type="email" inputMode="email" name="email" autoComplete="email" maxLength={200} {...err('email')} />{errText('email')}</label>
+            <label htmlFor={`${id}-phone`}><span>{c.fields[3]}</span><input id={`${id}-phone`} type="tel" inputMode="tel" name="phone" autoComplete="tel" maxLength={30} {...err('phone')} />{errText('phone')}</label>
             <label className="wide" htmlFor={`${id}-interest`}><span>{c.fields[4]} *</span>
-              <select id={`${id}-interest`} required name="interest" defaultValue="">
+              <select id={`${id}-interest`} name="interest" defaultValue="" {...err('interest')}>
                 <option value="" disabled>{c.select}</option>
                 {c.interests.map(x => <option key={x}>{x}</option>)}
               </select>
+              {errText('interest')}
             </label>
-            <label className="wide" htmlFor={`${id}-message`}><span>{c.fields[5]} *</span><textarea id={`${id}-message`} required name="message" rows={4} maxLength={3000} /></label>
+            <label className="wide" htmlFor={`${id}-message`}><span>{c.fields[5]} *</span><textarea id={`${id}-message`} name="message" rows={4} maxLength={3000} {...err('message')} />{errText('message')}</label>
           </div>
           <button className="btn primary submit" type="submit" disabled={sending}>{sending ? c.sending : c.send}<ArrowRight aria-hidden="true" /></button>
           <output id={`${id}-status`} className={`status ${status?.kind ?? ''}`} aria-live="polite">
-            {status && <>{status.kind === 'success' ? <Check aria-hidden="true" /> : <CircleAlert aria-hidden="true" />}{status.message}</>}
+            {status && <>{status.kind === 'success' ? <Check aria-hidden="true" /> : <CircleAlert aria-hidden="true" />}<span>{status.message}{status.kind === 'failed' && <> <a href={PHONE_HREF}>{PHONE}</a></>}</span></>}
           </output>
         </form>
       </div>
@@ -559,6 +607,7 @@ function Footer({ lang }: { lang: Lang }) {
         </div>
         <div>
           <h3>{c.footer.contact}</h3>
+          <a href={PHONE_HREF}>{c.footer.call} {PHONE}</a>
           <a href="https://cerosoft.net">cerosoft.net</a>
           <a href="https://cheer.cerosoft.net/" target="_blank" rel="noopener">{c.footer.founder}</a>
           <span>{c.footer.city}</span>
