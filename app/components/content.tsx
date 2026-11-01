@@ -204,7 +204,7 @@ export const copy: Record<Lang, Copy> = {
         available: 'Taking on new projects, and supporting every system after handover',
         experience: [
           { org: 'CeroSoft', role: 'Founder and Software Developer', when: 'Aug 2026 – present' },
-          { org: 'AirGradient', role: 'Embedded Firmware Engineer', when: 'From Nov 2026' },
+          { org: 'AirGradient', role: 'Embedded Firmware Engineer', when: 'Nov 2026 – present' },
           { org: 'NARIT · National Astronomical Research Institute of Thailand', role: 'Embedded Software Engineer', when: '2023–2024' },
           { org: 'Hana Microelectronics × Keysight Technologies', role: 'Electrical Test Engineer', when: '2021–2023' },
         ],
@@ -363,7 +363,7 @@ export const copy: Record<Lang, Copy> = {
         available: 'พร้อมรับงานใหม่ และดูแลระบบที่ส่งมอบต่อเนื่อง',
         experience: [
           { org: 'CeroSoft', role: 'ผู้ก่อตั้งและนักพัฒนาซอฟต์แวร์', when: 'ส.ค. 2569–ปัจจุบัน' },
-          { org: 'AirGradient', role: 'Embedded Firmware Engineer', when: 'เริ่ม พ.ย. 2569' },
+          { org: 'AirGradient', role: 'Embedded Firmware Engineer', when: 'พ.ย. 2569–ปัจจุบัน' },
           { org: 'NARIT · สถาบันวิจัยดาราศาสตร์แห่งชาติ', role: 'Embedded Software Engineer', when: '2566–2567' },
           { org: 'Hana Microelectronics × Keysight Technologies', role: 'Electrical Test Engineer', when: '2564–2566' },
         ],
